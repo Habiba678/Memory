@@ -1,0 +1,104 @@
+$primary-dark: #303131;
+$secondary-yellow: #f0ea6d;
+$text-light: #ffffff;
+$text-dark: #000000;
+
+$font-title: "Red Rose", serif;
+$font-subtitle: "Almarai", sans-serif;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin text-style($font-family, $font-size, $font-weight, $color) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: $color;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.home {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: $primary-dark;
+
+  &__settings-button {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &__settings-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  &__hero {
+    min-height: 100vh;
+    position: relative;
+    padding-top: 216px;
+    padding-left: 250px;
+  }
+
+  &__controller {
+    position: absolute;
+    width: 441.31px;
+    height: 301.31px;
+    top: 216px;
+    left: -88px;
+    transform: rotate(-37.42deg);
+    opacity: 0.05;
+  }
+
+  &__subtitle {
+    width: 265px;
+    height: 54px;
+    margin: 0;
+    @include text-style($font-subtitle, 48px, 400, $text-light);
+  }
+
+  &__title {
+    width: 991px;
+    height: 175px;
+    margin: 0;
+    @include text-style($font-title, 140px, 700, $text-light);
+  }
+
+  &__play-button {
+    width: 250px;
+    height: 80px;
+    padding: 20px;
+    gap: 24px;
+    border: none;
+    background-color: $secondary-yellow;
+    cursor: pointer;
+
+    @include flex-center;
+
+    span {
+      @include text-style($font-title, 40px, 700, $text-dark);
+    }
+  }
+
+  &__arrow-icon {
+    width: 33px;
+  }
+}
