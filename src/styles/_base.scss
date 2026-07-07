@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    width: 100%;
+    min-height: 100vh;
+  }
+  
+  body {
+    background-color: $primary-dark;
+    color: $text-light;
+    font-family: $font-title;
+  }
+  
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  
+  button {
+    font: inherit;
+  }

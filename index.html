@@ -5,43 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory</title>
 </head>
+
 <body>
+    <main class="home-screen">
 
-    <section class="home">
-
-        <button class="settings-button" type="button" aria-label="Settings">
+        <button class="home-screen__settings" type="button" aria-label="Settings">
             <img
-                class="settings-icon"
+                class="home-screen__settings-icon"
                 src="/src/assets/icon/stadia_controller (1).png"
-                alt="Settings Icon">
+                alt="Settings">
         </button>
 
-        <section class="hero">
-
+        <div class="home-screen__controller-container">
             <img
-                class="controller"
+                class="home-screen__controller"
                 src="/src/assets/icon/stadia_controller.png"
                 alt="Game Controller">
-
-            <p class="subtitle">
+        </div>
+        <div class="home-screen__header">
+            <p class="home-screen__eyebrow">
                 It's play time.
             </p>
-
-            <h1 class="title">
+            <h1 class="home-screen__title">
                 Ready to play?
             </h1>
-
-            <button class="play-button" type="button">
-                <span>Play</span>
-
+        </div>
+        <button class="btn btn--primary" type="button">
+            <span class="btn__text">
+                Play
+            </span>
+            <span class="btn__arrow-icon">
                 <img
-                    class="arrow-icon"
+                    class="btn__arrow"
                     src="/src/assets/icon/Arrow 1.png"
-                    alt="">
-            </button>
-
-        </section>
-
+                    alt="Arrow">
+            </span>
+        </button>
     </main>
 
     <script type="module" src="/src/main.ts"></script>
