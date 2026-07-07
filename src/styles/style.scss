@@ -1,104 +1,116 @@
-$primary-dark: #303131;
-$secondary-yellow: #f0ea6d;
-$text-light: #ffffff;
-$text-dark: #000000;
+@use "base";
+@use "tokens" as *;
 
-$font-title: "Red Rose", serif;
-$font-subtitle: "Almarai", sans-serif;
-
-@mixin flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@mixin text-style($font-family, $font-size, $font-weight, $color) {
-  font-family: $font-family;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  line-height: 100%;
-  letter-spacing: 0;
-  color: $color;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-}
-
-.home {
-  width: 100%;
+.home-screen {
+  background-color: $primary-dark;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
   position: relative;
   overflow: hidden;
-  background-color: $primary-dark;
 
-  &__settings-button {
+  &__settings {
     position: absolute;
     top: 40px;
     right: 40px;
-    padding: 0;
-    border: none;
     background: transparent;
+    border: none;
     cursor: pointer;
   }
 
   &__settings-icon {
     width: 60px;
     height: 60px;
+    transition: transform 0.3s ease;
   }
 
-  &__hero {
-    min-height: 100vh;
-    position: relative;
-    padding-top: 216px;
-    padding-left: 250px;
+  &__settings:hover &__settings-icon {
+    transform: rotate(90deg);
+  }
+
+  &__controller-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
   }
 
   &__controller {
+    width: $controller-width;
+    height: $controller-height;
     position: absolute;
-    width: 441.31px;
-    height: 301.31px;
-    top: 216px;
     left: -88px;
+    top: 216px;
     transform: rotate(-37.42deg);
     opacity: 0.05;
   }
 
-  &__subtitle {
-    width: 265px;
-    height: 54px;
-    margin: 0;
-    @include text-style($font-subtitle, 48px, 400, $text-light);
+  &__header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__eyebrow {
+    font-family: $font-subtitle;
+    font-size: $subtitle-size;
+    font-weight: 400;
+    color: $text-light;
   }
 
   &__title {
-    width: 991px;
-    height: 175px;
-    margin: 0;
-    @include text-style($font-title, 140px, 700, $text-light);
+    font-family: $font-title;
+    font-size: $title-size;
+    font-weight: 700;
+    line-height: 100%;
+    color: $text-light;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: $button-width;
+  height: $button-height;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &--primary {
+    background-color: $secondary-yellow;
+    color: $text-dark;
   }
 
-  &__play-button {
-    width: 250px;
-    height: 80px;
-    padding: 20px;
-    gap: 24px;
-    border: none;
-    background-color: $secondary-yellow;
-    cursor: pointer;
-
-    @include flex-center;
-
-    span {
-      @include text-style($font-title, 40px, 700, $text-dark);
-    }
+  &__text {
+    font-family: $font-title;
+    font-size: $button-text-size;
+    font-weight: 700;
   }
 
   &__arrow-icon {
-    width: 33px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+
+  &__arrow {
+    width: 35px;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:hover &__arrow-icon {
+    transform: translateX(10px);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }
