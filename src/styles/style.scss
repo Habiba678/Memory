@@ -1,24 +1,26 @@
 @use "base";
 @use "tokens" as *;
 
-.home-screen {
+.memory-home {
   background-color: $primary-dark;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 32px;
   position: relative;
   overflow: hidden;
+  color: $text-light;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
 
-  &__settings {
+  &__settings-button {
     position: absolute;
     top: 40px;
     right: 40px;
     background: transparent;
     border: none;
     cursor: pointer;
+    z-index: 3;
   }
 
   &__settings-icon {
@@ -27,63 +29,73 @@
     transition: transform 0.3s ease;
   }
 
-  &__settings:hover &__settings-icon {
+  &__settings-button:hover &__settings-icon {
     transform: rotate(90deg);
   }
 
-  &__controller-container {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
   &__controller {
-    width: $controller-width;
-    height: $controller-height;
+    width: 441.31px;
+    height: 301.31px;
     position: absolute;
     left: -88px;
     top: 216px;
     transform: rotate(-37.42deg);
-    opacity: 0.05;
+    opacity: 0.5;
+    pointer-events: none;
   }
 
-  &__header {
+  &__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    z-index: 2;
   }
 
-  &__eyebrow {
+  &__small-title {
     font-family: $font-subtitle;
     font-size: $subtitle-size;
     font-weight: 400;
     color: $text-light;
+    margin: 0;
   }
 
-  &__title {
+  &__main-title {
     font-family: $font-title;
     font-size: $title-size;
     font-weight: 700;
     line-height: 100%;
     color: $text-light;
+    margin: 0;
   }
 }
 
-.btn {
+.start-button {
+  width: $button-width;
+  height: $button-height;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 24px;
-  width: $button-width;
-  height: $button-height;
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease;
+  z-index: 2;
 
-  &--primary {
+  &--yellow {
     background-color: $secondary-yellow;
     color: $text-dark;
+  }
+
+  &__controller-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  &__controller-icon {
+    width: 44px;
+    height: 32px;
   }
 
   &__text {
@@ -92,22 +104,28 @@
     font-weight: 700;
   }
 
-  &__arrow-icon {
+  &__arrow-box {
     display: flex;
     align-items: center;
+    justify-content: center;
     transition: transform 0.3s ease;
   }
 
-  &__arrow {
+  &__arrow-icon {
     width: 35px;
+    height: 15px;
   }
 
   &:hover {
     transform: scale(1.05);
   }
 
-  &:hover &__arrow-icon {
-    transform: translateX(10px);
+  &:hover &__controller-box {
+    transform: rotate(-30deg);
+  }
+
+  &:hover &__arrow-box {
+    transform: translateX(6px) scale(1.15);
   }
 
   &:active {
