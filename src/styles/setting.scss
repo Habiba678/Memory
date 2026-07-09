@@ -7,16 +7,16 @@
   color: $text-dark;
   font-family: $font-subtitle;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
   &__panel {
-    width: 1103px;
+    width: min(100%, 1103px);
     height: 539px;
-    position: relative;
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    position: relative;
   }
 
   &__left {
@@ -25,7 +25,7 @@
 
   &__headline {
     position: relative;
-    margin-bottom: 38px;
+    margin-bottom: 40px;
   }
 
   &__title {
@@ -38,42 +38,78 @@
 
   &__headline-line {
     width: 251px;
-    height: auto;
     position: absolute;
-    left: -24px;
-    bottom: -8px;
+    left: -18px;
+    bottom: -10px;
     pointer-events: none;
   }
 
   &__right {
-    width: 460px;
+    width: 620px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 28px;
+    align-items: flex-end;
+    gap: 24px;
   }
-
-  &__preview {
+  &__preview-box {
     width: 460px;
     height: 412px;
     border-radius: 16px;
-    object-fit: cover;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  &__preview {
+    display: block;
+    border: none;
+    object-fit: contain;
+    object-position: center;
+  }
+  
+  &__preview--code {
+    width: 460px;
+    height: 374px;
+    border-radius: 16px;
+  }
+  
+  &__preview--gaming {
+    width: 430px;
+    height: 346.08px;
+    border-radius: 16px;
+    position: relative;
+    top: -20px;
+   
+  }
+  
+  &__preview--da {
+    width: 430px;
+    height: 347px;
+    border-radius: 16px;
+    position: relative;
+    top: -20px;
+
+    
   }
 
   &__choice-nav {
+    width: 100%;
+    height: 80px;
+    background-color: #f6f6f6;
     display: flex;
     align-items: center;
-    gap: 10px;
+    justify-content: space-between;
+    padding: 12px 20px;
   }
 
   &__choice {
     border: none;
     background: transparent;
     font-family: $font-subtitle;
-    font-size: 20px;
+    font-size: 18px;
     color: $primary-dark;
     cursor: pointer;
-    padding: 0;
 
     &:hover,
     &:focus {
@@ -83,44 +119,65 @@
   }
 
   &__choice-line {
-    width: 56px;
-    height: auto;
+    width: 5px;
+    height: 45px;
+    object-fit: cover;
   }
 
   &__start {
+    width: 126px;
+    height: 53px;
     background-color: $secondary-yellow;
     border: none;
-    width: 91px;
-    height: 24px;
+    padding: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    font-family: $font-subtitle;
-    font-size: 20px;
+    gap: 8px;
+    font-family: $font-title;
+    font-size: 18px;
+    font-weight: 700;
+    color: $primary-dark;
     cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 
-    &:hover,
+    &:hover {
+      opacity: 0.85;
+      transform: scale(1.03);
+    }
+
     &:focus {
-      outline: 2px solid $primary-dark;
-      outline-offset: 2px;
+      outline: 3px solid $primary-dark;
+      outline-offset: 3px;
     }
   }
 
   &__start-icon {
     width: 20px;
-    height: 16px;
+    height: auto;
   }
 }
 
+.preview-code {
+  background-color: $preview-code-bg;
+}
+
+.preview-gaming {
+  background-color: $preview-gaming-bg;
+}
+
+.preview-da {
+  background-color: $preview-da-bg;
+}
+
 .settings-group {
-  margin-bottom: 44px;
+  margin-bottom: 34px;
 
   &__title-row {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   &__icon {
@@ -138,13 +195,13 @@
   }
 
   &__option {
-    width: 238px;
-    height: 24px;
+    width: 282px;
+    min-height: 24px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-left: 44px;
-    margin-bottom: 10px;
+    gap: 12px;
+    margin-left: 40px;
+    margin-bottom: 12px;
     font-family: $font-subtitle;
     font-size: 20px;
     color: $primary-dark;
@@ -153,8 +210,32 @@
     input {
       width: 20px;
       height: 20px;
+      appearance: none;
+      border: 2px solid $primary-dark;
+      border-radius: 50%;
       cursor: pointer;
-      accent-color: $primary-dark;
+      position: relative;
+
+      &::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: $primary-dark;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        transition: transform 0.2s ease;
+      }
+
+      &:checked::before {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      &:hover {
+        border-width: 3px;
+      }
     }
 
     span {
@@ -165,24 +246,21 @@
       font-weight: 700;
     }
 
-    input:checked + span::after {
-      content: "";
-      position: absolute;
-      left: -4px;
-      right: -4px;
-      bottom: -2px;
-      height: 2px;
-      background-color: $primary-dark;
-    }
-
     &:hover span {
       font-weight: 700;
     }
   }
 
   &__arrow {
-    width: 38px;
+    width: 42px;
     height: auto;
     margin-left: 8px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &__option:has(input:checked) &__arrow,
+  &__option:hover &__arrow {
+    opacity: 1;
   }
 }
