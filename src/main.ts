@@ -1,18 +1,7 @@
 import "./styles/style.scss";
 import "./styles/setting.scss";
+import "./styles/game.scss";
 
-import { settingsTemplate } from "./components/settingsTemplate";
-import { initSettings } from "./components/setting";
+import { initStartGame } from "./components/startGame";
 
-/**
- * Finds the play button on the home screen.
- */
-const playButton = document.querySelector(".start-button");
-
-/**
- * Opens the settings screen after clicking the play button.
- */
-playButton?.addEventListener("click", () => {
-  document.body.innerHTML = settingsTemplate();
-  initSettings();
-});
+initStartGame();
