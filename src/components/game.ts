@@ -20,6 +20,7 @@ const playerImages: Record<
   {
     blue: string;
     orange: string;
+    white?: string;
   }
 > = {
   code: {
@@ -35,13 +36,14 @@ const playerImages: Record<
   da: {
     blue: "/src/assets/themes/Theme3/Player-blue.svg",
     orange: "/src/assets/themes/Theme3/Player-orange.svg",
+    white: "/src/assets/themes/Theme3/card/chess_pawn .svg",
   },
 };
 
 const exitImages: Record<Theme, string> = {
   code: "/src/assets/themes/theme1/cards/move_item.svg",
-  gaming: "/src/assets/themes/Theme2/orange_chess Kopie.svg",
-  da: "/src/assets/themes/Theme3/blue_chess Kopie.svg",
+  gaming: "/src/assets/themes/theme1/cards/move_item.svg",
+  da: "/src/assets/themes/Theme3/card/back-icon-2.svg",
 };
 
 function shuffleCards(cards: CardData[]): CardData[] {
@@ -222,10 +224,16 @@ function initCards(
 
   function updateCurrentPlayer(): void {
     if (currentPlayerIcon) {
-      currentPlayerIcon.src =
-        currentPlayer === "blue"
-          ? playerImages[theme].blue
-          : playerImages[theme].orange;
+      if (theme === "da") {
+        currentPlayerIcon.src =
+          playerImages.da.white ??
+          playerImages.da.blue;
+      } else {
+        currentPlayerIcon.src =
+          currentPlayer === "blue"
+            ? playerImages[theme].blue
+            : playerImages[theme].orange;
+      }
     }
 
     if (currentPlayerName) {

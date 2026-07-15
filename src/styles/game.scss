@@ -1,5 +1,7 @@
+
 @use "base";
 @use "tokens" as *;
+@use "game-theme";
 
 .memory-game {
   width: 100%;
@@ -125,6 +127,10 @@
     font-weight: 700;
     line-height: 1;
     cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease;
   }
 
   &__exit-icon {
@@ -165,7 +171,7 @@
   }
 
   &--orange {
-    color: #f58e39;
+    color: #EA6900;
   }
 }
 
@@ -241,92 +247,6 @@
   }
 }
 
-.memory-game--code {
-  .game-header {
-    background-color: transparent;
-    color: #ffffff;
-  }
-
-  .game-header__scores {
-    background-color: rgba(134, 233, 214, 0.2);
-  }
-
-  .game-header__current-player {
-    color: #ffffff;
-  }
-
-  .game-header__exit {
-    border: 1px solid #86e9d6;
-    border-radius: 0;
-    background-color: rgba(134, 233, 214, 0.2);
-    color: #ffffff;
-  }
-
-  .game-header__exit:hover {
-    background-color: rgba(134, 233, 214, 0.32);
-  }
-
-  .memory-card,
-  .memory-card__inner,
-  .memory-card__front,
-  .memory-card__back,
-  .memory-card__front-image,
-  .memory-card__back-image {
-    border-radius: 0;
-  }
-}
-
-.memory-game--gaming {
-  .game-header {
-    background-color: #7d79a7;
-    color: #ffffff;
-  }
-
-  .game-header__scores {
-    background-color: #ffffff;
-  }
-
-  .game-header__exit {
-    border-color: #e94976;
-    color: #ff9ab7;
-  }
-
-  .memory-card,
-  .memory-card__inner,
-  .memory-card__front,
-  .memory-card__back,
-  .memory-card__front-image,
-  .memory-card__back-image {
-    border-radius: 10px;
-  }
-}
-
-.memory-game--da {
-  .game-header {
-    background-color: #e9f5f7;
-    color: #226780;
-  }
-
-  .game-header__scores {
-    background-color: #ffffff;
-  }
-
-  .game-header__exit {
-    border-color: #8ccedc;
-    background-color: #cdebf1;
-    color: #287d96;
-  }
-
-  .memory-card,
-  .memory-card__inner,
-  .memory-card__front,
-  .memory-card__back,
-  .memory-card__front-image,
-  .memory-card__back-image {
-    border-radius: 6px;
-  }
-}
-
 .exit-dialog {
   position: fixed;
   top: 50%;
@@ -386,15 +306,31 @@
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease;
 
     &--continue {
       background-color: #65cfbc;
       color: #ffffff;
+      
+
+      &:hover {
+        border-color: #2fc9aa;
+        background-color: #4dd9bc;
+      }
     }
 
     &--exit {
       background-color: transparent;
       color: #65cfbc;
+  
+
+      &:hover {
+        border-color: #2fc9aa;
+        background-color: rgba(134, 233, 214, 0.14);
+      }
     }
   }
 }
@@ -434,6 +370,16 @@
 
     &__button {
       width: 100%;
+    }
+  }
+
+  .memory-game--gaming .exit-dialog {
+    .exit-dialog__content {
+      padding: 32px 20px;
+    }
+
+    .exit-dialog__title {
+      font-size: 20px;
     }
   }
 }
