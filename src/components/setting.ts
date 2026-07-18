@@ -10,15 +10,25 @@ const themeLabels: Record<string, string> = {
   da: "DA Projects theme",
 };
 
-const themeBackgrounds: Record<string, string> = {
-  code: "#303131",
-  gaming: "#1e7f97",
-  da: "#c7eef6",
-};
+function isSummaryExpanded(): boolean {
+  const choiceNav =
+    document.querySelector<HTMLElement>(
+      ".settings-screen__choice-nav"
+    );
+
+  return (
+    choiceNav?.classList.contains(
+      "settings-screen__choice-nav--expanded"
+    ) ?? false
+  );
+}
 
 function updatePreviewClass(value: string): void {
   const preview =
     document.getElementById("theme-preview");
+
+  const previewBox =
+    document.getElementById("theme-preview-box");
 
   preview?.classList.remove(
     "settings-screen__preview--code",
@@ -29,56 +39,159 @@ function updatePreviewClass(value: string): void {
   preview?.classList.add(
     `settings-screen__preview--${value}`
   );
+
+  previewBox?.classList.remove(
+    "preview-code",
+    "preview-gaming",
+    "preview-da"
+  );
+
+  previewBox?.classList.add(
+    `preview-${value}`
+  );
 }
 
 function updateTheme(value: string): void {
-  const preview = document.getElementById(
-    "theme-preview"
-  ) as HTMLImageElement | null;
-
-  const previewBox =
-    document.getElementById("theme-preview-box");
-
-  const summary =
-    document.getElementById("summary-theme");
+  const preview =
+    document.getElementById(
+      "theme-preview"
+    ) as HTMLImageElement | null;
 
   if (preview) {
     preview.src = themeImages[value];
     updatePreviewClass(value);
   }
 
-  if (previewBox) {
-    previewBox.style.backgroundColor =
-      themeBackgrounds[value];
-  }
-
-  if (summary) {
-    summary.textContent = themeLabels[value];
+  if (isSummaryExpanded()) {
+    updateSelectedSummary();
   }
 }
 
-function updatePlayer(value: string): void {
-  const summary =
+function updatePlayer(): void {
+  if (isSummaryExpanded()) {
+    updateSelectedSummary();
+  }
+}
+
+function updateBoard(): void {
+  if (isSummaryExpanded()) {
+    updateSelectedSummary();
+  }
+}
+
+function resetSummary(): void {
+  const themeSummary =
+    document.getElementById("summary-theme");
+
+  const playerSummary =
     document.getElementById("summary-player");
 
-  const playerName =
-    value.charAt(0).toUpperCase() +
-    value.slice(1);
+  const boardSummary =
+    document.getElementById("summary-board");
 
-  if (summary) {
-    summary.textContent =
-      `${playerName} Player`;
+  if (themeSummary) {
+    themeSummary.textContent = "Game theme";
+  }
+
+  if (playerSummary) {
+    playerSummary.textContent = "Player";
+  }
+
+  if (boardSummary) {
+    boardSummary.textContent = "Board size";
   }
 }
 
-function updateBoard(value: string): void {
-  const summary =
+function updateSelectedSummary(): void {
+  const selectedTheme =
+    document.querySelector<HTMLInputElement>(
+      'input[name="theme"]:checked'
+    )?.value ?? "code";
+
+  const selectedPlayer =
+    document.querySelector<HTMLInputElement>(
+      'input[name="player"]:checked'
+    )?.value ?? "blue";
+
+  const selectedBoard =
+    document.querySelector<HTMLInputElement>(
+      'input[name="board"]:checked'
+    )?.value ?? "16";
+
+  const themeSummary =
+    document.getElementById("summary-theme");
+
+  const playerSummary =
+    document.getElementById("summary-player");
+
+  const boardSummary =
     document.getElementById("summary-board");
 
-  if (summary) {
-    summary.textContent =
-      `Board-${value} Cards`;
+  const playerName =
+    selectedPlayer.charAt(0).toUpperCase() +
+    selectedPlayer.slice(1);
+
+  if (themeSummary) {
+    themeSummary.textContent =
+      themeLabels[selectedTheme];
   }
+
+  if (playerSummary) {
+    playerSummary.textContent =
+      `${playerName} Player`;
+  }
+
+  if (boardSummary) {
+    boardSummary.textContent =
+      `Board-${selectedBoard} Cards`;
+  }
+}
+
+function toggleChoiceSummary(
+  event: MouseEvent
+): void {
+  const target =
+    event.target as HTMLElement;
+
+  if (
+    target.closest(
+      ".settings-screen__start"
+    )
+  ) {
+    return;
+  }
+
+  const choiceNav =
+    document.querySelector<HTMLElement>(
+      ".settings-screen__choice-nav"
+    );
+
+  if (!choiceNav) {
+    return;
+  }
+
+  const isExpanded =
+    choiceNav.classList.toggle(
+      "settings-screen__choice-nav--expanded"
+    );
+
+  if (isExpanded) {
+    updateSelectedSummary();
+  } else {
+    resetSummary();
+  }
+}
+
+function addChoiceNavListener(): void {
+  const choiceNav =
+    document.querySelector<HTMLElement>(
+      ".settings-screen__choice-nav"
+    );
+
+  choiceNav?.addEventListener(
+    "click",
+    toggleChoiceSummary
+  );
 }
 
 function addThemeListeners(): void {
@@ -102,7 +215,7 @@ function addPlayerListeners(): void {
 
   inputs.forEach((input) => {
     input.addEventListener("change", () => {
-      updatePlayer(input.value);
+      updatePlayer();
     });
   });
 }
@@ -115,7 +228,7 @@ function addBoardListeners(): void {
 
   inputs.forEach((input) => {
     input.addEventListener("change", () => {
-      updateBoard(input.value);
+      updateBoard();
     });
   });
 }
@@ -203,9 +316,18 @@ function restoreSettings(): void {
     boardInput.checked = true;
   }
 
-  updateTheme(selectedTheme);
-  updatePlayer(selectedPlayer);
-  updateBoard(selectedBoard);
+  const preview =
+    document.getElementById(
+      "theme-preview"
+    ) as HTMLImageElement | null;
+
+  if (preview) {
+    preview.src =
+      themeImages[selectedTheme];
+  }
+
+  updatePreviewClass(selectedTheme);
+  resetSummary();
 }
 
 export function initSettings(
@@ -214,6 +336,7 @@ export function initSettings(
   addThemeListeners();
   addPlayerListeners();
   addBoardListeners();
+  addChoiceNavListener();
   addStartButtonListener(onStart);
   restoreSettings();
 }

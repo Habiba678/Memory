@@ -26,17 +26,19 @@ const playerImages: Record<
   code: {
     blue: "/src/assets/themes/theme1/cards/label.svg",
     orange: "/src/assets/themes/theme1/cards/label (1).svg",
+    white: "/src/assets/themes/theme1/cards/player-blue.svg",
   },
 
   gaming: {
     blue: "/src/assets/themes/Theme2/Player-blue.svg",
     orange: "/src/assets/themes/Theme2/Player-orange.svg",
+    white: "/src/assets/themes/Theme2/card/chess_pawn1.svg",
   },
 
   da: {
     blue: "/src/assets/themes/Theme3/Player-blue.svg",
     orange: "/src/assets/themes/Theme3/Player-orange.svg",
-    white: "/src/assets/themes/Theme3/card/chess_pawn .svg",
+    white: "/src/assets/themes/Theme3/card/chess_pawn.svg",
   },
 };
 
@@ -162,6 +164,16 @@ function applyTheme(theme: Theme): void {
       "#exit-game-icon"
     );
 
+  const continueButton =
+    document.querySelector<HTMLButtonElement>(
+      "#continue-game-button"
+    );
+
+  const confirmExitButton =
+    document.querySelector<HTMLButtonElement>(
+      "#confirm-exit-button"
+    );
+
   memoryGame?.classList.remove(
     "memory-game--code",
     "memory-game--gaming",
@@ -185,6 +197,22 @@ function applyTheme(theme: Theme): void {
   if (exitGameIcon) {
     exitGameIcon.src =
       exitImages[theme];
+  }
+
+  if (continueButton && confirmExitButton) {
+    if (theme === "gaming") {
+      continueButton.textContent =
+        "No, back to game";
+
+      confirmExitButton.textContent =
+        "Yes, quit game";
+    } else {
+      continueButton.textContent =
+        "Back to game";
+
+      confirmExitButton.textContent =
+        "Exit game";
+    }
   }
 }
 
@@ -224,15 +252,19 @@ function initCards(
 
   function updateCurrentPlayer(): void {
     if (currentPlayerIcon) {
-      if (theme === "da") {
+      if (theme === "gaming") {
+        currentPlayerIcon.src =
+          playerImages.gaming.white ??
+          playerImages.gaming.blue;
+      } else if (theme === "da") {
         currentPlayerIcon.src =
           playerImages.da.white ??
           playerImages.da.blue;
       } else {
         currentPlayerIcon.src =
           currentPlayer === "blue"
-            ? playerImages[theme].blue
-            : playerImages[theme].orange;
+            ? playerImages.code.blue
+            : playerImages.code.orange;
       }
     }
 
@@ -385,6 +417,7 @@ function initExitDialog(
     );
 
   exitButton?.addEventListener("click", () => {
+    exitButton.classList.add("active");
     exitDialog?.showModal();
   });
 
@@ -392,12 +425,14 @@ function initExitDialog(
     "click",
     () => {
       exitDialog?.close();
+      exitButton?.classList.remove("active");
     }
   );
 
   confirmExitButton?.addEventListener(
     "click",
     () => {
+      exitButton?.classList.remove("active");
       exitDialog?.close();
       onExit();
     }
@@ -439,13 +474,16 @@ export function initGame(
       : 16;
 
   applyTheme(selectedTheme);
+
   renderCards(
     selectedTheme,
     selectedBoard
   );
+
   initCards(
     selectedTheme,
     selectedPlayer
   );
+
   initExitDialog(onExit);
 }

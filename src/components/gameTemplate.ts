@@ -52,27 +52,25 @@ export function gameTemplate(): string {
 
           </div>
 
-         <div class="game-header__current-player">
-           <span class="game-header__current-text">
-           Current player:
-        </span>
+          <div class="game-header__current-player">
+            <span class="game-header__current-text">
+              Current player:
+            </span>
 
-        <span class="game-header__current-icon-wrapper">
-          <img
-          id="current-player-icon"
-          class="game-header__current-icon"
-          src="/src/assets/themes/theme3/card/chess_pawn.svg"
-          alt="Current player"
-        >
-        </span>
+            <img
+              id="current-player-icon"
+              class="game-header__current-icon"
+              src="/src/assets/themes/theme3/card/chess_pawn.svg"
+              alt="Current player"
+            >
 
-        <strong
-          id="current-player-name"
-        class="game-header__current-name"
-        >
-          Blue
-        </strong>
-        </div>
+            <strong
+              id="current-player-name"
+              class="game-header__current-name"
+            >
+              Blue
+            </strong>
+          </div>
 
           <button
             id="exit-game-button"

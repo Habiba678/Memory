@@ -1,5 +1,5 @@
 .memory-game--code {
-  .game-header {
+.game-header {
     background-color: transparent;
     color: #ffffff;
   }
@@ -13,10 +13,11 @@
   }
 
   .game-header__exit {
-    border: 2px solid #4dd9bc;
+    border: 3px solid #4dd9bc;
     border-radius: 0;
     background-color: rgba(134, 233, 214, 0.14);
     color: #ffffff;
+    white-space: nowrap;
 
     &:hover {
       border-color: #2fc9aa;
@@ -112,14 +113,14 @@
   .game-header__current-name {
     display: none;
   }
-
+ 
   .game-header__current-icon {
     width: 25px;
     height: 32px;
     object-fit: contain;
     display: block;
   }
-
+  
   .game-header__exit {
     width: 195px;
     height: 54px;
@@ -450,6 +451,7 @@
     transition:
       background-color 180ms ease,
       color 180ms ease;
+    white-space: nowrap;
 
     &:hover {
       background: #1e7594;
@@ -599,25 +601,69 @@
   }
 }
 
+.memory-game--gaming {
 .game-header__current-icon {
-  width: 41px;
-  height: 40px;
-  padding: 4px 8px;
-  box-sizing: border-box;
+    width: 41px;
+    height: 40px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    background: #1faafc;
+    border-radius: 3px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+  }
 
-  background: #1FAAFC;
-  border-radius: 3px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  .game-header__current-icon {
+    width: 25px;
+    height: 32px;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    object-fit: contain;
+    display: block;
+  }
 }
 
-.game-header__current-icon img,
-.game-header__current-icon svg {
-  width: 25px;
-  height: 32px;
-  object-fit: contain;
+.memory-game--gaming {
+  .game-header__exit.active {
+    background: rgba(237, 27, 118, 0.08);
+    border-color: #e71c4f;
+    color: #ffffff;
+  }
 
-  filter: brightness(0) saturate(100%) invert(100%);
+  .game-header__exit.active .game-header__exit-icon {
+    filter: brightness(0)
+      saturate(100%)
+      invert(24%)
+      sepia(95%)
+      saturate(2800%)
+      hue-rotate(320deg);
+  }
+}
+
+.memory-game--gaming {
+  .game-header__current-icon {
+    width: 41px;
+    height: 40px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    background: #1faafc;
+    border-radius: 3px;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+.memory-game--code {
+.game-header__current-player {
+    gap: 16px;
+  }
+
+  .game-header__current-icon {
+    width: 29px;
+    height: 24px;
+    display: block;
+    object-fit: contain;
+  }
 }

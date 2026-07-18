@@ -43,6 +43,8 @@
     grid-template-rows: repeat(6, 120px);
   }
 
+
+ 
   &--code {
     min-height: 100vh;
     background-color: #292e2d;
@@ -51,7 +53,7 @@
 
   &--gaming {
     min-height: 100vh;
-    background-color: #175970;
+    background-color: #0A2835;
     color: #ffffff;
   }
 
@@ -60,7 +62,8 @@
     background-color: #ffffff;
     color: $text-dark;
   }
-}
+ }
+
 
 .game-header {
   width: 100%;
@@ -89,7 +92,7 @@
     justify-content: center;
     gap: 32px;
     font-family: $font-subtitle;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
     line-height: 1;
   }
@@ -171,7 +174,7 @@
   }
 
   &--orange {
-    color: #EA6900;
+    color: #F58E39;
   }
 }
 
@@ -297,13 +300,13 @@
   }
 
   &__button {
-    min-width: 180px;
-    height: 58px;
+    min-width: 148px;
+    height: 57px;
     padding: 0 24px;
     border: 2px solid #65cfbc;
     border-radius: 0;
     font-family: $font-subtitle;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
     cursor: pointer;
     transition:
@@ -312,24 +315,26 @@
       color 180ms ease;
 
     &--continue {
+      min-width: 182px;
+      height: 57px;
       background-color: #65cfbc;
       color: #ffffff;
       
 
       &:hover {
-        border-color: #2fc9aa;
-        background-color: #4dd9bc;
+        border: 3px solid #4fc0ac;
+        background-color: #87ddcb;
       }
     }
 
     &--exit {
-      background-color: transparent;
-      color: #65cfbc;
+      background-color: rgb(64, 170, 149, 0.14);
+      color: #4fc0ac;
   
 
       &:hover {
-        border-color: #2fc9aa;
-        background-color: rgba(134, 233, 214, 0.14);
+        border: 3px solid #65cfbc;
+        background-color: rgba(64, 170, 149, 0.14);
       }
     }
   }
