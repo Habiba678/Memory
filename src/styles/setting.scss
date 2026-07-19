@@ -45,7 +45,7 @@
   }
 
   &__right {
-    width: 620px;
+    width: 740px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -92,34 +92,38 @@
   }
 
   &__choice-nav {
-    width: 564px;
-    height: 81px;
-    padding: 14px 10px;
+    width: 620px;
+    min-height: 81px;
+    padding: 14px 24px 14px 16px;
     box-sizing: border-box;
     background-color: #f6f6f6;
     display: grid;
     grid-template-columns:
-      116px
-      16px
-      90px
-      16px
+      130px
+      24px
+      95px
+      24px
       125px
-      126px;
-    column-gap: 5px;
+      136px;
+    column-gap: 6px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: width 0.2s ease;
+
+    transition:
+      width 0.2s ease,
+      padding 0.2s ease;
 
     &--expanded {
-      width: 620px;
+      width: 740px;
+      padding: 14px 25px;
       grid-template-columns:
-        150px
-        24px
-        120px
-        24px
-        150px
-        126px;
+        175px
+        28px
+        135px
+        28px
+        165px
+        136px;
       column-gap: 5px;
     }
   }
@@ -129,7 +133,8 @@
     height: 53px;
     border: none;
     background: transparent;
-    padding: 0;
+    padding: 0 8px;
+    box-sizing: border-box;
     font-family: $font-subtitle;
     font-size: 20px;
     font-weight: 400;
@@ -139,15 +144,20 @@
     white-space: nowrap;
     text-align: center;
 
+    transition:
+      font-weight 0.2s ease,
+      transform 0.2s ease;
+
     &:hover,
     &:focus {
       font-weight: 700;
+      transform: scale(1.03);
       outline: none;
     }
   }
 
   &__line-wrapper {
-    width: 100%;
+    width: 24px;
     height: 53px;
     display: flex;
     align-items: center;
@@ -155,10 +165,10 @@
   }
 
   &__choice-line {
-    width: 100%;
-    height: 53px;
+    width: 24px;
+    height: 65px;
     display: block;
-    object-fit: contain;
+    object-fit: fill;
     pointer-events: none;
   }
 
@@ -166,29 +176,36 @@
     width: 126px;
     min-width: 126px;
     height: 53px;
-    padding: 0;
+    padding: 0 14px;
     border: none;
+    border-radius: 0;
     background-color: $secondary-yellow;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     font-family: $font-title;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
+    line-height: 1;
     color: $primary-dark;
     cursor: pointer;
     box-sizing: border-box;
+
     transition:
-      background-color 0.2s ease,
-      transform 0.2s ease;
+      width 0.2s ease,
+      min-width 0.2s ease,
+      transform 0.2s ease,
+      background-color 0.2s ease;
 
     &:hover {
-      transform: translateY(-2px);
+      width: 136px;
+      min-width: 136px;
+      transform: scale(1.05);
     }
 
     &:active {
-      transform: translateY(1px);
+      transform: scale(0.98);
     }
 
     &:focus-visible {
@@ -198,10 +215,16 @@
   }
 
   &__start-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     display: block;
     object-fit: contain;
+    transform: rotate(-3deg);
+    transition: transform 0.2s ease;
+  }
+
+  &__start:hover &__start-icon {
+    transform: rotate(-6deg) scale(1.08);
   }
 }
 
@@ -269,16 +292,18 @@
 
       &::before {
         content: "";
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
         background-color: $primary-dark;
         border-radius: 50%;
         position: absolute;
         top: 50%;
         left: 50%;
+
         transform:
           translate(-50%, -50%)
           scale(0);
+
         transition: transform 0.2s ease;
       }
 
@@ -317,5 +342,358 @@
   &__option:has(input:checked) &__arrow,
   &__option:hover &__arrow {
     opacity: 1;
+  }
+}
+
+
+@media (max-width: 1099px) {
+  .settings-screen {
+    padding: 40px 32px;
+    box-sizing: border-box;
+
+    &__panel {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      gap: 40px;
+    }
+
+    &__left {
+      width: 330px;
+      flex-shrink: 0;
+    }
+
+    &__right {
+      width: 500px;
+      flex-shrink: 1;
+      align-items: flex-end;
+    }
+
+    &__title {
+      font-size: 48px;
+    }
+
+    &__headline-line {
+      width: 220px;
+    }
+
+    &__preview-box {
+      width: 400px;
+      height: 358px;
+    }
+
+    &__preview--code {
+      width: 400px;
+      height: 325px;
+    }
+
+    &__preview--gaming,
+    &__preview--da {
+      width: 375px;
+      height: auto;
+      top: -15px;
+    }
+
+    &__choice-nav {
+      width: 500px;
+      min-height: 72px;
+      padding: 10px 14px;
+      grid-template-columns:
+        105px
+        18px
+        80px
+        18px
+        110px
+        115px;
+      column-gap: 4px;
+
+      &--expanded {
+        width: 500px;
+        padding: 10px 14px;
+        grid-template-columns:
+          105px
+          18px
+          80px
+          18px
+          110px
+          115px;
+        column-gap: 4px;
+      }
+    }
+
+    &__choice {
+      font-size: 16px;
+      height: 48px;
+      padding: 0 3px;
+    }
+
+    &__line-wrapper {
+      width: 18px;
+      height: 48px;
+    }
+
+    &__choice-line {
+      width: 18px;
+      height: 54px;
+    }
+
+    &__start {
+      width: 115px;
+      min-width: 115px;
+      height: 48px;
+      font-size: 17px;
+
+      &:hover {
+        width: 120px;
+        min-width: 120px;
+      }
+    }
+
+    &__start-icon {
+      width: 21px;
+      height: 21px;
+    }
+  }
+
+  .settings-group {
+    margin-bottom: 28px;
+
+    &__title {
+      font-size: 21px;
+    }
+
+    &__option {
+      width: 245px;
+      margin-left: 34px;
+      font-size: 17px;
+      gap: 10px;
+    }
+
+    &__icon {
+      width: 28px;
+      height: 28px;
+    }
+
+    &__arrow {
+      width: 36px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .settings-screen {
+    padding: 32px 24px;
+    align-items: flex-start;
+
+    &__panel {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 34px;
+    }
+
+    &__left {
+      width: 100%;
+    }
+
+    &__headline {
+      margin-bottom: 32px;
+    }
+
+    &__title {
+      font-size: 44px;
+    }
+
+    &__headline-line {
+      width: 205px;
+      left: -12px;
+    }
+
+    &__right {
+      width: 100%;
+      align-items: center;
+      gap: 20px;
+    }
+
+    &__preview-box {
+      width: 100%;
+      max-width: 430px;
+      height: auto;
+      aspect-ratio: 460 / 412;
+    }
+
+    &__preview--code {
+      width: 100%;
+      height: auto;
+    }
+
+    &__preview--gaming,
+    &__preview--da {
+      width: 93%;
+      height: auto;
+      top: -10px;
+    }
+
+    &__choice-nav,
+    &__choice-nav--expanded {
+      width: 100%;
+      max-width: 430px;
+      min-height: 70px;
+      padding: 10px 12px;
+      grid-template-columns:
+        1fr
+        18px
+        1fr
+        18px
+        1fr;
+      column-gap: 4px;
+    }
+
+    &__choice {
+      font-size: 15px;
+      height: 46px;
+      padding: 0 2px;
+    }
+
+    &__line-wrapper {
+      width: 18px;
+      height: 46px;
+    }
+
+    &__choice-line {
+      width: 18px;
+      height: 52px;
+    }
+
+    &__start {
+      grid-column: 1 / -1;
+      width: 126px;
+      min-width: 126px;
+      height: 48px;
+      justify-self: center;
+      margin-top: 8px;
+      font-size: 17px;
+
+      &:hover {
+        width: 132px;
+        min-width: 132px;
+      }
+    }
+  }
+
+  .settings-group {
+    &__option {
+      width: auto;
+      max-width: 280px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .settings-screen {
+    padding: 24px 16px;
+
+    &__panel {
+      gap: 28px;
+    }
+
+    &__headline {
+      margin-bottom: 28px;
+    }
+
+    &__title {
+      font-size: 38px;
+    }
+
+    &__headline-line {
+      width: 180px;
+      left: -8px;
+    }
+
+    &__preview-box {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+
+    &__choice-nav,
+    &__choice-nav--expanded {
+      max-width: 100%;
+      padding: 12px 10px;
+      grid-template-columns:
+        1fr
+        14px
+        1fr
+        14px
+        1fr;
+      column-gap: 2px;
+    }
+
+    &__choice {
+      font-size: 12px;
+      height: 40px;
+      padding: 0;
+    }
+
+    &__line-wrapper {
+      width: 14px;
+      height: 40px;
+    }
+
+    &__choice-line {
+      width: 14px;
+      height: 46px;
+    }
+
+    &__start {
+      width: 120px;
+      min-width: 120px;
+      height: 46px;
+      font-size: 16px;
+
+      &:hover {
+        width: 124px;
+        min-width: 124px;
+      }
+    }
+
+    &__start-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .settings-group {
+    margin-bottom: 25px;
+
+    &__title {
+      font-size: 19px;
+    }
+
+    &__icon {
+      width: 26px;
+      height: 26px;
+    }
+
+    &__option {
+      margin-left: 24px;
+      margin-bottom: 10px;
+      font-size: 16px;
+
+      input {
+        width: 18px;
+        height: 18px;
+
+        &::before {
+          width: 7px;
+          height: 7px;
+        }
+      }
+    }
+
+    &__arrow {
+      width: 32px;
+    }
   }
 }
