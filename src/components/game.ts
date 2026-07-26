@@ -1,4 +1,8 @@
 import { themeImages } from "../gameCardImages";
+import {
+  renderGameResult,
+  showGameResult,
+} from "./gameResult";
 
 type Player = "blue" | "orange";
 type Theme = "code" | "gaming" | "da";
@@ -51,10 +55,19 @@ const exitImages: Record<Theme, string> = {
 function shuffleCards(cards: CardData[]): CardData[] {
   const shuffledCards = [...cards];
 
-  for (let index = shuffledCards.length - 1; index > 0; index--) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
+  for (
+    let index = shuffledCards.length - 1;
+    index > 0;
+    index--
+  ) {
+    const randomIndex = Math.floor(
+      Math.random() * (index + 1)
+    );
 
-    [shuffledCards[index], shuffledCards[randomIndex]] = [
+    [
+      shuffledCards[index],
+      shuffledCards[randomIndex],
+    ] = [
       shuffledCards[randomIndex],
       shuffledCards[index],
     ];
@@ -67,62 +80,102 @@ function createCardElement(
   card: CardData,
   theme: Theme
 ): HTMLButtonElement {
-  const cardButton = document.createElement("button");
+  const cardButton =
+    document.createElement("button");
 
   cardButton.className = "memory-card";
   cardButton.type = "button";
-  cardButton.dataset.pairId = String(card.pairId);
+  cardButton.dataset.pairId =
+    String(card.pairId);
   cardButton.dataset.scored = "false";
 
-  const cardInner = document.createElement("span");
-  cardInner.className = "memory-card__inner";
+  const cardInner =
+    document.createElement("span");
 
-  const cardBack = document.createElement("span");
-  cardBack.className = "memory-card__back";
+  cardInner.className =
+    "memory-card__inner";
 
-  const backImage = document.createElement("img");
-  backImage.className = "memory-card__back-image";
-  backImage.src = backCardImages[theme];
-  backImage.alt = "Hidden memory card";
+  const cardBack =
+    document.createElement("span");
 
-  const cardFront = document.createElement("span");
-  cardFront.className = "memory-card__front";
+  cardBack.className =
+    "memory-card__back";
 
-  const frontImage = document.createElement("img");
-  frontImage.className = "memory-card__front-image";
+  const backImage =
+    document.createElement("img");
+
+  backImage.className =
+    "memory-card__back-image";
+
+  backImage.src =
+    backCardImages[theme];
+
+  backImage.alt =
+    "Hidden memory card";
+
+  const cardFront =
+    document.createElement("span");
+
+  cardFront.className =
+    "memory-card__front";
+
+  const frontImage =
+    document.createElement("img");
+
+  frontImage.className =
+    "memory-card__front-image";
+
   frontImage.src = card.image;
   frontImage.alt = "Memory card";
 
   cardBack.append(backImage);
   cardFront.append(frontImage);
-  cardInner.append(cardBack, cardFront);
+
+  cardInner.append(
+    cardBack,
+    cardFront
+  );
+
   cardButton.append(cardInner);
 
   return cardButton;
 }
 
-function renderCards(theme: Theme, boardSize: BoardSize): void {
+function renderCards(
+  theme: Theme,
+  boardSize: BoardSize
+): void {
   const gameGrid =
-    document.querySelector<HTMLElement>("#game-grid");
+    document.querySelector<HTMLElement>(
+      "#game-grid"
+    );
 
   if (!gameGrid) {
     return;
   }
 
-  const pairCount = boardSize / 2;
-  const selectedImages =
-    themeImages[theme].slice(0, pairCount);
+  const pairCount =
+    boardSize / 2;
 
-  const cards = selectedImages.flatMap((image, pairId) => [
-    {
-      image,
-      pairId,
-    },
-    {
-      image,
-      pairId,
-    },
-  ]);
+  const selectedImages =
+    themeImages[theme].slice(
+      0,
+      pairCount
+    );
+
+  const cards =
+    selectedImages.flatMap(
+      (image, pairId) => [
+        {
+          image,
+          pairId,
+        },
+        {
+          image,
+          pairId,
+        },
+      ]
+    );
 
   gameGrid.classList.remove(
     "memory-game__grid--16",
@@ -136,14 +189,21 @@ function renderCards(theme: Theme, boardSize: BoardSize): void {
 
   gameGrid.innerHTML = "";
 
-  shuffleCards(cards).forEach((card) => {
-    gameGrid.append(
-      createCardElement(card, theme)
-    );
-  });
+  shuffleCards(cards).forEach(
+    (card) => {
+      gameGrid.append(
+        createCardElement(
+          card,
+          theme
+        )
+      );
+    }
+  );
 }
 
-function applyTheme(theme: Theme): void {
+function applyTheme(
+  theme: Theme
+): void {
   const memoryGame =
     document.querySelector<HTMLElement>(
       "#memory-game"
@@ -199,7 +259,10 @@ function applyTheme(theme: Theme): void {
       exitImages[theme];
   }
 
-  if (continueButton && confirmExitButton) {
+  if (
+    continueButton &&
+    confirmExitButton
+  ) {
     if (theme === "gaming") {
       continueButton.textContent =
         "No, back to game";
@@ -218,7 +281,8 @@ function applyTheme(theme: Theme): void {
 
 function initCards(
   theme: Theme,
-  startPlayer: Player
+  startPlayer: Player,
+  onBackToStart: () => void
 ): void {
   const cards =
     document.querySelectorAll<HTMLButtonElement>(
@@ -248,7 +312,14 @@ function initCards(
   let currentPlayer = startPlayer;
   let blueScore = 0;
   let orangeScore = 0;
-  let openCards: HTMLButtonElement[] = [];
+  let matchedPairs = 0;
+  let gameFinished = false;
+
+  let openCards:
+    HTMLButtonElement[] = [];
+
+  const totalPairs =
+    cards.length / 2;
 
   function updateCurrentPlayer(): void {
     if (currentPlayerIcon) {
@@ -297,6 +368,49 @@ function initCards(
     updateCurrentPlayer();
   }
 
+  function finishGame(): void {
+    if (gameFinished) {
+      return;
+    }
+
+    gameFinished = true;
+
+    renderGameResult();
+
+    showGameResult(
+      theme,
+      "game-over"
+    );
+
+    window.setTimeout(() => {
+      if (blueScore > orangeScore) {
+        showGameResult(
+          theme,
+          "winner-blue",
+          onBackToStart
+        );
+
+        return;
+      }
+
+      if (orangeScore > blueScore) {
+        showGameResult(
+          theme,
+          "winner-orange",
+          onBackToStart
+        );
+
+        return;
+      }
+
+      showGameResult(
+        theme,
+        "draw",
+        onBackToStart
+      );
+    }, 1500);
+  }
+
   function addPoint(): void {
     if (currentPlayer === "blue") {
       blueScore += 1;
@@ -304,7 +418,13 @@ function initCards(
       orangeScore += 1;
     }
 
+    matchedPairs += 1;
+
     updateScores();
+
+    if (matchedPairs === totalPairs) {
+      finishGame();
+    }
   }
 
   function compareLastOpenedCards(): void {
@@ -313,28 +433,38 @@ function initCards(
     }
 
     const firstCard =
-      openCards[openCards.length - 2];
+      openCards[
+        openCards.length - 2
+      ];
 
     const secondCard =
-      openCards[openCards.length - 1];
+      openCards[
+        openCards.length - 1
+      ];
 
     const isSamePair =
       firstCard.dataset.pairId ===
       secondCard.dataset.pairId;
 
     const firstCardAlreadyScored =
-      firstCard.dataset.scored === "true";
+      firstCard.dataset.scored ===
+      "true";
 
     const secondCardAlreadyScored =
-      secondCard.dataset.scored === "true";
+      secondCard.dataset.scored ===
+      "true";
 
     if (isSamePair) {
       if (
         !firstCardAlreadyScored &&
         !secondCardAlreadyScored
       ) {
-        firstCard.dataset.scored = "true";
-        secondCard.dataset.scored = "true";
+        firstCard.dataset.scored =
+          "true";
+
+        secondCard.dataset.scored =
+          "true";
+
         addPoint();
       }
 
@@ -347,29 +477,44 @@ function initCards(
   function openCard(
     card: HTMLButtonElement
   ): void {
+    if (gameFinished) {
+      return;
+    }
+
     card.classList.add(
       "memory-card--flipped"
     );
 
     openCards.push(card);
+
     compareLastOpenedCards();
   }
 
   function closeCard(
     card: HTMLButtonElement
   ): void {
+    if (gameFinished) {
+      return;
+    }
+
     card.classList.remove(
       "memory-card--flipped"
     );
 
-    openCards = openCards.filter(
-      (openCard) => openCard !== card
-    );
+    openCards =
+      openCards.filter(
+        (openCard) =>
+          openCard !== card
+      );
   }
 
   function handleCardClick(
     card: HTMLButtonElement
   ): void {
+    if (gameFinished) {
+      return;
+    }
+
     const isOpen =
       card.classList.contains(
         "memory-card--flipped"
@@ -384,9 +529,12 @@ function initCards(
   }
 
   cards.forEach((card) => {
-    card.addEventListener("click", () => {
-      handleCardClick(card);
-    });
+    card.addEventListener(
+      "click",
+      () => {
+        handleCardClick(card);
+      }
+    );
   });
 
   updateScores();
@@ -416,40 +564,62 @@ function initExitDialog(
       "#exit-dialog"
     );
 
-  exitButton?.addEventListener("click", () => {
-    exitButton.classList.add("active");
-    exitDialog?.showModal();
-  });
+  exitButton?.addEventListener(
+    "click",
+    () => {
+      exitButton.classList.add(
+        "active"
+      );
+
+      exitDialog?.showModal();
+    }
+  );
 
   continueButton?.addEventListener(
     "click",
     () => {
       exitDialog?.close();
-      exitButton?.classList.remove("active");
+
+      exitButton?.classList.remove(
+        "active"
+      );
     }
   );
 
   confirmExitButton?.addEventListener(
     "click",
     () => {
-      exitButton?.classList.remove("active");
+      exitButton?.classList.remove(
+        "active"
+      );
+
       exitDialog?.close();
+
       onExit();
     }
   );
 }
 
 export function initGame(
-  onExit: () => void
+  onExit: () => void,
+  onBackToStart: () => void = () => {
+    window.location.reload();
+  }
 ): void {
   const storedTheme =
-    localStorage.getItem("selectedTheme");
+    localStorage.getItem(
+      "selectedTheme"
+    );
 
   const storedPlayer =
-    localStorage.getItem("selectedPlayer");
+    localStorage.getItem(
+      "selectedPlayer"
+    );
 
   const storedBoard =
-    localStorage.getItem("selectedBoard");
+    localStorage.getItem(
+      "selectedBoard"
+    );
 
   const selectedTheme: Theme =
     storedTheme === "gaming" ||
@@ -462,10 +632,11 @@ export function initGame(
       ? "orange"
       : "blue";
 
-  const boardNumber = Number.parseInt(
-    storedBoard ?? "16",
-    10
-  );
+  const boardNumber =
+    Number.parseInt(
+      storedBoard ?? "16",
+      10
+    );
 
   const selectedBoard: BoardSize =
     boardNumber === 24 ||
@@ -473,7 +644,9 @@ export function initGame(
       ? boardNumber
       : 16;
 
-  applyTheme(selectedTheme);
+  applyTheme(
+    selectedTheme
+  );
 
   renderCards(
     selectedTheme,
@@ -482,8 +655,11 @@ export function initGame(
 
   initCards(
     selectedTheme,
-    selectedPlayer
+    selectedPlayer,
+    onBackToStart
   );
 
-  initExitDialog(onExit);
+  initExitDialog(
+    onExit
+  );
 }

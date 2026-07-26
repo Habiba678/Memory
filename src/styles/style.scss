@@ -34,15 +34,18 @@
   }
 
   &__controller {
-    width: 441.31px;
+    min-width: 414.31px;
     height: 301.31px;
     position: absolute;
-    left: -88px;
-    top: 216px;
-    transform: rotate(-37.42deg);
+    left: -80px;
+    top: 400px;
+    transform: rotate(5deg);
     opacity: 0.5;
     pointer-events: none;
+    
+   
   }
+
 
   &__content {
     display: flex;
@@ -80,6 +83,9 @@
   cursor: pointer;
   transition: transform 0.2s ease;
   z-index: 2;
+
+  position: relative;
+  top: 20px;
 
   &--yellow {
     background-color: $secondary-yellow;
@@ -125,7 +131,7 @@
   }
 
   &:hover &__arrow-box {
-    transform: translateX(6px) scale(1.15);
+    transform: translateX(6px) scale(1.35);
   }
 
   &:active {
