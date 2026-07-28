@@ -261,6 +261,20 @@
       background-color: #ff3f77;
       color: #ffffff;
     }
+
+    .game-result__confetti {
+      display: none;
+    }
+
+    .game-result__screen--winner {
+      padding-top: 170px;
+    }
+
+    .game-result__players {
+      background: #ffffff;
+      border: none;
+      border-radius: 2px;
+    }
   }
 
   &__theme--da {
@@ -290,6 +304,20 @@
     .game-result__button {
       background-color: #ffffff;
       color: #04a6c2;
+    }
+
+    .game-result__confetti {
+      display: none;
+    }
+
+    .game-result__screen--winner {
+      padding-top: 170px;
+    }
+
+    .game-result__players {
+      background: #ffffff;
+      border: none;
+      border-radius: 2px;
     }
   }
 }

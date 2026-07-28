@@ -1,3 +1,4 @@
+import { gameResultTemplatePart1 } from "./gameResultTemplatePart1";
 import { gameResultTemplate } from "./gameResultTemplate";
 
 export type GameResult =
@@ -13,6 +14,7 @@ export type GameTheme =
 
 export function renderGameResult(): void {
   document.body.innerHTML =
+    gameResultTemplatePart1() +
     gameResultTemplate();
 }
 

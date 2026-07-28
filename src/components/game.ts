@@ -34,8 +34,8 @@ const playerImages: Record<
   },
 
   gaming: {
-    blue: "/src/assets/themes/Theme2/Player-blue.svg",
-    orange: "/src/assets/themes/Theme2/Player-orange.svg",
+    blue: "/src/assets/themes/Theme2/card/Player-blue.svg",
+    orange: "/src/assets/themes/Theme2/card/Player-orange.svg",
     white: "/src/assets/themes/Theme2/card/chess_pawn1.svg",
   },
 
