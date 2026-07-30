@@ -52,16 +52,21 @@ import {
     let orangeScore = 0;
     let matchedPairs = 0;
     let gameFinished = false;
+    let gameStarted = false;
     let openCards: HTMLButtonElement[] = [];
   
     const totalPairs = cards.length / 2;
   
+    /**
+     * Updates the current-player display.
+     */
     function updateCurrentPlayer(): void {
       if (currentPlayerIcon) {
         currentPlayerIcon.src =
           getCurrentPlayerImage(
             theme,
             currentPlayer,
+            gameStarted,
           );
       }
   
@@ -73,6 +78,9 @@ import {
       }
     }
   
+    /**
+     * Updates the displayed scores.
+     */
     function updateScores(): void {
       if (blueScoreElement) {
         blueScoreElement.textContent =
@@ -85,6 +93,9 @@ import {
       }
     }
   
+    /**
+     * Changes the current player.
+     */
     function switchPlayer(): void {
       currentPlayer =
         currentPlayer === "blue"
@@ -94,6 +105,11 @@ import {
       updateCurrentPlayer();
     }
   
+    /**
+     * Displays the winner or draw screen.
+     *
+     * @param scores - The final scores.
+     */
     function showFinalResult(
       scores: GameScores,
     ): void {
@@ -104,6 +120,7 @@ import {
           scores,
           onBackToStart,
         );
+  
         return;
       }
   
@@ -114,6 +131,7 @@ import {
           scores,
           onBackToStart,
         );
+  
         return;
       }
   
@@ -125,6 +143,9 @@ import {
       );
     }
   
+    /**
+     * Finishes the game and displays the result.
+     */
     function finishGame(): void {
       if (gameFinished) {
         return;
@@ -149,149 +170,178 @@ import {
         showFinalResult(scores);
       }, 2500);
     }
-  
-    function addPoint(): void {
-      if (currentPlayer === "blue") {
-        blueScore++;
-      } else {
-        orangeScore++;
-      }
-  
-      matchedPairs++;
-      updateScores();
-  
-      if (matchedPairs === totalPairs) {
-        finishGame();
-      }
-    }
-  
-    function compareOpenedCards(): void {
-      if (openCards.length < 2) {
-        return;
-      }
-  
-      const firstCard =
-        openCards.at(-2);
-  
-      const secondCard =
-        openCards.at(-1);
-  
-      if (!firstCard || !secondCard) {
-        return;
-      }
-  
-      const samePair =
-        firstCard.dataset.pairId ===
-        secondCard.dataset.pairId;
-  
-      const alreadyScored =
-        firstCard.dataset.scored ===
-          "true" ||
-        secondCard.dataset.scored ===
-          "true";
-  
-      if (samePair && !alreadyScored) {
-        firstCard.dataset.scored =
-          "true";
-  
-        secondCard.dataset.scored =
-          "true";
-  
-        addPoint();
-        return;
-      }
-  
-      if (!samePair) {
-        switchPlayer();
-      }
-    }
-  
-    function openCard(
-      card: HTMLButtonElement,
-    ): void {
-      if (gameFinished) {
-        return;
-      }
-  
-      card.classList.add(
-        "memory-card--flipped",
-      );
-  
-      openCards.push(card);
-  
-      compareOpenedCards();
-    }
-  
-    function closeCard(
-      card: HTMLButtonElement,
-    ): void {
-      if (gameFinished) {
-        return;
-      }
-  
-      card.classList.remove(
-        "memory-card--flipped",
-      );
-  
-      openCards = openCards.filter(
-        (openCard) =>
-          openCard !== card,
-      );
-    }
-  
-    function handleCardClick(
-      card: HTMLButtonElement,
-    ): void {
-      if (gameFinished) {
-        return;
-      }
-  
-      const isOpen =
-        card.classList.contains(
-          "memory-card--flipped",
-        );
-  
-      if (isOpen) {
-        closeCard(card);
-        return;
-      }
-  
-      openCard(card);
-    }
-  
-    cards.forEach((card) => {
-      card.addEventListener(
-        "click",
-        () => handleCardClick(card),
-      );
-    });
-  
-    updateScores();
-    updateCurrentPlayer();
-  }
-  
-  /**
-   * Returns the current-player image.
-   *
-   * @param theme - The selected theme.
-   * @param player - Current player.
-   * @returns Image path.
+
+    /**
+   * Adds one point to the current player.
    */
-  function getCurrentPlayerImage(
-    theme: Theme,
-    player: Player,
-  ): string {
-    if (
-      theme === "gaming" ||
-      theme === "da"
-    ) {
-      return (
-        playerImages[theme].white ??
-        playerImages[theme].blue
-      );
+  function addPoint(): void {
+    if (currentPlayer === "blue") {
+      blueScore++;
+    } else {
+      orangeScore++;
     }
-  
-    return player === "blue"
-      ? playerImages.code.blue
-      : playerImages.code.orange;
+
+    matchedPairs++;
+    updateScores();
+
+    if (matchedPairs === totalPairs) {
+      finishGame();
+    }
   }
+
+  /**
+   * Compares the last two opened cards.
+   */
+  function compareOpenedCards(): void {
+    if (openCards.length < 2) {
+      return;
+    }
+
+    const firstCard =
+      openCards.at(-2);
+
+    const secondCard =
+      openCards.at(-1);
+
+    if (!firstCard || !secondCard) {
+      return;
+    }
+
+    const samePair =
+      firstCard.dataset.pairId ===
+      secondCard.dataset.pairId;
+
+    const alreadyScored =
+      firstCard.dataset.scored ===
+        "true" ||
+      secondCard.dataset.scored ===
+        "true";
+
+    if (samePair && !alreadyScored) {
+      firstCard.dataset.scored =
+        "true";
+
+      secondCard.dataset.scored =
+        "true";
+
+      addPoint();
+      return;
+    }
+
+    if (!samePair) {
+      switchPlayer();
+    }
+  }
+
+  /**
+   * Opens the selected memory card.
+   *
+   * @param card - The card that should be opened.
+   */
+  function openCard(
+    card: HTMLButtonElement,
+  ): void {
+    if (gameFinished) {
+      return;
+    }
+
+    if (!gameStarted) {
+      gameStarted = true;
+      updateCurrentPlayer();
+    }
+
+    card.classList.add(
+      "memory-card--flipped",
+    );
+
+    openCards.push(card);
+
+    compareOpenedCards();
+  }
+
+  /**
+   * Closes the selected memory card.
+   *
+   * @param card - The card that should be closed.
+   */
+  function closeCard(
+    card: HTMLButtonElement,
+  ): void {
+    if (gameFinished) {
+      return;
+    }
+
+    card.classList.remove(
+      "memory-card--flipped",
+    );
+
+    openCards = openCards.filter(
+      (openCard) =>
+        openCard !== card,
+    );
+  }
+
+  /**
+   * Handles a click on a memory card.
+   *
+   * @param card - The card that was clicked.
+   */
+  function handleCardClick(
+    card: HTMLButtonElement,
+  ): void {
+    if (gameFinished) {
+      return;
+    }
+
+    const isOpen =
+      card.classList.contains(
+        "memory-card--flipped",
+      );
+
+    if (isOpen) {
+      closeCard(card);
+      return;
+    }
+
+    openCard(card);
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener(
+      "click",
+      () => handleCardClick(card),
+    );
+  });
+
+  updateScores();
+  updateCurrentPlayer();
+}
+
+/**
+ * Returns the current-player image.
+ *
+ * @param theme - The selected theme.
+ * @param player - The current player.
+ * @param gameStarted - Indicates whether the game has started.
+ * @returns The matching player-image path.
+ */
+function getCurrentPlayerImage(
+  theme: Theme,
+  player: Player,
+  gameStarted: boolean,
+): string {
+  if (
+    !gameStarted &&
+    (theme === "gaming" ||
+      theme === "da")
+  ) {
+    return (
+      playerImages[theme].white ??
+      playerImages[theme].blue
+    );
+  }
+
+  return player === "blue"
+    ? playerImages[theme].blue
+    : playerImages[theme].orange;
+}
