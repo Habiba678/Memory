@@ -1,87 +1,90 @@
-type PlayerColor = "blue" | "orange";
-
 /**
- * Returns the player icon path.
+ * Returns the blue player score.
  *
- * @param color - The player's color.
- * @returns The path to the player icon.
+ * @returns The blue player score HTML.
  */
-function getPlayerIcon(color: PlayerColor): string {
-  return color === "blue"
-    ? "/src/assets/themes/Theme3/Player-blue.svg"
-    : "/src/assets/themes/Theme3/Player-orange.svg";
-}
-
-/**
- * Capitalizes the first letter of a string.
- *
- * @param value - The string to format.
- * @returns The formatted string.
- */
-function capitalize(value: string): string {
-  return value.charAt(0).toUpperCase()
-    + value.slice(1);
-}
-
-/**
- * Creates the HTML markup for one player.
- *
- * @param color - The player's color.
- * @returns The HTML markup for the player.
- */
-function playerTemplate(color: PlayerColor): string {
-  const playerName = capitalize(color);
-
+export function getBluePlayerTemplate(): string {
   return `
-    <div class="game-result__player game-result__player--${color}">
-      <img class="game-result__player-icon" src="${getPlayerIcon(color)}" alt="${playerName} Player">
-      <span class="game-result__player-name">${playerName}</span>
-      <span class="game-result__player-score game-result__player-score--${color}">0</span>
+    <div class="game-result__player game-result__player--blue">
+      <img class="game-result__player-icon"
+        src="/src/assets/themes/Theme3/Player-blue.svg"
+        alt="Blue Player">
+      <span class="game-result__player-name">Blue</span>
+      <span class="game-result__player-score
+        game-result__player-score--blue">0</span>
     </div>
   `;
 }
 
 /**
- * Creates the game-over screen.
+ * Returns the orange player score.
  *
- * @returns The HTML markup for the game-over screen.
+ * @returns The orange player score HTML.
  */
-function gameOverTemplate(): string {
+export function getOrangePlayerTemplate(): string {
   return `
-    <div id="da-game-over" class="game-result__screen game-result__screen--game-over">
+    <div class="game-result__player game-result__player--orange">
+      <img class="game-result__player-icon"
+        src="/src/assets/themes/Theme3/Player-orange.svg"
+        alt="Orange Player">
+      <span class="game-result__player-name">Orange</span>
+      <span class="game-result__player-score
+        game-result__player-score--orange">0</span>
+    </div>
+  `;
+}
+
+/**
+ * Returns the player score section.
+ *
+ * @returns The player score section HTML.
+ */
+export function getPlayersTemplate(): string {
+  return `
+    <div class="game-result__players">
+      ${getBluePlayerTemplate()}
+      ${getOrangePlayerTemplate()}
+    </div>
+  `;
+}
+
+/**
+ * Returns the game-over screen.
+ *
+ * @returns The game-over screen HTML.
+ */
+export function getGameOverTemplate(): string {
+  return `
+    <div id="da-game-over"
+      class="game-result__screen game-result__screen--game-over">
       <h1 class="game-result__title">GAME OVER</h1>
       <div class="game-result__score">
         <p class="game-result__score-title">Final score</p>
-        <div class="game-result__players">
-          ${playerTemplate("blue")}
-          ${playerTemplate("orange")}
-        </div>
+        ${getPlayersTemplate()}
       </div>
     </div>
   `;
 }
 
 /**
- * Creates the confetti image.
+ * Returns the confetti image.
  *
- * @returns The HTML markup for the confetti image.
+ * @returns The confetti image HTML.
  */
-function confettiTemplate(): string {
+export function getConfettiTemplate(): string {
   return `
-    <img
-      class="game-result__confetti"
+    <img class="game-result__confetti"
       src="/src/assets/themes/Confetti.png"
-      alt=""
-    >
+      alt="">
   `;
 }
 
 /**
- * Creates the home button.
+ * Returns the home button.
  *
- * @returns The HTML markup for the home button.
+ * @returns The home button HTML.
  */
-function homeButtonTemplate(): string {
+export function getHomeButtonTemplate(): string {
   return `
     <button class="game-result__button" type="button">
       Home
@@ -90,53 +93,87 @@ function homeButtonTemplate(): string {
 }
 
 /**
- * Creates the winner screen.
+ * Returns the blue winner screen.
  *
- * @param color - The winning player's color.
- * @returns The HTML markup for the winner screen.
+ * @returns The blue winner screen HTML.
  */
-function winnerTemplate(color: PlayerColor): string {
-  const playerName = `${capitalize(color)} Player`;
-
+export function getBlueWinnerTemplate(): string {
   return `
-    <div id="da-winner-${color}" class="game-result__screen game-result__screen--winner">
-      ${confettiTemplate()}
+    <div id="da-winner-blue"
+      class="game-result__screen game-result__screen--winner">
+      ${getConfettiTemplate()}
       <p class="game-result__subtitle">The winner is</p>
-      <h2 class="game-result__winner-name">${playerName}</h2>
-      <img class="game-result__image" src="${getPlayerIcon(color)}" alt="${playerName}">
-      ${homeButtonTemplate()}
+      <h2 class="game-result__winner-name">Blue Player</h2>
+      <img class="game-result__image"
+        src="/src/assets/themes/Theme3/Player-blue.svg"
+        alt="Blue Player">
+      ${getHomeButtonTemplate()}
     </div>
   `;
 }
 
 /**
- * Creates the draw screen.
+ * Returns the orange winner screen.
  *
- * @returns The HTML markup for the draw screen.
+ * @returns The orange winner screen HTML.
  */
-function drawTemplate(): string {
+export function getOrangeWinnerTemplate(): string {
   return `
-    <div id="da-draw" class="game-result__screen game-result__screen--draw">
+    <div id="da-winner-orange"
+      class="game-result__screen game-result__screen--winner">
+      ${getConfettiTemplate()}
+      <p class="game-result__subtitle">The winner is</p>
+      <h2 class="game-result__winner-name">Orange Player</h2>
+      <img class="game-result__image"
+        src="/src/assets/themes/Theme3/Player-orange.svg"
+        alt="Orange Player">
+      ${getHomeButtonTemplate()}
+    </div>
+  `;
+}
+
+/**
+ * Returns the draw screen.
+ *
+ * @returns The draw screen HTML.
+ */
+export function getDrawTemplate(): string {
+  return `
+    <div id="da-draw"
+      class="game-result__screen game-result__screen--draw">
       <p class="game-result__subtitle">It's a</p>
       <h2 class="game-result__draw-title">DRAW</h2>
-      <img class="game-result__image" src="/src/assets/themes/Theme3/Scale_Icon.svg" alt="Draw">
-      ${homeButtonTemplate()}
+      <img class="game-result__image"
+        src="/src/assets/themes/Theme3/Scale_Icon.svg"
+        alt="Draw">
+      ${getHomeButtonTemplate()}
     </div>
   `;
 }
 
 /**
- * Creates the complete game-result template.
+ * Returns the complete game-result content.
  *
- * @returns The HTML markup for all result screens.
+ * @returns The complete game-result content HTML.
+ */
+export function getGameResultContentTemplate(): string {
+  return `
+    ${getGameOverTemplate()}
+    ${getBlueWinnerTemplate()}
+    ${getOrangeWinnerTemplate()}
+    ${getDrawTemplate()}
+  `;
+}
+
+/**
+ * Returns the complete game-result template.
+ *
+ * @returns The complete game-result HTML.
  */
 export function gameResultTemplate(): string {
   return `
     <div class="game-result__theme game-result__theme--da">
-      ${gameOverTemplate()}
-      ${winnerTemplate("blue")}
-      ${winnerTemplate("orange")}
-      ${drawTemplate()}
+      ${getGameResultContentTemplate()}
     </div>
   `;
 }

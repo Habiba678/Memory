@@ -10,6 +10,9 @@ import type {
   Theme,
 } from "./gameBoard";
 
+/**
+ * Gets the selected game theme from local storage.
+ */
 const exitImages: Record<Theme, string> = {
   code: "/src/assets/themes/theme1/cards/move_item.svg",
   gaming: "/src/assets/themes/theme1/cards/move_item.svg",
@@ -19,7 +22,7 @@ const exitImages: Record<Theme, string> = {
 /**
  * Updates the player images for the selected theme.
  *
- * @param theme - The currently selected theme.
+ * @param theme  The currently selected theme.
  */
 function updatePlayerImages(
   theme: Theme,
@@ -48,7 +51,7 @@ function updatePlayerImages(
 /**
  * Updates the exit icon for the selected theme.
  *
- * @param theme - The currently selected theme.
+ * @param theme  The currently selected theme.
  */
 function updateExitImage(
   theme: Theme,
@@ -67,7 +70,7 @@ function updateExitImage(
 /**
  * Updates the exit-dialog button labels.
  *
- * @param theme - The currently selected theme.
+ * @param theme  The currently selected theme.
  */
 function updateExitButtonLabels(
   theme: Theme,
@@ -100,7 +103,7 @@ function updateExitButtonLabels(
 /**
  * Applies the selected theme to the game.
  *
- * @param theme - The currently selected theme.
+ * @param theme  The currently selected theme.
  */
 function applyTheme(
   theme: Theme,
@@ -128,8 +131,8 @@ function applyTheme(
 /**
  * Opens the exit confirmation dialog.
  *
- * @param exitButton - The exit button.
- * @param exitDialog - The exit dialog.
+ * @param exitButton  The exit button.
+ * @param exitDialog  The exit dialog.
  */
 function openExitDialog(
   exitButton: HTMLButtonElement,
@@ -142,8 +145,8 @@ function openExitDialog(
 /**
  * Closes the exit confirmation dialog.
  *
- * @param exitButton - The exit button.
- * @param exitDialog - The exit dialog.
+ * @param exitButton  The exit button.
+ * @param exitDialog  The exit dialog.
  */
 function closeExitDialog(
   exitButton: HTMLButtonElement | null,
@@ -156,7 +159,7 @@ function closeExitDialog(
 /**
  * Initializes the exit confirmation dialog.
  *
- * @param onExit - Runs after confirming the game exit.
+ * @param onExit  Runs after confirming the game exit.
  */
 function initExitDialog(
   onExit: () => void,
@@ -255,8 +258,8 @@ function getSelectedBoard(): BoardSize {
 /**
  * Initializes the complete memory game.
  *
- * @param onExit - Runs after confirming the game exit.
- * @param onBackToStart - Runs after leaving the result screen.
+ * @param onExit  Runs after confirming the game exit.
+ * @param onBackToStart  Runs after leaving the result screen.
  */
 export function initGame(
   onExit: () => void,

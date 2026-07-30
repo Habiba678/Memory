@@ -29,8 +29,8 @@ export function renderGameResult(): void {
 /**
  * Updates the displayed final scores.
  *
- * @param activeTheme - The currently selected theme element.
- * @param scores - The final scores of both players.
+ * @param activeTheme  The currently selected theme element.
+ * @param scores  The final scores of both players.
  */
 function updateFinalScores(
   activeTheme: HTMLElement,
@@ -77,10 +77,10 @@ function hideGameResults(): void {
 /**
  * Displays the selected game-result screen.
  *
- * @param theme - The currently selected game theme.
- * @param result - The result screen that should be displayed.
- * @param scores - The final scores of both players.
- * @param onBackToStart - Runs when the navigation button is clicked.
+ * @param theme  The currently selected game theme.
+ * @param result  The result screen that should be displayed.
+ * @param scores  The final scores of both players.
+ * @param onBackToStart  Runs when the navigation button is clicked.
  */
 export function showGameResult(
   theme: GameTheme,

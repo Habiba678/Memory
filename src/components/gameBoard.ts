@@ -1,14 +1,31 @@
 import { themeImages } from "../gameCardImages";
 
+/**
+ * Defines the available player colors.
+ */
 export type Player = "blue" | "orange";
+
+/**
+ * Defines the available game themes.
+ */
 export type Theme = "code" | "gaming" | "da";
+
+/**
+ * Defines the supported board sizes.
+ */
 export type BoardSize = 16 | 24 | 36;
 
+/**
+ * Describes the data of one memory card.
+ */
 export type CardData = {
   image: string;
   pairId: number;
 };
 
+/**
+ * Maps each theme to its player icons.
+ */
 export const playerImages: Record<
   Theme,
   {
@@ -44,10 +61,10 @@ export const playerImages: Record<
   },
 };
 
-const backCardImages: Record<
-  Theme,
-  string
-> = {
+/**
+ * Assigns the correct card-back image to each theme.
+ */
+const backCardImages: Record<Theme, string> = {
   code:
     "/src/assets/themes/theme1/cards/back-card.svg",
 
@@ -61,7 +78,7 @@ const backCardImages: Record<
 /**
  * Shuffles the cards into a random order.
  *
- * @param cards - Cards to shuffle.
+ * @param cards  The cards to shuffle.
  * @returns The shuffled cards.
  */
 function shuffleCards(
@@ -91,12 +108,27 @@ function shuffleCards(
 }
 
 /**
- * Creates an image element.
+ * Builds a span element with a CSS class.
  *
- * @param source - Image source.
- * @param className - CSS class.
- * @param altText - Alternative text.
- * @returns Image element.
+ * @param className  The CSS class of the span.
+ * @returns The created span element.
+ */
+function createSpan(
+  className: string,
+): HTMLSpanElement {
+  const span = document.createElement("span");
+  span.className = className;
+
+  return span;
+}
+
+/**
+ * Builds an image element for a memory card.
+ *
+ * @param source  The image source.
+ * @param className  The CSS class of the image.
+ * @param altText  The alternative text.
+ * @returns The created image element.
  */
 function createCardImage(
   source: string,
@@ -113,31 +145,24 @@ function createCardImage(
 }
 
 /**
- * Creates the inside of a card.
+ * Builds the front and back area of a memory card.
  *
- * @param card - Card data.
- * @param theme - Selected theme.
- * @returns Card inner element.
+ * @param card  The card data.
+ * @param theme  The selected game theme.
+ * @returns The inner card element.
  */
 function createCardInner(
   card: CardData,
   theme: Theme,
 ): HTMLSpanElement {
   const cardInner =
-    document.createElement("span");
+    createSpan("memory-card__inner");
+
   const cardBack =
-    document.createElement("span");
+    createSpan("memory-card__back");
+
   const cardFront =
-    document.createElement("span");
-
-  cardInner.className =
-    "memory-card__inner";
-
-  cardBack.className =
-    "memory-card__back";
-
-  cardFront.className =
-    "memory-card__front";
+    createSpan("memory-card__front");
 
   cardBack.append(
     createCardImage(
@@ -164,11 +189,11 @@ function createCardInner(
 }
 
 /**
- * Creates one memory card.
+ * Builds one memory card button.
  *
- * @param card - Card data.
- * @param theme - Selected theme.
- * @returns Memory card button.
+ * @param card  The card data.
+ * @param theme  The selected game theme.
+ * @returns The created memory card button.
  */
 function createCardElement(
   card: CardData,
@@ -192,13 +217,13 @@ function createCardElement(
 }
 
 /**
- * Creates all cards.
+ * Generates the card data for the selected board.
  *
- * @param theme - Selected theme.
- * @param boardSize - Board size.
- * @returns Card data.
+ * @param theme - The selected game theme.
+ * @param boardSize - The selected board size.
+ * @returns The generated card data.
  */
-function createCards(
+function createCardData(
   theme: Theme,
   boardSize: BoardSize,
 ): CardData[] {
@@ -213,10 +238,10 @@ function createCards(
 }
 
 /**
- * Applies the board size class.
+ * Applies the selected size class to the game grid.
  *
- * @param gameGrid - Grid element.
- * @param boardSize - Board size.
+ * @param gameGrid  The game grid element.
+ * @param boardSize The selected board size.
  */
 function applyBoardSize(
   gameGrid: HTMLElement,
@@ -234,10 +259,10 @@ function applyBoardSize(
 }
 
 /**
- * Renders all cards.
+ * Displays the shuffled cards inside the game grid.
  *
- * @param theme - Selected theme.
- * @param boardSize - Board size.
+ * @param theme  The selected game theme.
+ * @param boardSize  The selected board size.
  */
 export function renderCards(
   theme: Theme,
@@ -260,7 +285,7 @@ export function renderCards(
   gameGrid.innerHTML = "";
 
   shuffleCards(
-    createCards(theme, boardSize),
+    createCardData(theme, boardSize),
   ).forEach((card) => {
     gameGrid.append(
       createCardElement(card, theme),
