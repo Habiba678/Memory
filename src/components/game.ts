@@ -1,50 +1,14 @@
-import { themeImages } from "../gameCardImages";
 import {
-  renderGameResult,
-  showGameResult,
-} from "./gameResult";
+  playerImages,
+  renderCards,
+} from "./gameBoard";
 
-type Player = "blue" | "orange";
-type Theme = "code" | "gaming" | "da";
-type BoardSize = 16 | 24 | 36;
-
-type CardData = {
-  image: string;
-  pairId: number;
-};
-
-const backCardImages: Record<Theme, string> = {
-  code: "/src/assets/themes/theme1/cards/back-card.svg",
-  gaming: "/src/assets/themes/Theme2/back-card 2.svg",
-  da: "/src/assets/themes/Theme3/back-card.svg",
-};
-
-const playerImages: Record<
+import { initCards } from "./gameLogic";
+import type {
+  BoardSize,
+  Player,
   Theme,
-  {
-    blue: string;
-    orange: string;
-    white?: string;
-  }
-> = {
-  code: {
-    blue: "/src/assets/themes/theme1/cards/label.svg",
-    orange: "/src/assets/themes/theme1/cards/label (1).svg",
-    white: "/src/assets/themes/theme1/cards/player-blue.svg",
-  },
-
-  gaming: {
-    blue: "/src/assets/themes/Theme2/card/Player-blue.svg",
-    orange: "/src/assets/themes/Theme2/card/Player-orange.svg",
-    white: "/src/assets/themes/Theme2/card/chess_pawn1.svg",
-  },
-
-  da: {
-    blue: "/src/assets/themes/Theme3/Player-blue.svg",
-    orange: "/src/assets/themes/Theme3/Player-orange.svg",
-    white: "/src/assets/themes/Theme3/card/chess_pawn.svg",
-  },
-};
+} from "./gameBoard";
 
 const exitImages: Record<Theme, string> = {
   code: "/src/assets/themes/theme1/cards/move_item.svg",
@@ -52,197 +16,23 @@ const exitImages: Record<Theme, string> = {
   da: "/src/assets/themes/Theme3/card/back-icon-2.svg",
 };
 
-function shuffleCards(cards: CardData[]): CardData[] {
-  const shuffledCards = [...cards];
-
-  for (
-    let index = shuffledCards.length - 1;
-    index > 0;
-    index--
-  ) {
-    const randomIndex = Math.floor(
-      Math.random() * (index + 1)
-    );
-
-    [
-      shuffledCards[index],
-      shuffledCards[randomIndex],
-    ] = [
-      shuffledCards[randomIndex],
-      shuffledCards[index],
-    ];
-  }
-
-  return shuffledCards;
-}
-
-function createCardElement(
-  card: CardData,
-  theme: Theme
-): HTMLButtonElement {
-  const cardButton =
-    document.createElement("button");
-
-  cardButton.className = "memory-card";
-  cardButton.type = "button";
-  cardButton.dataset.pairId =
-    String(card.pairId);
-  cardButton.dataset.scored = "false";
-
-  const cardInner =
-    document.createElement("span");
-
-  cardInner.className =
-    "memory-card__inner";
-
-  const cardBack =
-    document.createElement("span");
-
-  cardBack.className =
-    "memory-card__back";
-
-  const backImage =
-    document.createElement("img");
-
-  backImage.className =
-    "memory-card__back-image";
-
-  backImage.src =
-    backCardImages[theme];
-
-  backImage.alt =
-    "Hidden memory card";
-
-  const cardFront =
-    document.createElement("span");
-
-  cardFront.className =
-    "memory-card__front";
-
-  const frontImage =
-    document.createElement("img");
-
-  frontImage.className =
-    "memory-card__front-image";
-
-  frontImage.src = card.image;
-  frontImage.alt = "Memory card";
-
-  cardBack.append(backImage);
-  cardFront.append(frontImage);
-
-  cardInner.append(
-    cardBack,
-    cardFront
-  );
-
-  cardButton.append(cardInner);
-
-  return cardButton;
-}
-
-function renderCards(
+/**
+ * Updates the player images for the selected theme.
+ *
+ * @param theme - The currently selected theme.
+ */
+function updatePlayerImages(
   theme: Theme,
-  boardSize: BoardSize
 ): void {
-  const gameGrid =
-    document.querySelector<HTMLElement>(
-      "#game-grid"
-    );
-
-  if (!gameGrid) {
-    return;
-  }
-
-  const pairCount =
-    boardSize / 2;
-
-  const selectedImages =
-    themeImages[theme].slice(
-      0,
-      pairCount
-    );
-
-  const cards =
-    selectedImages.flatMap(
-      (image, pairId) => [
-        {
-          image,
-          pairId,
-        },
-        {
-          image,
-          pairId,
-        },
-      ]
-    );
-
-  gameGrid.classList.remove(
-    "memory-game__grid--16",
-    "memory-game__grid--24",
-    "memory-game__grid--36"
-  );
-
-  gameGrid.classList.add(
-    `memory-game__grid--${boardSize}`
-  );
-
-  gameGrid.innerHTML = "";
-
-  shuffleCards(cards).forEach(
-    (card) => {
-      gameGrid.append(
-        createCardElement(
-          card,
-          theme
-        )
-      );
-    }
-  );
-}
-
-function applyTheme(
-  theme: Theme
-): void {
-  const memoryGame =
-    document.querySelector<HTMLElement>(
-      "#memory-game"
-    );
-
   const bluePlayerIcon =
     document.querySelector<HTMLImageElement>(
-      "#blue-player-icon"
+      "#blue-player-icon",
     );
 
   const orangePlayerIcon =
     document.querySelector<HTMLImageElement>(
-      "#orange-player-icon"
+      "#orange-player-icon",
     );
-
-  const exitGameIcon =
-    document.querySelector<HTMLImageElement>(
-      "#exit-game-icon"
-    );
-
-  const continueButton =
-    document.querySelector<HTMLButtonElement>(
-      "#continue-game-button"
-    );
-
-  const confirmExitButton =
-    document.querySelector<HTMLButtonElement>(
-      "#confirm-exit-button"
-    );
-
-  memoryGame?.classList.remove(
-    "memory-game--code",
-    "memory-game--gaming",
-    "memory-game--da"
-  );
-
-  memoryGame?.classList.add(
-    `memory-game--${theme}`
-  );
 
   if (bluePlayerIcon) {
     bluePlayerIcon.src =
@@ -253,413 +43,243 @@ function applyTheme(
     orangePlayerIcon.src =
       playerImages[theme].orange;
   }
+}
+
+/**
+ * Updates the exit icon for the selected theme.
+ *
+ * @param theme - The currently selected theme.
+ */
+function updateExitImage(
+  theme: Theme,
+): void {
+  const exitGameIcon =
+    document.querySelector<HTMLImageElement>(
+      "#exit-game-icon",
+    );
 
   if (exitGameIcon) {
     exitGameIcon.src =
       exitImages[theme];
   }
-
-  if (
-    continueButton &&
-    confirmExitButton
-  ) {
-    if (theme === "gaming") {
-      continueButton.textContent =
-        "No, back to game";
-
-      confirmExitButton.textContent =
-        "Yes, quit game";
-    } else {
-      continueButton.textContent =
-        "Back to game";
-
-      confirmExitButton.textContent =
-        "Exit game";
-    }
-  }
 }
 
-function initCards(
+/**
+ * Updates the exit-dialog button labels.
+ *
+ * @param theme - The currently selected theme.
+ */
+function updateExitButtonLabels(
   theme: Theme,
-  startPlayer: Player,
-  onBackToStart: () => void
 ): void {
-  const cards =
-    document.querySelectorAll<HTMLButtonElement>(
-      ".memory-card"
-    );
-
-  const blueScoreElement =
-    document.querySelector<HTMLElement>(
-      "#blue-score"
-    );
-
-  const orangeScoreElement =
-    document.querySelector<HTMLElement>(
-      "#orange-score"
-    );
-
-  const currentPlayerIcon =
-    document.querySelector<HTMLImageElement>(
-      "#current-player-icon"
-    );
-
-  const currentPlayerName =
-    document.querySelector<HTMLElement>(
-      "#current-player-name"
-    );
-
-  let currentPlayer = startPlayer;
-  let blueScore = 0;
-  let orangeScore = 0;
-  let matchedPairs = 0;
-  let gameFinished = false;
-
-  let openCards:
-    HTMLButtonElement[] = [];
-
-  const totalPairs =
-    cards.length / 2;
-
-  function updateCurrentPlayer(): void {
-    if (currentPlayerIcon) {
-      if (theme === "gaming") {
-        currentPlayerIcon.src =
-          playerImages.gaming.white ??
-          playerImages.gaming.blue;
-      } else if (theme === "da") {
-        currentPlayerIcon.src =
-          playerImages.da.white ??
-          playerImages.da.blue;
-      } else {
-        currentPlayerIcon.src =
-          currentPlayer === "blue"
-            ? playerImages.code.blue
-            : playerImages.code.orange;
-      }
-    }
-
-    if (currentPlayerName) {
-      currentPlayerName.textContent =
-        currentPlayer === "blue"
-          ? "Blue"
-          : "Orange";
-    }
-  }
-
-  function updateScores(): void {
-    if (blueScoreElement) {
-      blueScoreElement.textContent =
-        String(blueScore);
-    }
-
-    if (orangeScoreElement) {
-      orangeScoreElement.textContent =
-        String(orangeScore);
-    }
-  }
-
-  function switchPlayer(): void {
-    currentPlayer =
-      currentPlayer === "blue"
-        ? "orange"
-        : "blue";
-
-    updateCurrentPlayer();
-  }
-
-  function finishGame(): void {
-    if (gameFinished) {
-      return;
-    }
-
-    gameFinished = true;
-
-    renderGameResult();
-
-    showGameResult(
-      theme,
-      "game-over"
-    );
-
-    window.setTimeout(() => {
-      if (blueScore > orangeScore) {
-        showGameResult(
-          theme,
-          "winner-blue",
-          onBackToStart
-        );
-
-        return;
-      }
-
-      if (orangeScore > blueScore) {
-        showGameResult(
-          theme,
-          "winner-orange",
-          onBackToStart
-        );
-
-        return;
-      }
-
-      showGameResult(
-        theme,
-        "draw",
-        onBackToStart
-      );
-    }, 1500);
-  }
-
-  function addPoint(): void {
-    if (currentPlayer === "blue") {
-      blueScore += 1;
-    } else {
-      orangeScore += 1;
-    }
-
-    matchedPairs += 1;
-
-    updateScores();
-
-    if (matchedPairs === totalPairs) {
-      finishGame();
-    }
-  }
-
-  function compareLastOpenedCards(): void {
-    if (openCards.length < 2) {
-      return;
-    }
-
-    const firstCard =
-      openCards[
-        openCards.length - 2
-      ];
-
-    const secondCard =
-      openCards[
-        openCards.length - 1
-      ];
-
-    const isSamePair =
-      firstCard.dataset.pairId ===
-      secondCard.dataset.pairId;
-
-    const firstCardAlreadyScored =
-      firstCard.dataset.scored ===
-      "true";
-
-    const secondCardAlreadyScored =
-      secondCard.dataset.scored ===
-      "true";
-
-    if (isSamePair) {
-      if (
-        !firstCardAlreadyScored &&
-        !secondCardAlreadyScored
-      ) {
-        firstCard.dataset.scored =
-          "true";
-
-        secondCard.dataset.scored =
-          "true";
-
-        addPoint();
-      }
-
-      return;
-    }
-
-    switchPlayer();
-  }
-
-  function openCard(
-    card: HTMLButtonElement
-  ): void {
-    if (gameFinished) {
-      return;
-    }
-
-    card.classList.add(
-      "memory-card--flipped"
-    );
-
-    openCards.push(card);
-
-    compareLastOpenedCards();
-  }
-
-  function closeCard(
-    card: HTMLButtonElement
-  ): void {
-    if (gameFinished) {
-      return;
-    }
-
-    card.classList.remove(
-      "memory-card--flipped"
-    );
-
-    openCards =
-      openCards.filter(
-        (openCard) =>
-          openCard !== card
-      );
-  }
-
-  function handleCardClick(
-    card: HTMLButtonElement
-  ): void {
-    if (gameFinished) {
-      return;
-    }
-
-    const isOpen =
-      card.classList.contains(
-        "memory-card--flipped"
-      );
-
-    if (isOpen) {
-      closeCard(card);
-      return;
-    }
-
-    openCard(card);
-  }
-
-  cards.forEach((card) => {
-    card.addEventListener(
-      "click",
-      () => {
-        handleCardClick(card);
-      }
-    );
-  });
-
-  updateScores();
-  updateCurrentPlayer();
-}
-
-function initExitDialog(
-  onExit: () => void
-): void {
-  const exitButton =
-    document.querySelector<HTMLButtonElement>(
-      "#exit-game-button"
-    );
-
   const continueButton =
     document.querySelector<HTMLButtonElement>(
-      "#continue-game-button"
+      "#continue-game-button",
     );
 
   const confirmExitButton =
     document.querySelector<HTMLButtonElement>(
-      "#confirm-exit-button"
+      "#confirm-exit-button",
+    );
+
+  if (!continueButton || !confirmExitButton) {
+    return;
+  }
+
+  const isGaming = theme === "gaming";
+
+  continueButton.textContent = isGaming
+    ? "No, back to game"
+    : "Back to game";
+
+  confirmExitButton.textContent = isGaming
+    ? "Yes, quit game"
+    : "Exit game";
+}
+
+/**
+ * Applies the selected theme to the game.
+ *
+ * @param theme - The currently selected theme.
+ */
+function applyTheme(
+  theme: Theme,
+): void {
+  const memoryGame =
+    document.querySelector<HTMLElement>(
+      "#memory-game",
+    );
+
+  memoryGame?.classList.remove(
+    "memory-game--code",
+    "memory-game--gaming",
+    "memory-game--da",
+  );
+
+  memoryGame?.classList.add(
+    `memory-game--${theme}`,
+  );
+
+  updatePlayerImages(theme);
+  updateExitImage(theme);
+  updateExitButtonLabels(theme);
+}
+
+/**
+ * Opens the exit confirmation dialog.
+ *
+ * @param exitButton - The exit button.
+ * @param exitDialog - The exit dialog.
+ */
+function openExitDialog(
+  exitButton: HTMLButtonElement,
+  exitDialog: HTMLDialogElement | null,
+): void {
+  exitButton.classList.add("active");
+  exitDialog?.showModal();
+}
+
+/**
+ * Closes the exit confirmation dialog.
+ *
+ * @param exitButton - The exit button.
+ * @param exitDialog - The exit dialog.
+ */
+function closeExitDialog(
+  exitButton: HTMLButtonElement | null,
+  exitDialog: HTMLDialogElement | null,
+): void {
+  exitDialog?.close();
+  exitButton?.classList.remove("active");
+}
+
+/**
+ * Initializes the exit confirmation dialog.
+ *
+ * @param onExit - Runs after confirming the game exit.
+ */
+function initExitDialog(
+  onExit: () => void,
+): void {
+  const exitButton =
+    document.querySelector<HTMLButtonElement>(
+      "#exit-game-button",
+    );
+
+  const continueButton =
+    document.querySelector<HTMLButtonElement>(
+      "#continue-game-button",
+    );
+
+  const confirmExitButton =
+    document.querySelector<HTMLButtonElement>(
+      "#confirm-exit-button",
     );
 
   const exitDialog =
     document.querySelector<HTMLDialogElement>(
-      "#exit-dialog"
+      "#exit-dialog",
     );
 
-  exitButton?.addEventListener(
-    "click",
-    () => {
-      exitButton.classList.add(
-        "active"
-      );
+  exitButton?.addEventListener("click", () => {
+    openExitDialog(exitButton, exitDialog);
+  });
 
-      exitDialog?.showModal();
-    }
-  );
+  continueButton?.addEventListener("click", () => {
+    closeExitDialog(exitButton, exitDialog);
+  });
 
-  continueButton?.addEventListener(
-    "click",
-    () => {
-      exitDialog?.close();
-
-      exitButton?.classList.remove(
-        "active"
-      );
-    }
-  );
-
-  confirmExitButton?.addEventListener(
-    "click",
-    () => {
-      exitButton?.classList.remove(
-        "active"
-      );
-
-      exitDialog?.close();
-
-      onExit();
-    }
-  );
+  confirmExitButton?.addEventListener("click", () => {
+    closeExitDialog(exitButton, exitDialog);
+    onExit();
+  });
 }
 
+/**
+ * Returns the theme stored in local storage.
+ *
+ * @returns The selected game theme.
+ */
+function getSelectedTheme(): Theme {
+  const storedTheme =
+    localStorage.getItem("selectedTheme");
+
+  if (
+    storedTheme === "gaming" ||
+    storedTheme === "da"
+  ) {
+    return storedTheme;
+  }
+
+  return "code";
+}
+
+/**
+ * Returns the starting player stored in local storage.
+ *
+ * @returns The selected starting player.
+ */
+function getSelectedPlayer(): Player {
+  const storedPlayer =
+    localStorage.getItem("selectedPlayer");
+
+  return storedPlayer === "orange"
+    ? "orange"
+    : "blue";
+}
+
+/**
+ * Returns the board size stored in local storage.
+ *
+ * @returns The selected number of cards.
+ */
+function getSelectedBoard(): BoardSize {
+  const storedBoard =
+    localStorage.getItem("selectedBoard");
+
+  const boardNumber = Number.parseInt(
+    storedBoard ?? "16",
+    10,
+  );
+
+  if (
+    boardNumber === 24 ||
+    boardNumber === 36
+  ) {
+    return boardNumber;
+  }
+
+  return 16;
+}
+
+/**
+ * Initializes the complete memory game.
+ *
+ * @param onExit - Runs after confirming the game exit.
+ * @param onBackToStart - Runs after leaving the result screen.
+ */
 export function initGame(
   onExit: () => void,
   onBackToStart: () => void = () => {
     window.location.reload();
-  }
+  },
 ): void {
-  const storedTheme =
-    localStorage.getItem(
-      "selectedTheme"
-    );
+  const selectedTheme = getSelectedTheme();
+  const selectedPlayer = getSelectedPlayer();
+  const selectedBoard = getSelectedBoard();
 
-  const storedPlayer =
-    localStorage.getItem(
-      "selectedPlayer"
-    );
-
-  const storedBoard =
-    localStorage.getItem(
-      "selectedBoard"
-    );
-
-  const selectedTheme: Theme =
-    storedTheme === "gaming" ||
-    storedTheme === "da"
-      ? storedTheme
-      : "code";
-
-  const selectedPlayer: Player =
-    storedPlayer === "orange"
-      ? "orange"
-      : "blue";
-
-  const boardNumber =
-    Number.parseInt(
-      storedBoard ?? "16",
-      10
-    );
-
-  const selectedBoard: BoardSize =
-    boardNumber === 24 ||
-    boardNumber === 36
-      ? boardNumber
-      : 16;
-
-  applyTheme(
-    selectedTheme
-  );
+  applyTheme(selectedTheme);
 
   renderCards(
     selectedTheme,
-    selectedBoard
+    selectedBoard,
   );
 
   initCards(
     selectedTheme,
     selectedPlayer,
-    onBackToStart
+    onBackToStart,
   );
 
-  initExitDialog(
-    onExit
-  );
+  initExitDialog(onExit);
 }
