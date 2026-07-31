@@ -586,8 +586,9 @@
       line-height: 1;
       cursor: pointer;
       transition:
-        background-color 180ms ease,
-        color 180ms ease;
+      background-color 180ms ease,
+      color 180ms ease;
+     
     }
 
     &__button--continue {
@@ -598,6 +599,8 @@
       &:hover {
         background: #1e7594;
         color: #ffffff;
+        border: none;
+        
       }
     }
 
@@ -608,6 +611,7 @@
 
       &:hover {
         background: #db564d;
+        border: none;
       }
     }
   }
