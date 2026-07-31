@@ -19,13 +19,15 @@
   &__screen {
     width: 100%;
     min-height: 100vh;
+    padding: 40px 24px;
+    box-sizing: border-box;
+
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
     text-align: center;
-    box-sizing: border-box;
-    padding: 40px 24px;
   }
 
   &__screen--game-over {
@@ -36,7 +38,6 @@
     position: relative;
     justify-content: flex-start;
     overflow: hidden;
-    padding-top: 245px;
   }
 
   &__screen--draw {
@@ -54,17 +55,21 @@
   &__subtitle {
     position: relative;
     z-index: 2;
+
     margin: 0;
+
     font-family: $font-subtitle;
     font-size: 20px;
-    font-weight: 600;
-    line-height: 1.2;
+    font-weight: 400;
+    line-height: 1;
   }
 
   &__winner-name {
     position: relative;
     z-index: 2;
+
     margin: 8px 0 24px;
+
     font-family: $font-title;
     font-size: 48px;
     font-weight: 700;
@@ -72,7 +77,11 @@
   }
 
   &__draw-title {
+    position: relative;
+    z-index: 2;
+
     margin: 8px 0 24px;
+
     font-family: $font-title;
     font-size: 48px;
     font-weight: 700;
@@ -83,39 +92,57 @@
     position: absolute;
     top: -32px;
     left: 50%;
+    z-index: 1;
+
     width: 100%;
     height: 220px;
+
     object-fit: cover;
     object-position: center top;
+
     transform: translateX(-50%);
     pointer-events: none;
-    z-index: 1;
   }
 
   &__image {
     position: relative;
     z-index: 2;
+
     display: block;
     width: 160px;
     height: 160px;
+
     object-fit: contain;
   }
 
   &__button {
     position: relative;
     z-index: 2;
-    min-width: 96px;
-    min-height: 30px;
+
     margin-top: 22px;
-    padding: 6px 12px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+
     border: none;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     font-family: inherit;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+
     cursor: pointer;
+
     transition:
       transform 0.2s ease,
-      opacity 0.2s ease;
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
 
     &:hover {
       transform: scale(1.05);
@@ -124,71 +151,84 @@
     &:active {
       transform: scale(0.98);
     }
+
+    &:focus-visible {
+      outline: 3px solid currentColor;
+      outline-offset: 3px;
+    }
   }
 
   &__score {
     margin-top: 48px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
     gap: 8px;
-    font-size: 14px;
-    font-weight: 700;
   }
 
   &__score-title {
     margin: 0;
+
     font-family: inherit;
-    font-size: 14px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 400;
     line-height: 1;
   }
 
   &__players {
-    width: max-content;
-    min-width: 108px;
-    height: 28px;
+    width: 323px;
+    min-height: 62px;
+    padding: 17px 20px;
     box-sizing: border-box;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 4px 8px;
+
+    gap: 32px;
+
     background-color: rgba(134, 233, 214, 0.2);
     border: 1px solid rgba(134, 233, 214, 0.35);
-    border-radius: 2px;
   }
 
   &__player {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+
+    gap: 4px;
     white-space: nowrap;
   }
 
   &__player-icon {
     display: block;
-    width: 14px;
-    height: 14px;
+    width: 24px;
+    height: 28px;
+
     object-fit: contain;
   }
 
   &__player-name,
   &__player-score {
     font-family: inherit;
-    font-size: 10px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1;
   }
 
   &__player--blue {
-    color: #00b7ff;
+    color: #2bb1ff;
   }
 
   &__player--orange {
-    color: #ff914d;
+    color: #f58e39;
   }
+
+  // =========================================================
+  // CODE VIBES
+  // =========================================================
 
   &__theme--code {
     font-family: $font-subtitle;
@@ -210,43 +250,161 @@
     .game-result__score-title,
     .game-result__player-name,
     .game-result__player-score {
-      font-family: $font-subtitle;
+      font-family: $font-title;
     }
 
-    .game-result__title,
-    .game-result__draw-title {
+    .game-result__title {
       color: #35d9bd;
+      font-size: 96px;
+      font-weight: 700;
+    }
+
+    .game-result__score {
+      margin-top: 48px;
+      gap: 8px;
+    }
+
+    .game-result__score-title {
+      width: 323px;
+      font-size: 26px;
+      font-weight: 400;
+      color: #ffffff;
+    }
+
+    .game-result__players {
+      width: 323px;
+      min-height: 62px;
+      padding: 17px 20px;
+
+      gap: 32px;
+
+      background-color: rgba(134, 233, 214, 0.2);
+      border: 1px solid rgba(134, 233, 214, 0.35);
+      border-radius: 0;
+    }
+
+    .game-result__player {
+      gap: 4px;
+    }
+
+    .game-result__player-icon {
+      width: 24px;
+      height: 28px;
+    }
+
+    .game-result__player-name,
+    .game-result__player-score {
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .game-result__screen--winner {
+      padding-top: 190px;
+    }
+
+    .game-result__subtitle {
+      width: auto;
+      max-width: 100%;
+
+      display: inline-block;
+      white-space: nowrap;
+
+      font-size: 20px;
+      font-weight: 400;
+      color: #ffffff;
+    }
+
+    .game-result__winner-name {
+      width: auto;
+      max-width: 100%;
+
+      display: inline-block;
+      white-space: nowrap;
+
+      margin: 8px 0 24px;
+
+      font-size: 60px;
+      font-weight: 700;
     }
 
     #code-winner-blue .game-result__winner-name {
-      color: #00b7ff;
+      color: #2bb1ff;
     }
 
     #code-winner-orange .game-result__winner-name {
-      color: #ff914d;
+      color: #f58e39;
+    }
+
+    .game-result__screen--winner .game-result__image {
+      width: 200px;
+      height: 250px;
+    }
+
+    .game-result__draw-title {
+      margin: 8px 0 24px;
+
+      font-size: 96px;
+      font-weight: 700;
+      color: #35d9bd;
+    }
+
+    .game-result__screen--draw .game-result__image {
+      width: 339px;
+      height: 272px;
     }
 
     .game-result__button {
-      background-color: #4d8d80;
+      width: 204px;
+      height: 62px;
+      margin-top: 24px;
+      padding: 16px 24px;
+
+      background-color: rgba(134, 233, 214, 0.2);
+      border: 1px solid #4dd5bc;
+      border-radius: 0;
+
       color: #ffffff;
+
+      font-size: 24px;
+      font-weight: 700;
+
+      &:hover {
+        background-color: #4dd5bc;
+        border-color: #4dd5bc;
+        color: #292d2c;
+      }
+
+      &:active {
+        background-color: #35d9bd;
+        border-color: #35d9bd;
+        color: #292d2c;
+      }
     }
   }
 
+  // =========================================================
+  // GAMING
+  // =========================================================
+
   &__theme--gaming {
     font-family: $font-gaming;
-    background: linear-gradient(
-      180deg,
-      #294f60 0%,
-      #17677d 100%
-    );
-    color: #ffffff;
 
-    .game-result__screen {
-      background: linear-gradient(
+    background:
+      linear-gradient(
         180deg,
         #294f60 0%,
         #17677d 100%
       );
+
+    color: #ffffff;
+
+    .game-result__screen {
+      background:
+        linear-gradient(
+          180deg,
+          #294f60 0%,
+          #17677d 100%
+        );
     }
 
     .game-result__title,
@@ -260,38 +418,156 @@
       font-family: $font-gaming;
     }
 
-    .game-result__title,
-    .game-result__draw-title {
+    .game-result__title {
       color: #ff3f77;
+      font-size: 128px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .game-result__score {
+      margin-top: 52px;
+      gap: 8px;
+    }
+
+    .game-result__score-title {
+      width: 222px;
+      font-size: 30px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .game-result__players {
+      width: 222px;
+      min-height: 66px;
+      padding: 8px 16px;
+
+      gap: 40px;
+
+      background-color: #ffffff;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .game-result__player {
+      gap: 6px;
+    }
+
+    .game-result__player-icon {
+      width: 26px;
+      height: 32px;
+    }
+
+    .game-result__player-name {
+      display: none;
+    }
+
+    .game-result__player-score {
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    .game-result__screen--winner {
+      padding-top: 105px;
+    }
+
+    .game-result__subtitle {
+      width: auto;
+      max-width: 100%;
+
+      display: inline-block;
+      white-space: nowrap;
+
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+
+      color: #ffffff;
+    }
+
+    .game-result__winner-name {
+      width: auto;
+      max-width: 100%;
+
+      display: inline-block;
+      white-space: nowrap;
+
+      margin: 8px 0 34px;
+
+      font-size: 64px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+
+      text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
     #gaming-winner-blue .game-result__winner-name {
-      color: #00b7ff;
+      color: #2298db;
     }
 
     #gaming-winner-orange .game-result__winner-name {
-      color: #ff914d;
+      color: #ea6900;
+    }
+
+    .game-result__screen--winner .game-result__image {
+      width: 288px;
+      height: 344px;
+    }
+
+    .game-result__draw-title {
+      width: 578px;
+      margin: 8px 0 28px;
+
+      font-size: 128px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+
+      color: #ff3f77;
+      text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .game-result__screen--draw .game-result__image {
+      width: 339px;
+      height: 272px;
     }
 
     .game-result__button {
-      background-color: #ff3f77;
+      width: 107px;
+      height: 49px;
+      margin-top: 28px;
+      padding: 12px 20px;
+
+      background-color: rgba(237, 27, 118, 0.08);
+      border: 2px solid #e71c4f;
+      border-radius: 10px;
+
       color: #ffffff;
+
+      font-size: 20px;
+      font-weight: 700;
+
+      &:hover {
+        background-color: #ed1b76;
+        border-color: #ed1b76;
+        color: #ffffff;
+      }
+
+      &:active {
+        background-color: #c91563;
+        border-color: #c91563;
+        color: #ffffff;
+      }
     }
 
     .game-result__confetti {
       display: none;
     }
-
-    .game-result__screen--winner {
-      padding-top: 170px;
-    }
-
-    .game-result__players {
-      background: #ffffff;
-      border: none;
-      border-radius: 2px;
-    }
   }
+
+  // =========================================================
+  // DA
+  // =========================================================
 
   &__theme--da {
     font-family: $font-da;
@@ -313,9 +589,86 @@
       font-family: $font-da;
     }
 
-    .game-result__title,
-    .game-result__draw-title {
-      color: #ff5a5f;
+    .game-result__title {
+      color: #fd5b4f;
+      font-size: 130px;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .game-result__score {
+      margin-top: 52px;
+      gap: 8px;
+    }
+
+    .game-result__score-title {
+      width: 222px;
+      font-size: 40px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .game-result__players {
+      width: 220px;
+      min-height: 76px;
+      padding: 16px;
+
+      gap: 40px;
+
+      background-color: #ffffff;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .game-result__player {
+      gap: 8px;
+    }
+
+    .game-result__player-icon {
+      width: 24px;
+      height: 30px;
+    }
+
+    .game-result__player-name {
+      display: none;
+    }
+
+    .game-result__player-score {
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    .game-result__screen--winner {
+      padding-top: 115px;
+    }
+
+    .game-result__subtitle {
+      width: auto;
+      max-width: 100%;
+
+      display: inline-block;
+      white-space: nowrap;
+
+      font-size: 40px;
+      font-weight: 400;
+
+      color: #ffffff;
+    }
+
+    .game-result__winner-name {
+      width: auto;
+      max-width: 100%;
+
+      display: inline-block;
+      white-space: nowrap;
+
+      margin: 8px 0 30px;
+
+      font-size: 80px;
+      font-weight: 700;
+
+      color: #ffffff;
     }
 
     #da-winner-blue .game-result__winner-name,
@@ -323,23 +676,294 @@
       color: #ffffff;
     }
 
+    .game-result__screen--winner .game-result__image {
+      width: 200px;
+      height: 250px;
+    }
+
+    .game-result__draw-title {
+      margin: 8px 0 28px;
+
+      font-size: 128px;
+      font-weight: 800;
+
+      color: #fd5b4f;
+      text-transform: uppercase;
+
+      text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .game-result__screen--draw .game-result__image {
+      width: 339px;
+      height: 272px;
+    }
+
     .game-result__button {
-      background-color: #ffffff;
-      color: #04a6c2;
+      width: 96px;
+      height: 48px;
+      margin-top: 24px;
+      padding: 12px 20px;
+
+      background-color: #bfe5f2;
+      border: none;
+      border-radius: 10px;
+
+      color: #1e7594;
+
+      font-size: 20px;
+      font-weight: 700;
+
+      &:hover {
+        background-color: #1e7594;
+        color: #ffffff;
+      }
+
+      &:active {
+        background-color: #175f78;
+        color: #ffffff;
+      }
     }
 
     .game-result__confetti {
       display: none;
     }
+  }
+}
 
-    .game-result__screen--winner {
-      padding-top: 170px;
+@media (max-width: 768px) {
+  .game-result {
+    &__screen {
+      padding: 32px 20px;
     }
 
-    .game-result__players {
-      background: #ffffff;
-      border: none;
-      border-radius: 2px;
+    &__title {
+      font-size: 72px;
+    }
+
+    &__winner-name,
+    &__draw-title {
+      font-size: 40px;
+    }
+
+    &__image {
+      max-width: 100%;
+    }
+
+    &__theme--code {
+      .game-result__title {
+        font-size: 72px;
+      }
+
+      .game-result__winner-name {
+        font-size: 48px;
+      }
+
+      .game-result__screen--winner {
+        padding-top: 150px;
+      }
+    }
+
+    &__theme--gaming {
+      .game-result__title,
+      .game-result__draw-title {
+        width: auto;
+        max-width: 100%;
+        font-size: 80px;
+      }
+
+      .game-result__subtitle,
+      .game-result__winner-name {
+        width: auto;
+        max-width: 100%;
+        white-space: nowrap;
+      }
+
+      .game-result__winner-name {
+        font-size: 48px;
+      }
+
+      .game-result__screen--winner {
+        padding-top: 100px;
+      }
+
+      .game-result__screen--winner .game-result__image {
+        width: 230px;
+        height: auto;
+      }
+
+      .game-result__screen--draw .game-result__image {
+        width: 280px;
+        height: auto;
+      }
+    }
+
+    &__theme--da {
+      .game-result__title,
+      .game-result__draw-title {
+        font-size: 80px;
+      }
+
+      .game-result__subtitle,
+      .game-result__winner-name {
+        width: auto;
+        max-width: 100%;
+        white-space: nowrap;
+      }
+
+      .game-result__winner-name {
+        font-size: 56px;
+      }
+
+      .game-result__screen--winner {
+        padding-top: 100px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .game-result {
+    &__screen {
+      padding: 28px 16px;
+    }
+
+    &__title {
+      font-size: 50px;
+    }
+
+    &__subtitle {
+      font-size: 18px;
+    }
+
+    &__winner-name,
+    &__draw-title {
+      font-size: 32px;
+    }
+
+    &__score {
+      margin-top: 34px;
+    }
+
+    &__players {
+      max-width: 100%;
+    }
+
+    &__theme--code {
+      .game-result__title {
+        font-size: 50px;
+      }
+
+      .game-result__score-title,
+      .game-result__players {
+        width: min(323px, 100%);
+      }
+
+      .game-result__players {
+        gap: 20px;
+        padding: 14px 16px;
+      }
+
+      .game-result__player-name,
+      .game-result__player-score {
+        font-size: 18px;
+      }
+
+      .game-result__winner-name {
+        font-size: 38px;
+        white-space: nowrap;
+      }
+
+      .game-result__screen--winner {
+        padding-top: 120px;
+      }
+
+      .game-result__screen--winner .game-result__image {
+        width: 150px;
+        height: auto;
+      }
+
+      .game-result__screen--draw .game-result__image {
+        width: 240px;
+        height: auto;
+      }
+
+      .game-result__button {
+        width: 180px;
+        height: 54px;
+        font-size: 20px;
+      }
+    }
+
+    &__theme--gaming {
+      .game-result__title,
+      .game-result__draw-title {
+        font-size: 54px;
+      }
+
+      .game-result__score-title,
+      .game-result__players {
+        width: 210px;
+      }
+
+      .game-result__subtitle {
+        font-size: 20px;
+        white-space: nowrap;
+      }
+
+      .game-result__winner-name {
+        font-size: 38px;
+        white-space: nowrap;
+      }
+
+      .game-result__screen--winner {
+        padding-top: 90px;
+      }
+
+      .game-result__screen--winner .game-result__image {
+        width: 190px;
+        height: auto;
+      }
+
+      .game-result__screen--draw .game-result__image {
+        width: 230px;
+        height: auto;
+      }
+    }
+
+    &__theme--da {
+      .game-result__title,
+      .game-result__draw-title {
+        font-size: 54px;
+      }
+
+      .game-result__score-title,
+      .game-result__players {
+        width: 210px;
+      }
+
+      .game-result__subtitle {
+        font-size: 24px;
+        white-space: nowrap;
+      }
+
+      .game-result__winner-name {
+        font-size: 42px;
+        white-space: nowrap;
+      }
+
+      .game-result__screen--winner {
+        padding-top: 90px;
+      }
+
+      .game-result__screen--winner .game-result__image {
+        width: 150px;
+        height: auto;
+      }
+
+      .game-result__screen--draw .game-result__image {
+        width: 230px;
+        height: auto;
+      }
     }
   }
 }
