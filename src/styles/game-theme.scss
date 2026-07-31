@@ -1,7 +1,13 @@
+@use "fonts";
+@use "tokens" as *;
+
 .memory-game--code {
-.game-header {
+  font-family: $font-title;
+
+  .game-header {
     background-color: transparent;
     color: #ffffff;
+    font-family: $font-title;
   }
 
   .game-header__scores {
@@ -9,7 +15,16 @@
   }
 
   .game-header__current-player {
+    gap: 16px;
     color: #ffffff;
+    font-family: $font-title;
+  }
+
+  .game-header__current-icon {
+    width: 29px;
+    height: 24px;
+    display: block;
+    object-fit: contain;
   }
 
   .game-header__exit {
@@ -17,12 +32,17 @@
     border-radius: 0;
     background-color: rgba(134, 233, 214, 0.14);
     color: #ffffff;
+    font-family: $font-title;
     white-space: nowrap;
 
     &:hover {
       border-color: #2fc9aa;
       background-color: rgba(134, 233, 214, 0.22);
     }
+  }
+
+  .game-score {
+    font-family: $font-title;
   }
 
   .memory-card,
@@ -35,22 +55,26 @@
   }
 
   .exit-dialog {
-    &__content {
+    font-family: $font-title;
+
+    &__content,
+    &__button {
       border-radius: 0;
     }
 
+    &__title,
     &__button {
-      border-radius: 0;
+      font-family: $font-title;
     }
   }
 }
 
 .memory-game--gaming {
-.memory-game__container {
+  font-family: $font-gaming;
+
+  .memory-game__container {
     width: min(1219px, 100%);
     padding-top: 41px;
-    
-    
   }
 
   .game-header {
@@ -76,7 +100,7 @@
 
   .game-score {
     gap: 8px;
-    font-family: "Orbitron", sans-serif;
+    font-family: $font-gaming;
     font-size: 30px;
     font-weight: 700;
     line-height: 1;
@@ -104,7 +128,7 @@
     height: 40px;
     justify-content: center;
     gap: 10px;
-    font-family: "Orbitron", sans-serif;
+    font-family: $font-gaming;
     font-size: 30px;
     font-weight: 700;
     color: #ffffff;
@@ -113,14 +137,18 @@
   .game-header__current-name {
     display: none;
   }
- 
+
   .game-header__current-icon {
-    width: 25px;
-    height: 32px;
+    width: 41px;
+    height: 40px;
+    padding: 4px 8px;
+    box-sizing: border-box;
+    background: #1faafc;
+    border-radius: 3px;
     object-fit: contain;
     display: block;
   }
-  
+
   .game-header__exit {
     width: 195px;
     height: 54px;
@@ -129,22 +157,20 @@
     border-radius: 10px;
     background: rgba(237, 27, 118, 0.08);
     color: #ffffff;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-
-    font-family: "Orbitron", sans-serif;
+    font-family: $font-gaming;
     font-size: 20px;
     font-weight: 700;
     line-height: 1;
     letter-spacing: 0.04em;
-
     transition:
-      background-color 180ms ease,
-      border-color 180ms ease,
-      color 180ms ease;
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+    white-space: nowrap;
 
     &:hover {
       border-color: #c91243;
@@ -152,7 +178,24 @@
     }
 
     &:hover img {
-      filter: brightness(0)
+      filter:
+        brightness(0)
+        saturate(100%)
+        invert(24%)
+        sepia(95%)
+        saturate(2800%)
+        hue-rotate(320deg);
+    }
+
+    &.active {
+      background: rgba(237, 27, 118, 0.08);
+      border-color: #e71c4f;
+      color: #ffffff;
+    }
+
+    &.active .game-header__exit-icon {
+      filter:
+        brightness(0)
         saturate(100%)
         invert(24%)
         sepia(95%)
@@ -221,19 +264,19 @@
     border: none;
     border-radius: 20px;
     background: transparent;
+    font-family: $font-gaming;
 
     &::backdrop {
       background: rgba(10, 38, 55, 0.25);
     }
 
-    .exit-dialog__content {
+    &__content {
       width: 100%;
       min-height: 254px;
       padding: 40px;
       box-sizing: border-box;
       border-radius: 20px;
       background: #ffffff;
-
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -241,10 +284,10 @@
       gap: 40px;
     }
 
-    .exit-dialog__title {
+    &__title {
       width: 401px;
       margin: 0;
-      font-family: "Orbitron", sans-serif;
+      font-family: $font-gaming;
       font-size: 28px;
       font-weight: 700;
       line-height: 135%;
@@ -252,18 +295,18 @@
       color: #294f60;
     }
 
-    .exit-dialog__actions {
+    &__actions {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 20px;
     }
 
-    .exit-dialog__button {
+    &__button {
       height: 44px;
       padding: 0 20px;
       border-radius: 8px;
-      font-family: "Orbitron", sans-serif;
+      font-family: $font-gaming;
       font-size: 16px;
       font-weight: 700;
       line-height: 1;
@@ -273,80 +316,55 @@
         border-color 180ms ease,
         color 180ms ease,
         box-shadow 180ms ease;
-  
-        &--continue {
-          min-width: 201px;
-          background: #ED1B76;
-          border: 2px solid #ED1B76;
-          color: #FFFFFF;
-        
+
+      &--continue {
+        min-width: 201px;
+        background: #ed1b76;
+        border: 2px solid #ed1b76;
+        color: #ffffff;
+
         &:hover {
-            background: #ffffff;;
-            border: 2px solid #E71C4F;
-            color: #ED1B76;
-            box-shadow:
-              inset 0 2px 4px rgba(0, 0, 0, 0.18),
-              0 1px 2px rgba(0, 0, 0, 0.08);
-          }
-          
+          background: #ffffff;
+          border-color: #e71c4f;
+          color: #ed1b76;
+          box-shadow:
+            inset 0 2px 4px rgba(0, 0, 0, 0.18),
+            0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+
         &:active {
-            background: #C91563;
-            border: 2px solid #A80F50;
-            color: #FFFFFF;
-            box-shadow:
-              inset 0 3px 6px rgba(0, 0, 0, 0.22);
-          }
-        
-    
-        &--exit {
-          min-width: 176px;
-          background: #C91563;
-          border: 2px solid #E71C4F;
-          color: #ED1B76;
-            
-        
-          &:hover {
-            background: #ED1B76;
-            border: 2px solid #C91563;
-            color: #FFFFFF;
-            box-shadow: 0 0 8px rgba(237, 27, 118, 0.25);
-          }
-      
-          &:active {
-            background: #C91563;
-            border: 6px solid #C91563;
-            color: #FFFFFF;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-          }
+          background: #c91563;
+          border-color: #a80f50;
+          color: #ffffff;
+          box-shadow:
+            inset 0 3px 6px rgba(0, 0, 0, 0.22);
         }
       }
-    
+
       &--exit {
         min-width: 176px;
         background: rgba(237, 27, 118, 0.08);
-        border: 2px solid #E71C4F;
-        color: #E71C4F;
-       
-    
+        border: 2px solid #e71c4f;
+        color: #e71c4f;
+
         &:hover {
-          background: rgba(237, 27, 118, 0.08);
-          border: 3px solid #E71C4F;
-          color: #E71C4F;
+          border: 3px solid #e71c4f;
           box-shadow: 0 0 8px rgba(231, 28, 79, 0.25);
         }
-    
+
         &:active {
           background: rgba(237, 27, 118, 0.14);
-          border: 3px solid #E71C4F;
-          color: #E71C4F;
+          border: 3px solid #e71c4f;
           box-shadow: 0 0 10px rgba(231, 28, 79, 0.35);
         }
       }
     }
-  } 
+  }
 }
 
 .memory-game--da {
+  font-family: $font-da;
+
   .memory-game__container {
     width: min(1219px, 100%);
     padding-top: 38px;
@@ -375,7 +393,7 @@
 
   .game-score {
     gap: 6px;
-    font-family: "Figtree", sans-serif;
+    font-family: $font-da;
     font-size: 32px;
     font-weight: 700;
     line-height: 1;
@@ -408,7 +426,7 @@
     height: 40px;
     justify-content: center;
     gap: 10px;
-    font-family: "Figtree", sans-serif;
+    font-family: $font-da;
     font-size: 32px;
     font-weight: 700;
     color: #1e7594;
@@ -445,31 +463,24 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-family: "Figtree", sans-serif;
+    font-family: $font-da;
     font-size: 20px;
     font-weight: 700;
+    white-space: nowrap;
     transition:
       background-color 180ms ease,
       color 180ms ease;
-    white-space: nowrap;
 
-    &:hover {
+    &:hover,
+    &.active {
       background: #1e7594;
       color: #ffffff;
     }
 
-    &:hover img {
+    &:hover img,
+    &.active img {
       filter: brightness(0) invert(1);
     }
-  }
-
-  .game-header__exit.active {
-    background: #1e7594;
-    color: #ffffff;
-  }
-
-  .game-header__exit.active img {
-    filter: brightness(0) invert(1);
   }
 
   .game-header__exit-icon {
@@ -522,12 +533,13 @@
     border: none;
     border-radius: 20px;
     background: transparent;
+    font-family: $font-da;
 
     &::backdrop {
       background: rgba(20, 63, 78, 0.22);
     }
 
-    .exit-dialog__content {
+    &__content {
       width: 100%;
       min-height: 254px;
       padding: 40px;
@@ -541,10 +553,10 @@
       gap: 40px;
     }
 
-    .exit-dialog__title {
+    &__title {
       width: 401px;
       margin: 0;
-      font-family: "Figtree", sans-serif;
+      font-family: $font-da;
       font-size: 28px;
       font-weight: 700;
       line-height: 135%;
@@ -552,23 +564,23 @@
       color: #294f60;
     }
 
-    .exit-dialog__actions {
+    &__actions {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 10px;
     }
 
-    .exit-dialog__button {
+    &__button {
       height: 43px;
+      padding: 12px 20px;
       border: none;
       border-radius: 10px;
-      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-family: "Figtree", sans-serif;
+      font-family: $font-da;
       font-size: 16px;
       font-weight: 700;
       line-height: 1;
@@ -578,7 +590,7 @@
         color 180ms ease;
     }
 
-    .exit-dialog__button--continue {
+    &__button--continue {
       width: 140px;
       background: #bfe5f2;
       color: #1e7594;
@@ -589,7 +601,7 @@
       }
     }
 
-    .exit-dialog__button--exit {
+    &__button--exit {
       width: 114px;
       background: #fd8a81;
       color: #ffffff;
@@ -598,72 +610,5 @@
         background: #db564d;
       }
     }
-  }
-}
-
-.memory-game--gaming {
-.game-header__current-icon {
-    width: 41px;
-    height: 40px;
-    padding: 4px 8px;
-    box-sizing: border-box;
-    background: #1faafc;
-    border-radius: 3px;
-    display: block;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .game-header__current-icon {
-    width: 25px;
-    height: 32px;
-    padding: 0;
-    background: transparent;
-    border-radius: 0;
-    object-fit: contain;
-    display: block;
-  }
-}
-
-.memory-game--gaming {
-  .game-header__exit.active {
-    background: rgba(237, 27, 118, 0.08);
-    border-color: #e71c4f;
-    color: #ffffff;
-  }
-
-  .game-header__exit.active .game-header__exit-icon {
-    filter: brightness(0)
-      saturate(100%)
-      invert(24%)
-      sepia(95%)
-      saturate(2800%)
-      hue-rotate(320deg);
-  }
-}
-
-.memory-game--gaming {
-  .game-header__current-icon {
-    width: 41px;
-    height: 40px;
-    padding: 4px 8px;
-    box-sizing: border-box;
-    background: #1faafc;
-    border-radius: 3px;
-    object-fit: contain;
-    display: block;
-  }
-}
-
-.memory-game--code {
-.game-header__current-player {
-    gap: 16px;
-  }
-
-  .game-header__current-icon {
-    width: 29px;
-    height: 24px;
-    display: block;
-    object-fit: contain;
   }
 }

@@ -1,4 +1,4 @@
-
+@use "fonts";
 @use "base";
 @use "tokens" as *;
 @use "game-theme";
@@ -43,27 +43,27 @@
     grid-template-rows: repeat(6, 120px);
   }
 
-
- 
   &--code {
     min-height: 100vh;
     background-color: #292e2d;
     color: #ffffff;
+    font-family: $font-subtitle;
   }
 
   &--gaming {
     min-height: 100vh;
-    background-color: #0A2835;
+    background-color: #0a2835;
     color: #ffffff;
+    font-family: $font-gaming;
   }
 
   &--da {
     min-height: 100vh;
     background-color: #ffffff;
     color: $text-dark;
+    font-family: $font-da;
   }
- }
-
+}
 
 .game-header {
   width: 100%;
@@ -91,7 +91,7 @@
     align-items: center;
     justify-content: center;
     gap: 32px;
-    font-family: $font-subtitle;
+    font-family: inherit;
     font-size: 26px;
     font-weight: 700;
     line-height: 1;
@@ -125,7 +125,7 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-family: $font-subtitle;
+    font-family: inherit;
     font-size: 24px;
     font-weight: 700;
     line-height: 1;
@@ -149,7 +149,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-family: $font-subtitle;
+  font-family: inherit;
   font-size: 24px;
   font-weight: 700;
   line-height: 1;
@@ -174,7 +174,7 @@
   }
 
   &--orange {
-    color: #F58E39;
+    color: #f58e39;
   }
 }
 
@@ -254,15 +254,15 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  margin: 0;
   width: min(560px, 92vw);
   max-width: none;
   max-height: none;
+  margin: 0;
   padding: 0;
   border: none;
   border-radius: 0;
   background-color: transparent;
+  transform: translate(-50%, -50%);
 
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.2);
@@ -285,7 +285,7 @@
   &__title {
     max-width: 480px;
     margin: 0;
-    font-family: $font-title;
+    font-family: inherit;
     font-size: 32px;
     font-weight: 700;
     line-height: 1.2;
@@ -305,7 +305,7 @@
     padding: 0 24px;
     border: 2px solid #65cfbc;
     border-radius: 0;
-    font-family: $font-subtitle;
+    font-family: inherit;
     font-size: 20px;
     font-weight: 700;
     cursor: pointer;
@@ -319,7 +319,6 @@
       height: 57px;
       background-color: #65cfbc;
       color: #ffffff;
-      
 
       &:hover {
         border: 3px solid #4fc0ac;
@@ -328,9 +327,8 @@
     }
 
     &--exit {
-      background-color: rgb(64, 170, 149, 0.14);
+      background-color: rgba(64, 170, 149, 0.14);
       color: #4fc0ac;
-  
 
       &:hover {
         border: 3px solid #65cfbc;

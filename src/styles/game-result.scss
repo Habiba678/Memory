@@ -1,3 +1,4 @@
+@use "fonts";
 @use "base";
 @use "tokens" as *;
 
@@ -108,7 +109,7 @@
     margin-top: 22px;
     padding: 6px 12px;
     border: none;
-    font-family: $font-subtitle;
+    font-family: inherit;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
@@ -137,7 +138,7 @@
 
   &__score-title {
     margin: 0;
-    font-family: $font-subtitle;
+    font-family: inherit;
     font-size: 14px;
     font-weight: 700;
     line-height: 1;
@@ -173,15 +174,9 @@
     object-fit: contain;
   }
 
-  &__player-name {
-    font-family: $font-subtitle;
-    font-size: 10px;
-    font-weight: 700;
-    line-height: 1;
-  }
-
+  &__player-name,
   &__player-score {
-    font-family: $font-subtitle;
+    font-family: inherit;
     font-size: 10px;
     font-weight: 700;
     line-height: 1;
@@ -196,6 +191,7 @@
   }
 
   &__theme--code {
+    font-family: $font-subtitle;
     background-color: #292d2c;
     color: #ffffff;
 
@@ -203,7 +199,22 @@
       background-color: #292d2c;
     }
 
-    .game-result__title {
+    .game-result__title,
+    .game-result__winner-name,
+    .game-result__draw-title {
+      font-family: $font-title;
+    }
+
+    .game-result__subtitle,
+    .game-result__button,
+    .game-result__score-title,
+    .game-result__player-name,
+    .game-result__player-score {
+      font-family: $font-subtitle;
+    }
+
+    .game-result__title,
+    .game-result__draw-title {
       color: #35d9bd;
     }
 
@@ -215,10 +226,6 @@
       color: #ff914d;
     }
 
-    .game-result__draw-title {
-      color: #35d9bd;
-    }
-
     .game-result__button {
       background-color: #4d8d80;
       color: #ffffff;
@@ -226,6 +233,7 @@
   }
 
   &__theme--gaming {
+    font-family: $font-gaming;
     background: linear-gradient(
       180deg,
       #294f60 0%,
@@ -241,7 +249,19 @@
       );
     }
 
-    .game-result__title {
+    .game-result__title,
+    .game-result__subtitle,
+    .game-result__winner-name,
+    .game-result__draw-title,
+    .game-result__button,
+    .game-result__score-title,
+    .game-result__player-name,
+    .game-result__player-score {
+      font-family: $font-gaming;
+    }
+
+    .game-result__title,
+    .game-result__draw-title {
       color: #ff3f77;
     }
 
@@ -251,10 +271,6 @@
 
     #gaming-winner-orange .game-result__winner-name {
       color: #ff914d;
-    }
-
-    .game-result__draw-title {
-      color: #ff3f77;
     }
 
     .game-result__button {
@@ -278,6 +294,7 @@
   }
 
   &__theme--da {
+    font-family: $font-da;
     background-color: #04a6c2;
     color: #ffffff;
 
@@ -285,20 +302,25 @@
       background-color: #04a6c2;
     }
 
-    .game-result__title {
-      color: #ff5a5f;
+    .game-result__title,
+    .game-result__subtitle,
+    .game-result__winner-name,
+    .game-result__draw-title,
+    .game-result__button,
+    .game-result__score-title,
+    .game-result__player-name,
+    .game-result__player-score {
+      font-family: $font-da;
     }
 
-    #da-winner-blue .game-result__winner-name {
-      color: #ffffff;
-    }
-
-    #da-winner-orange .game-result__winner-name {
-      color: #ffffff;
-    }
-
+    .game-result__title,
     .game-result__draw-title {
       color: #ff5a5f;
+    }
+
+    #da-winner-blue .game-result__winner-name,
+    #da-winner-orange .game-result__winner-name {
+      color: #ffffff;
     }
 
     .game-result__button {
