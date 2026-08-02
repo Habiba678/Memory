@@ -21,12 +21,10 @@
     min-height: 100vh;
     padding: 40px 24px;
     box-sizing: border-box;
-
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     text-align: center;
   }
 
@@ -55,9 +53,7 @@
   &__subtitle {
     position: relative;
     z-index: 2;
-
     margin: 0;
-
     font-family: $font-subtitle;
     font-size: 20px;
     font-weight: 400;
@@ -67,9 +63,7 @@
   &__winner-name {
     position: relative;
     z-index: 2;
-
     margin: 8px 0 24px;
-
     font-family: $font-title;
     font-size: 48px;
     font-weight: 700;
@@ -79,9 +73,7 @@
   &__draw-title {
     position: relative;
     z-index: 2;
-
     margin: 8px 0 24px;
-
     font-family: $font-title;
     font-size: 48px;
     font-weight: 700;
@@ -93,13 +85,10 @@
     top: -32px;
     left: 50%;
     z-index: 1;
-
     width: 100%;
     height: 220px;
-
     object-fit: cover;
     object-position: center top;
-
     transform: translateX(-50%);
     pointer-events: none;
   }
@@ -107,36 +96,28 @@
   &__image {
     position: relative;
     z-index: 2;
-
     display: block;
     width: 160px;
     height: 160px;
-
     object-fit: contain;
   }
 
   &__button {
     position: relative;
     z-index: 2;
-
     margin-top: 22px;
     padding: 12px 20px;
     box-sizing: border-box;
-
     border: none;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     font-family: inherit;
     font-size: 16px;
     font-weight: 700;
     line-height: 1;
     white-space: nowrap;
-
     cursor: pointer;
-
     transition:
       transform 0.2s ease,
       background-color 0.2s ease,
@@ -160,17 +141,14 @@
 
   &__score {
     margin-top: 48px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 8px;
   }
 
   &__score-title {
     margin: 0;
-
     font-family: inherit;
     font-size: 26px;
     font-weight: 400;
@@ -182,13 +160,10 @@
     min-height: 62px;
     padding: 17px 20px;
     box-sizing: border-box;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     gap: 32px;
-
     background-color: rgba(134, 233, 214, 0.2);
     border: 1px solid rgba(134, 233, 214, 0.35);
   }
@@ -197,7 +172,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     gap: 4px;
     white-space: nowrap;
   }
@@ -206,7 +180,6 @@
     display: block;
     width: 24px;
     height: 28px;
-
     object-fit: contain;
   }
 
@@ -225,10 +198,6 @@
   &__player--orange {
     color: #f58e39;
   }
-
-  // =========================================================
-  // CODE VIBES
-  // =========================================================
 
   &__theme--code {
     font-family: $font-subtitle;
@@ -275,9 +244,7 @@
       width: 323px;
       min-height: 62px;
       padding: 17px 20px;
-
       gap: 32px;
-
       background-color: rgba(134, 233, 214, 0.2);
       border: 1px solid rgba(134, 233, 214, 0.35);
       border-radius: 0;
@@ -305,10 +272,8 @@
     .game-result__subtitle {
       width: auto;
       max-width: 100%;
-
       display: inline-block;
       white-space: nowrap;
-
       font-size: 20px;
       font-weight: 400;
       color: #ffffff;
@@ -317,12 +282,9 @@
     .game-result__winner-name {
       width: auto;
       max-width: 100%;
-
       display: inline-block;
       white-space: nowrap;
-
       margin: 8px 0 24px;
-
       font-size: 60px;
       font-weight: 700;
     }
@@ -342,7 +304,6 @@
 
     .game-result__draw-title {
       margin: 8px 0 24px;
-
       font-size: 96px;
       font-weight: 700;
       color: #35d9bd;
@@ -358,13 +319,10 @@
       height: 62px;
       margin-top: 24px;
       padding: 16px 24px;
-
       background-color: rgba(134, 233, 214, 0.2);
       border: 1px solid #4dd5bc;
       border-radius: 0;
-
       color: #ffffff;
-
       font-size: 24px;
       font-weight: 700;
 
@@ -382,29 +340,13 @@
     }
   }
 
-  // =========================================================
-  // GAMING
-  // =========================================================
-
   &__theme--gaming {
     font-family: $font-gaming;
-
-    background:
-      linear-gradient(
-        180deg,
-        #294f60 0%,
-        #17677d 100%
-      );
-
+    background-color: #0a2835;
     color: #ffffff;
 
     .game-result__screen {
-      background:
-        linear-gradient(
-          180deg,
-          #294f60 0%,
-          #17677d 100%
-        );
+      background-color: #0a2835;
     }
 
     .game-result__title,
@@ -442,10 +384,8 @@
       width: 222px;
       min-height: 66px;
       padding: 8px 16px;
-
       gap: 40px;
-
-      background-color: #ffffff;
+      background: #ffffff;
       border: none;
       border-radius: 10px;
     }
@@ -475,30 +415,23 @@
     .game-result__subtitle {
       width: auto;
       max-width: 100%;
-
       display: inline-block;
       white-space: nowrap;
-
       font-size: 28px;
       font-weight: 700;
       letter-spacing: 0.07em;
-
       color: #ffffff;
     }
 
     .game-result__winner-name {
       width: auto;
       max-width: 100%;
-
       display: inline-block;
       white-space: nowrap;
-
       margin: 8px 0 34px;
-
       font-size: 64px;
       font-weight: 700;
       letter-spacing: 0.07em;
-
       text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     }
 
@@ -518,11 +451,9 @@
     .game-result__draw-title {
       width: 578px;
       margin: 8px 0 28px;
-
       font-size: 128px;
       font-weight: 700;
       letter-spacing: 0.07em;
-
       color: #ff3f77;
       text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     }
@@ -537,24 +468,21 @@
       height: 49px;
       margin-top: 28px;
       padding: 12px 20px;
-
-      background-color: rgba(237, 27, 118, 0.08);
+      background: rgba(237, 27, 118, 0.08);
       border: 2px solid #e71c4f;
       border-radius: 10px;
-
       color: #ffffff;
-
       font-size: 20px;
       font-weight: 700;
 
       &:hover {
-        background-color: #ed1b76;
+        background: #ed1b76;
         border-color: #ed1b76;
         color: #ffffff;
       }
 
       &:active {
-        background-color: #c91563;
+        background: #c91563;
         border-color: #c91563;
         color: #ffffff;
       }
@@ -564,10 +492,6 @@
       display: none;
     }
   }
-
-  // =========================================================
-  // DA
-  // =========================================================
 
   &__theme--da {
     font-family: $font-da;
@@ -613,10 +537,8 @@
       width: 220px;
       min-height: 76px;
       padding: 16px;
-
       gap: 40px;
-
-      background-color: #ffffff;
+      background: #ffffff;
       border: none;
       border-radius: 10px;
     }
@@ -646,28 +568,21 @@
     .game-result__subtitle {
       width: auto;
       max-width: 100%;
-
       display: inline-block;
       white-space: nowrap;
-
       font-size: 40px;
       font-weight: 400;
-
       color: #ffffff;
     }
 
     .game-result__winner-name {
       width: auto;
       max-width: 100%;
-
       display: inline-block;
       white-space: nowrap;
-
       margin: 8px 0 30px;
-
       font-size: 80px;
       font-weight: 700;
-
       color: #ffffff;
     }
 
@@ -683,13 +598,10 @@
 
     .game-result__draw-title {
       margin: 8px 0 28px;
-
       font-size: 128px;
       font-weight: 800;
-
-      color: #fd5b4f;
       text-transform: uppercase;
-
+      color: #fd5b4f;
       text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.2);
     }
 
@@ -703,23 +615,20 @@
       height: 48px;
       margin-top: 24px;
       padding: 12px 20px;
-
-      background-color: #bfe5f2;
+      background: #bfe5f2;
       border: none;
       border-radius: 10px;
-
       color: #1e7594;
-
       font-size: 20px;
       font-weight: 700;
 
       &:hover {
-        background-color: #1e7594;
+        background: #1e7594;
         color: #ffffff;
       }
 
       &:active {
-        background-color: #175f78;
+        background: #175f78;
         color: #ffffff;
       }
     }
