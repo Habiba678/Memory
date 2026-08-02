@@ -4,6 +4,7 @@ import {
 } from "./gameBoard";
 
 import { initCards } from "./gameLogic";
+
 import type {
   BoardSize,
   Player,
@@ -22,7 +23,7 @@ const exitImages: Record<Theme, string> = {
 /**
  * Updates the player images for the selected theme.
  *
- * @param theme  The currently selected theme.
+ * @param theme The currently selected theme.
  */
 function updatePlayerImages(
   theme: Theme,
@@ -51,7 +52,7 @@ function updatePlayerImages(
 /**
  * Updates the exit icon for the selected theme.
  *
- * @param theme  The currently selected theme.
+ * @param theme The currently selected theme.
  */
 function updateExitImage(
   theme: Theme,
@@ -70,7 +71,7 @@ function updateExitImage(
 /**
  * Updates the exit-dialog button labels.
  *
- * @param theme  The currently selected theme.
+ * @param theme The currently selected theme.
  */
 function updateExitButtonLabels(
   theme: Theme,
@@ -103,7 +104,7 @@ function updateExitButtonLabels(
 /**
  * Applies the selected theme to the game.
  *
- * @param theme  The currently selected theme.
+ * @param theme The currently selected theme.
  */
 function applyTheme(
   theme: Theme,
@@ -131,8 +132,8 @@ function applyTheme(
 /**
  * Opens the exit confirmation dialog.
  *
- * @param exitButton  The exit button.
- * @param exitDialog  The exit dialog.
+ * @param exitButton The exit button.
+ * @param exitDialog The exit dialog.
  */
 function openExitDialog(
   exitButton: HTMLButtonElement,
@@ -145,8 +146,8 @@ function openExitDialog(
 /**
  * Closes the exit confirmation dialog.
  *
- * @param exitButton  The exit button.
- * @param exitDialog  The exit dialog.
+ * @param exitButton The exit button.
+ * @param exitDialog The exit dialog.
  */
 function closeExitDialog(
   exitButton: HTMLButtonElement | null,
@@ -159,7 +160,7 @@ function closeExitDialog(
 /**
  * Initializes the exit confirmation dialog.
  *
- * @param onExit  Runs after confirming the game exit.
+ * @param onExit Runs after confirming the game exit.
  */
 function initExitDialog(
   onExit: () => void,
@@ -258,14 +259,12 @@ function getSelectedBoard(): BoardSize {
 /**
  * Initializes the complete memory game.
  *
- * @param onExit  Runs after confirming the game exit.
- * @param onBackToStart  Runs after leaving the result screen.
+ * @param onExit Runs after confirming the game exit.
+ * @param onBackToGame Runs after leaving the result screen.
  */
 export function initGame(
   onExit: () => void,
-  onBackToStart: () => void = () => {
-    window.location.reload();
-  },
+  onBackToGame: () => void,
 ): void {
   const selectedTheme = getSelectedTheme();
   const selectedPlayer = getSelectedPlayer();
@@ -281,7 +280,7 @@ export function initGame(
   initCards(
     selectedTheme,
     selectedPlayer,
-    onBackToStart,
+    onBackToGame,
   );
 
   initExitDialog(onExit);

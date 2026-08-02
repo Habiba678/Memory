@@ -5,4 +5,7 @@ import "./styles/game-result.scss";
 
 import { initStartGame } from "./components/startGame";
 
+/**
+ * Initializes the memory game application.
+ */
 initStartGame();
