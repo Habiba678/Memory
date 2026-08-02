@@ -261,7 +261,7 @@ export function getGamingBluePlayerTemplate(): string {
         <p class="game-result__subtitle">The winner is</p>
         <h2 class="game-result__winner-name">Blue Player</h2>
         <img class="game-result__image"
-          src="/src/assets/themes/Theme2/Player-blue.svg"
+          src="src/assets/themes/Theme2/pockal 1.svg"
           alt="Blue Player">
         ${getHomeButtonTemplate()}
       </div>
