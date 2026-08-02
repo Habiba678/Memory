@@ -1,0 +1,79 @@
+$breakpoints: (
+  mobile: 600px,
+  sm: 480px,
+  md: 768px,
+  tablet: 900px,
+  lg: 1099px,
+);
+
+@mixin respond($size) {
+  @media screen and (max-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-left() {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin fade-in($duration: 0.5s, $distance: 550px) {
+  --fade-distance: #{$distance};
+  opacity: 0;
+  animation: fade-in $duration ease-in-out forwards;
+}
+
+@mixin fade-top($duration: 0.5s, $distance: 550px) {
+  --fade-distance: #{$distance};
+  opacity: 0;
+  animation: fade-top $duration ease-in-out forwards;
+}
+
+@mixin fade-bottom($duration: 0.5s, $distance: 550px) {
+  --fade-distance: #{$distance};
+  opacity: 0;
+  animation: fade-bottom $duration ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  from {
+    transform: translateX(var(--fade-distance));
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-top {
+  from {
+    transform: translateY(calc(-1 * var(--fade-distance)));
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-bottom {
+  from {
+    transform: translateY(var(--fade-distance));
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

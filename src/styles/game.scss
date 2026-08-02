@@ -2,6 +2,7 @@
 @use "base";
 @use "tokens" as *;
 @use "game-theme";
+@use "abstract/mixins" as *;
 
 .memory-game {
   width: 100%;
@@ -348,34 +349,6 @@
   }
 }
 
-@media (max-width: 900px) {
-  .memory-game {
-    &__container {
-      min-width: max-content;
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  .exit-dialog {
-    &__content {
-      padding: 36px 20px;
-    }
-
-    &__title {
-      font-size: 26px;
-    }
-
-    &__actions {
-      width: 100%;
-      flex-direction: column;
-    }
-
-    &__button {
-      width: 100%;
-    }
-  }
-
   .memory-game--gaming .exit-dialog {
     .exit-dialog__content {
       padding: 32px 20px;
@@ -385,4 +358,224 @@
       font-size: 20px;
     }
   }
-}
+
+  @include respond(tablet) {
+    .memory-game {
+      width: 100%;
+  
+      &__container {
+        width: 100%;
+        min-width: 0;
+        padding: 24px 16px 0;
+        box-sizing: border-box;
+      }
+  
+      &__grid {
+        width: max-content;
+        max-width: 100%;
+        margin: 40px auto;
+        gap: 12px;
+      }
+  
+      &__grid--16 {
+        grid-template-columns: repeat(4, 100px);
+        grid-template-rows: repeat(4, 100px);
+      }
+  
+      &__grid--24 {
+        grid-template-columns: repeat(6, 100px);
+        grid-template-rows: repeat(4, 100px);
+      }
+  
+      &__grid--36 {
+        grid-template-columns: repeat(6, 100px);
+        grid-template-rows: repeat(6, 100px);
+      }
+    }
+  
+    .game-header {
+      width: 100%;
+      height: auto;
+      min-height: 62px;
+      gap: 12px;
+  
+      &__scores {
+        width: auto;
+        min-width: 0;
+        height: 56px;
+        padding: 12px;
+        gap: 12px;
+      }
+  
+      &__current-player {
+        width: auto;
+        min-width: 0;
+        height: 32px;
+        gap: 12px;
+        font-size: 22px;
+      }
+  
+      &__exit {
+        width: auto;
+        min-width: 150px;
+        height: 56px;
+        padding: 12px 16px;
+        font-size: 20px;
+      }
+  
+      &__exit-icon {
+        width: 26px;
+        height: 26px;
+      }
+    }
+  
+    .game-score {
+      font-size: 20px;
+  
+      &__icon {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  
+    .memory-card {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  @include respond(mobile) {
+    .memory-game {
+      width: 100%;
+  
+      &__container {
+        width: 100%;
+        min-width: 0;
+        padding: 16px 10px 0;
+        box-sizing: border-box;
+      }
+  
+      &__grid {
+        width: max-content;
+        max-width: 100%;
+        margin: 28px auto;
+        gap: 8px;
+      }
+  
+      &__grid--16 {
+        grid-template-columns: repeat(4, 68px);
+        grid-template-rows: repeat(4, 68px);
+      }
+  
+      &__grid--24 {
+        grid-template-columns: repeat(4, 68px);
+        grid-template-rows: repeat(6, 68px);
+      }
+  
+      &__grid--36 {
+        grid-template-columns: repeat(4, 68px);
+        grid-auto-rows: 68px;
+      }
+    }
+  
+    .game-header {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-areas:
+        "scores exit"
+        "current current";
+      align-items: center;
+      gap: 10px;
+    }
+  
+    .game-header__scores {
+      grid-area: scores;
+      width: max-content;
+      max-width: 100%;
+      min-width: 0;
+      height: 46px;
+      padding: 8px 10px;
+      gap: 8px;
+    }
+  
+    .game-header__exit {
+      grid-area: exit;
+      width: auto;
+      min-width: 0;
+      height: 46px;
+      padding: 8px 10px;
+      gap: 6px;
+      font-size: 15px;
+    }
+  
+    .game-header__exit-icon {
+      width: 22px;
+      height: 22px;
+    }
+  
+    .game-header__current-player {
+      grid-area: current;
+      width: 100%;
+      min-width: 0;
+      height: 38px;
+      gap: 8px;
+      font-size: 18px;
+    }
+  
+    .game-header__current-icon {
+      width: 23px;
+      height: 23px;
+    }
+  
+    .game-score {
+      height: 22px;
+      gap: 2px;
+      font-size: 15px;
+  
+      &__icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  
+    .memory-card {
+      width: 68px;
+      height: 68px;
+    }
+  
+    .exit-dialog {
+      width: min(92vw, 560px);
+  
+      &__content {
+        width: 100%;
+        padding: 32px 18px;
+      }
+  
+      &__title {
+        font-size: 24px;
+      }
+  
+      &__actions {
+        width: 100%;
+        flex-direction: column;
+      }
+  
+      &__button {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  
+    .memory-game--gaming {
+      .exit-dialog__content {
+        padding: 32px 18px;
+      }
+  
+      .exit-dialog__title {
+        font-size: 20px;
+      }
+    }
+  }

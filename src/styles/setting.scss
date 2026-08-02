@@ -1,5 +1,7 @@
 @use "base";
 @use "tokens" as *;
+@use "abstract/mixins" as *;
+
 
 .settings-screen {
   min-height: 100vh;
@@ -345,9 +347,9 @@
   }
 }
 
-
-@media (max-width: 1099px) {
+@include respond(lg) {
   .settings-screen {
+    width: 100%;
     padding: 40px 32px;
     box-sizing: border-box;
 
@@ -360,11 +362,14 @@
 
     &__left {
       width: 330px;
+      max-width: 100%;
       flex-shrink: 0;
     }
 
     &__right {
-      width: 500px;
+      width: 100%;
+      max-width: 500px;
+      min-width: 0;
       flex-shrink: 1;
       align-items: flex-end;
     }
@@ -375,56 +380,50 @@
 
     &__headline-line {
       width: 220px;
+      max-width: 100%;
     }
 
     &__preview-box {
-      width: 400px;
+      width: 100%;
+      max-width: 400px;
       height: 358px;
     }
 
     &__preview--code {
-      width: 400px;
+      width: 100%;
+      max-width: 400px;
       height: 325px;
     }
 
     &__preview--gaming,
     &__preview--da {
-      width: 375px;
+      width: 94%;
+      max-width: 375px;
       height: auto;
       top: -15px;
     }
 
-    &__choice-nav {
-      width: 500px;
+    &__choice-nav,
+    &__choice-nav--expanded {
+      width: 100%;
+      max-width: 500px;
       min-height: 72px;
       padding: 10px 14px;
       grid-template-columns:
-        105px
+        minmax(82px, 1fr)
         18px
-        80px
+        minmax(66px, 1fr)
         18px
-        110px
+        minmax(90px, 1fr)
         115px;
       column-gap: 4px;
-
-      &--expanded {
-        width: 500px;
-        padding: 10px 14px;
-        grid-template-columns:
-          105px
-          18px
-          80px
-          18px
-          110px
-          115px;
-        column-gap: 4px;
-      }
     }
 
     &__choice {
-      font-size: 16px;
+      width: 100%;
       height: 48px;
       padding: 0 3px;
+      font-size: 16px;
     }
 
     &__line-wrapper {
@@ -464,9 +463,10 @@
 
     &__option {
       width: 245px;
+      max-width: 100%;
       margin-left: 34px;
-      font-size: 17px;
       gap: 10px;
+      font-size: 17px;
     }
 
     &__icon {
@@ -480,9 +480,11 @@
   }
 }
 
-@media (max-width: 768px) {
+@include respond(md) {
   .settings-screen {
+    width: 100%;
     padding: 32px 24px;
+    box-sizing: border-box;
     align-items: flex-start;
 
     &__panel {
@@ -496,6 +498,7 @@
 
     &__left {
       width: 100%;
+      max-width: 100%;
     }
 
     &__headline {
@@ -508,11 +511,14 @@
 
     &__headline-line {
       width: 205px;
+      max-width: 100%;
       left: -12px;
     }
 
     &__right {
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       align-items: center;
       gap: 20px;
     }
@@ -543,18 +549,20 @@
       min-height: 70px;
       padding: 10px 12px;
       grid-template-columns:
-        1fr
+        minmax(0, 1fr)
         18px
-        1fr
+        minmax(0, 1fr)
         18px
-        1fr;
+        minmax(0, 1fr);
       column-gap: 4px;
     }
 
     &__choice {
-      font-size: 15px;
+      width: 100%;
+      min-width: 0;
       height: 46px;
       padding: 0 2px;
+      font-size: 15px;
     }
 
     &__line-wrapper {
@@ -591,11 +599,15 @@
   }
 }
 
-@media (max-width: 480px) {
+@include respond(sm) {
   .settings-screen {
+    width: 100%;
     padding: 24px 16px;
+    box-sizing: border-box;
 
     &__panel {
+      width: 100%;
+      max-width: 100%;
       gap: 28px;
     }
 
@@ -609,31 +621,36 @@
 
     &__headline-line {
       width: 180px;
+      max-width: 100%;
       left: -8px;
     }
 
     &__preview-box {
+      width: 100%;
       max-width: 100%;
       border-radius: 12px;
     }
 
     &__choice-nav,
     &__choice-nav--expanded {
+      width: 100%;
       max-width: 100%;
       padding: 12px 10px;
       grid-template-columns:
-        1fr
+        minmax(0, 1fr)
         14px
-        1fr
+        minmax(0, 1fr)
         14px
-        1fr;
+        minmax(0, 1fr);
       column-gap: 2px;
     }
 
     &__choice {
-      font-size: 12px;
+      width: 100%;
+      min-width: 0;
       height: 40px;
       padding: 0;
+      font-size: 12px;
     }
 
     &__line-wrapper {
@@ -677,6 +694,8 @@
     }
 
     &__option {
+      width: auto;
+      max-width: calc(100% - 24px);
       margin-left: 24px;
       margin-bottom: 10px;
       font-size: 16px;
@@ -694,6 +713,8 @@
 
     &__arrow {
       width: 32px;
+      max-width: 100%;
     }
   }
 }
+
