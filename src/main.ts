@@ -9,3 +9,5 @@ import { initStartGame } from "./components/startGame";
  * Initializes the memory game application.
  */
 initStartGame();
+
+document.body.style.visibility = "visible";
