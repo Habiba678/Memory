@@ -1,3 +1,12 @@
+import lineThree from "../assets/icon/Line 3.png";
+import paletteIcon from "../assets/icon/palette.png";
+import lineThreeCopy from "../assets/icon/Line 3 Kopie.png";
+import chessPawnIcon from "../assets/icon/chess_pawn.png";
+import styleIcon from "../assets/icon/style.png";
+import codePreview from "../assets/imge/code.png";
+import lineFour from "../assets/icon/Line 4.svg";
+import smartDisplayIcon from "../assets/icon/smart_display.png";
+
 /**
  * Returns the settings headline.
  *
@@ -8,7 +17,7 @@ export function getSettingsHeadlineTemplate(): string {
     <div class="settings-screen__headline">
       <h1 class="settings-screen__title">Settings</h1>
       <img class="settings-screen__headline-line"
-        src="/src/assets/icon/Line 3.png" alt="">
+        src="${lineThree}" alt="">
     </div>
   `;
 }
@@ -22,7 +31,7 @@ export function getThemeTitleTemplate(): string {
   return `
     <div class="settings-group__title-row">
       <img class="settings-group__icon"
-        src="/src/assets/icon/palette.png" alt="">
+        src="${paletteIcon}" alt="">
       <h2 class="settings-group__title">Game themes</h2>
     </div>
   `;
@@ -39,7 +48,7 @@ export function getCodeThemeOptionTemplate(): string {
       <input type="radio" name="theme" value="code" checked>
       <span>Code vibes theme</span>
       <img class="settings-group__arrow"
-        src="/src/assets/icon/Line 3 Kopie.png" alt="">
+        src="${lineThreeCopy}" alt="">
     </label>
   `;
 }
@@ -55,7 +64,7 @@ export function getGamingThemeOptionTemplate(): string {
       <input type="radio" name="theme" value="gaming">
       <span>Gaming theme</span>
       <img class="settings-group__arrow"
-        src="/src/assets/icon/Line 3 Kopie.png" alt="">
+        src="${lineThreeCopy}" alt="">
     </label>
   `;
 }
@@ -71,7 +80,7 @@ export function getDaThemeOptionTemplate(): string {
       <input type="radio" name="theme" value="da">
       <span>DA Projects theme</span>
       <img class="settings-group__arrow"
-        src="/src/assets/icon/Line 3 Kopie.png" alt="">
+        src="${lineThreeCopy}" alt="">
     </label>
   `;
 }
@@ -101,7 +110,7 @@ export function getPlayerTitleTemplate(): string {
   return `
     <div class="settings-group__title-row">
       <img class="settings-group__icon"
-        src="/src/assets/icon/chess_pawn.png" alt="">
+        src="${chessPawnIcon}" alt="">
       <h2 class="settings-group__title">Choose player</h2>
     </div>
   `;
@@ -159,7 +168,7 @@ export function getBoardTitleTemplate(): string {
   return `
     <div class="settings-group__title-row">
       <img class="settings-group__icon"
-        src="/src/assets/icon/style.png" alt="">
+        src="${styleIcon}" alt="">
       <h2 class="settings-group__title">Board size</h2>
     </div>
   `;
@@ -250,7 +259,7 @@ export function getThemePreviewTemplate(): string {
       class="settings-screen__preview-box preview-code">
       <img id="theme-preview"
         class="settings-screen__preview settings-screen__preview--code"
-        src="/src/assets/imge/code.png"
+        src="${codePreview}"
         alt="Theme Preview">
     </div>
   `;
@@ -280,7 +289,7 @@ export function getChoiceLineTemplate(): string {
     <span class="settings-screen__line-wrapper">
       <img class="settings-screen__choice-line
         settings-screen__choice-line--default"
-        src="/src/assets/icon/Line 4.svg" alt="">
+        src="${lineFour}" alt="">
     </span>
   `;
 }
@@ -322,7 +331,7 @@ export function getStartButtonTemplate(): string {
   return `
     <button class="settings-screen__start" type="button">
       <img class="settings-screen__start-icon"
-        src="/src/assets/icon/smart_display.png" alt="">
+        src="${smartDisplayIcon}" alt="">
       <span>Start</span>
     </button>
   `;

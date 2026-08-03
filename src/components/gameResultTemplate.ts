@@ -1,3 +1,8 @@
+import bluePlayerIcon from "../assets/themes/Theme3/Player-blue.svg";
+import orangePlayerIcon from "../assets/themes/Theme3/chess_pawn.svg";
+import confettiImage from "../assets/themes/Confetti.png";
+import drawImage from "../assets/themes/Theme3/Scale_Icon.svg";
+
 /**
  * Returns the blue player score.
  *
@@ -7,7 +12,7 @@ export function getBluePlayerTemplate(): string {
   return `
     <div class="game-result__player game-result__player--blue">
       <img class="game-result__player-icon"
-        src="/src/assets/themes/Theme3/Player-blue.svg"
+        src="${bluePlayerIcon}"
         alt="Blue Player">
       <span class="game-result__player-name">Blue</span>
       <span class="game-result__player-score
@@ -25,7 +30,7 @@ export function getOrangePlayerTemplate(): string {
   return `
     <div class="game-result__player game-result__player--orange">
       <img class="game-result__player-icon"
-        src="/src/assets/themes/Theme3/Player-orange.svg"
+        src="${orangePlayerIcon}"
         alt="Orange Player">
       <span class="game-result__player-name">Orange</span>
       <span class="game-result__player-score
@@ -74,7 +79,7 @@ export function getGameOverTemplate(): string {
 export function getConfettiTemplate(): string {
   return `
     <img class="game-result__confetti"
-      src="/src/assets/themes/Confetti.png"
+      src="${confettiImage}"
       alt="">
   `;
 }
@@ -105,7 +110,7 @@ export function getBlueWinnerTemplate(): string {
       <p class="game-result__subtitle">The winner is</p>
       <h2 class="game-result__winner-name">Blue Player</h2>
       <img class="game-result__image"
-        src="/src/assets/themes/Theme3/Player-blue.svg"
+        src="${bluePlayerIcon}"
         alt="Blue Player">
       ${getHomeButtonTemplate()}
     </div>
@@ -125,7 +130,7 @@ export function getOrangeWinnerTemplate(): string {
       <p class="game-result__subtitle">The winner is</p>
       <h2 class="game-result__winner-name">Orange Player</h2>
       <img class="game-result__image"
-        src="/src/assets/themes/Theme3/Player-orange.svg"
+        src="${orangePlayerIcon}"
         alt="Orange Player">
       ${getHomeButtonTemplate()}
     </div>
@@ -144,7 +149,7 @@ export function getDrawTemplate(): string {
       <p class="game-result__subtitle">It's a</p>
       <h2 class="game-result__draw-title">DRAW</h2>
       <img class="game-result__image"
-        src="/src/assets/themes/Theme3/Scale_Icon.svg"
+        src="${drawImage}"
         alt="Draw">
       ${getHomeButtonTemplate()}
     </div>

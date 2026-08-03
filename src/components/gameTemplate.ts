@@ -1,3 +1,8 @@
+import bluePlayerIcon from "../assets/themes/theme1/cards/label.svg";
+import orangePlayerIcon from "../assets/themes/theme1/cards/label (1).svg";
+import currentPlayerIcon from "../assets/themes/Theme3/card/chess_pawn.svg";
+import exitGameIcon from "../assets/themes/theme1/cards/move_item.svg";
+
 /**
  * Returns the blue player score.
  *
@@ -7,7 +12,7 @@ export function getBlueScoreTemplate(): string {
   return `
     <div class="game-score game-score--blue">
       <img id="blue-player-icon" class="game-score__icon"
-        src="/src/assets/themes/theme1/cards/label.svg" alt="Blue player">
+        src="${bluePlayerIcon}" alt="Blue player">
       <span class="game-score__name">Blue</span>
       <strong id="blue-score" class="game-score__points">0</strong>
     </div>
@@ -23,7 +28,7 @@ export function getOrangeScoreTemplate(): string {
   return `
     <div class="game-score game-score--orange">
       <img id="orange-player-icon" class="game-score__icon"
-        src="/src/assets/themes/theme1/cards/label (1).svg" alt="Orange player">
+        src="${orangePlayerIcon}" alt="Orange player">
       <span class="game-score__name">Orange</span>
       <strong id="orange-score" class="game-score__points">0</strong>
     </div>
@@ -53,8 +58,9 @@ export function getCurrentPlayerTemplate(): string {
   return `
     <div class="game-header__current-player">
       <span class="game-header__current-text">Current player:</span>
-      <img id="current-player-icon" class="game-header__current-icon"
-        src="/src/assets/themes/theme3/card/chess_pawn.svg"
+      <img id="current-player-icon"
+        class="game-header__current-icon"
+        src="${currentPlayerIcon}"
         alt="Current player">
       <strong id="current-player-name"
         class="game-header__current-name">Blue</strong>
@@ -70,9 +76,12 @@ export function getCurrentPlayerTemplate(): string {
 export function getExitButtonTemplate(): string {
   return `
     <button id="exit-game-button"
-      class="game-header__exit" type="button">
-      <img id="exit-game-icon" class="game-header__exit-icon"
-        src="/src/assets/themes/theme3/blue_chess Kopie.svg" alt="">
+      class="game-header__exit"
+      type="button">
+      <img id="exit-game-icon"
+        class="game-header__exit-icon"
+        src="${exitGameIcon}"
+        alt="Exit game">
       <span>Exit game</span>
     </button>
   `;

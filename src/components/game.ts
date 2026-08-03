@@ -11,13 +11,17 @@ import type {
   Theme,
 } from "./gameBoard";
 
+import codeExitImage from "../assets/themes/theme1/cards/move_item.svg";
+import gamingExitImage from "../assets/themes/theme1/cards/move_item.svg";
+import daExitImage from "../assets/themes/Theme3/card/back-icon-2.svg";
+
 /**
  * Gets the selected game theme from local storage.
  */
 const exitImages: Record<Theme, string> = {
-  code: "/src/assets/themes/theme1/cards/move_item.svg",
-  gaming: "/src/assets/themes/theme1/cards/move_item.svg",
-  da: "/src/assets/themes/Theme3/card/back-icon-2.svg",
+  code: codeExitImage,
+  gaming: gamingExitImage,
+  da: daExitImage,
 };
 
 /**

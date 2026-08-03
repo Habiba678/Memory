@@ -1,5 +1,18 @@
 import { themeImages } from "../gameCardImages";
 
+import codeBlue from "../assets/themes/theme1/cards/label.svg";
+import codeOrange from "../assets/themes/theme1/cards/label (1).svg";
+import codeWhite from "../assets/themes/theme1/cards/player-blue.svg";
+import gamingBlue from "../assets/themes/Theme2/card/Player-blue.svg";
+import gamingOrange from "../assets/themes/Theme2/card/Player-orange.svg";
+import gamingWhite from "../assets/themes/Theme2/card/chess_pawn1.svg";
+import daBlue from "../assets/themes/Theme3/Player-blue.svg";
+import daOrange from "../assets/themes/Theme3/Player-orange.svg";
+import daWhite from "../assets/themes/Theme3/card/chess_pawn.svg";
+import codeBackCard from "../assets/themes/theme1/cards/back-card.svg";
+import gamingBackCard from "../assets/themes/Theme2/back-card 2.svg";
+import daBackCard from "../assets/themes/Theme3/back-card.svg";
+
 /**
  * Defines the available player colors.
  */
@@ -35,29 +48,21 @@ export const playerImages: Record<
   }
 > = {
   code: {
-    blue: "/src/assets/themes/theme1/cards/label.svg",
-    orange:
-      "/src/assets/themes/theme1/cards/label (1).svg",
-    white:
-      "/src/assets/themes/theme1/cards/player-blue.svg",
+    blue: codeBlue,
+    orange: codeOrange,
+    white: codeWhite,
   },
 
   gaming: {
-    blue:
-      "/src/assets/themes/Theme2/card/Player-blue.svg",
-    orange:
-      "/src/assets/themes/Theme2/card/Player-orange.svg",
-    white:
-      "/src/assets/themes/Theme2/card/chess_pawn1.svg",
+    blue: gamingBlue,
+    orange: gamingOrange,
+    white: gamingWhite,
   },
 
   da: {
-    blue:
-      "/src/assets/themes/Theme3/Player-blue.svg",
-    orange:
-      "/src/assets/themes/Theme3/Player-orange.svg",
-    white:
-      "/src/assets/themes/Theme3/card/chess_pawn.svg",
+    blue: daBlue,
+    orange: daOrange,
+    white: daWhite,
   },
 };
 
@@ -65,20 +70,15 @@ export const playerImages: Record<
  * Assigns the correct card-back image to each theme.
  */
 const backCardImages: Record<Theme, string> = {
-  code:
-    "/src/assets/themes/theme1/cards/back-card.svg",
-
-  gaming:
-    "/src/assets/themes/Theme2/back-card 2.svg",
-
-  da:
-    "/src/assets/themes/Theme3/back-card.svg",
+  code: codeBackCard,
+  gaming: gamingBackCard,
+  da: daBackCard,
 };
 
 /**
  * Shuffles the cards into a random order.
  *
- * @param cards  The cards to shuffle.
+ * @param cards The cards to shuffle.
  * @returns The shuffled cards.
  */
 function shuffleCards(
@@ -110,7 +110,7 @@ function shuffleCards(
 /**
  * Builds a span element with a CSS class.
  *
- * @param className  The CSS class of the span.
+ * @param className The CSS class of the span.
  * @returns The created span element.
  */
 function createSpan(
@@ -125,9 +125,9 @@ function createSpan(
 /**
  * Builds an image element for a memory card.
  *
- * @param source  The image source.
- * @param className  The CSS class of the image.
- * @param altText  The alternative text.
+ * @param source The image source.
+ * @param className The CSS class of the image.
+ * @param altText The alternative text.
  * @returns The created image element.
  */
 function createCardImage(
@@ -147,8 +147,8 @@ function createCardImage(
 /**
  * Builds the front and back area of a memory card.
  *
- * @param card  The card data.
- * @param theme  The selected game theme.
+ * @param card The card data.
+ * @param theme The selected game theme.
  * @returns The inner card element.
  */
 function createCardInner(
@@ -191,8 +191,8 @@ function createCardInner(
 /**
  * Builds one memory card button.
  *
- * @param card  The card data.
- * @param theme  The selected game theme.
+ * @param card The card data.
+ * @param theme The selected game theme.
  * @returns The created memory card button.
  */
 function createCardElement(
@@ -219,8 +219,8 @@ function createCardElement(
 /**
  * Generates the card data for the selected board.
  *
- * @param theme - The selected game theme.
- * @param boardSize - The selected board size.
+ * @param theme The selected game theme.
+ * @param boardSize The selected board size.
  * @returns The generated card data.
  */
 function createCardData(
@@ -240,7 +240,7 @@ function createCardData(
 /**
  * Applies the selected size class to the game grid.
  *
- * @param gameGrid  The game grid element.
+ * @param gameGrid The game grid element.
  * @param boardSize The selected board size.
  */
 function applyBoardSize(
@@ -261,8 +261,8 @@ function applyBoardSize(
 /**
  * Displays the shuffled cards inside the game grid.
  *
- * @param theme  The selected game theme.
- * @param boardSize  The selected board size.
+ * @param theme The selected game theme.
+ * @param boardSize The selected board size.
  */
 export function renderCards(
   theme: Theme,

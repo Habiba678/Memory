@@ -1,12 +1,19 @@
+import codePreview from "../assets/imge/code.png";
+import gamingPreview from "../assets/imge/gaming.png";
+import daPreview from "../assets/imge/DA.png";
+
 /**
  * Stores the preview image for each game theme.
  */
 const themeImages: Record<string, string> = {
-  code: "/src/assets/imge/code.png",
-  gaming: "/src/assets/imge/gaming.png",
-  da: "/src/assets/imge/DA.png",
+  code: codePreview,
+  gaming: gamingPreview,
+  da: daPreview,
 };
 
+/**
+ * Stores the label for each game theme.
+ */
 const themeLabels: Record<string, string> = {
   code: "Code vibes theme",
   gaming: "Gaming theme",
@@ -16,17 +23,19 @@ const themeLabels: Record<string, string> = {
 /**
  * Returns the currently selected input value.
  *
- * @param name  The name of the radio input.
- * @param defaultValue  The default value.
+ * @param name The name of the radio input.
+ * @param defaultValue The default value.
  * @returns The selected input value.
  */
 function getSelectedValue(
   name: string,
   defaultValue: string
 ): string {
-  return document.querySelector<HTMLInputElement>(
-    `input[name="${name}"]:checked`
-  )?.value ?? defaultValue;
+  return (
+    document.querySelector<HTMLInputElement>(
+      `input[name="${name}"]:checked`
+    )?.value ?? defaultValue
+  );
 }
 
 /**
@@ -46,19 +55,23 @@ function getChoiceNav(): HTMLElement | null {
  * @returns Whether the summary is expanded.
  */
 function isSummaryExpanded(): boolean {
-  return getChoiceNav()?.classList.contains(
-    "settings-screen__choice-nav--expanded"
-  ) ?? false;
+  return (
+    getChoiceNav()?.classList.contains(
+      "settings-screen__choice-nav--expanded"
+    ) ?? false
+  );
 }
 
 /**
  * Updates the preview classes.
  *
- * @param value - The selected theme.
+ * @param value The selected theme.
  */
 function updatePreviewClass(value: string): void {
   const preview = document.getElementById("theme-preview");
-  const previewBox = document.getElementById("theme-preview-box");
+  const previewBox = document.getElementById(
+    "theme-preview-box"
+  );
 
   preview?.classList.remove(
     "settings-screen__preview--code",
@@ -91,15 +104,17 @@ function updateSummary(): void {
 /**
  * Updates the selected theme preview.
  *
- * @param value  The selected theme.
+ * @param value The selected theme.
  */
 function updateTheme(value: string): void {
   const preview = document.getElementById(
     "theme-preview"
   ) as HTMLImageElement | null;
 
-  if (preview) {
-    preview.src = themeImages[value];
+  const selectedImage = themeImages[value];
+
+  if (preview && selectedImage) {
+    preview.src = selectedImage;
   }
 
   updatePreviewClass(value);
@@ -114,16 +129,24 @@ function resetSummary(): void {
   const player = document.getElementById("summary-player");
   const board = document.getElementById("summary-board");
 
-  if (theme) theme.textContent = "Game theme";
-  if (player) player.textContent = "Player";
-  if (board) board.textContent = "Board size";
+  if (theme) {
+    theme.textContent = "Game theme";
+  }
+
+  if (player) {
+    player.textContent = "Player";
+  }
+
+  if (board) {
+    board.textContent = "Board size";
+  }
 }
 
 /**
  * Returns a text with an uppercase first letter.
  *
- * @param value  The text to format.
- * @returns  The formatted text.
+ * @param value The text to format.
+ * @returns The formatted text.
  */
 function capitalize(value: string): string {
   return `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
@@ -137,27 +160,38 @@ function updateSelectedSummary(): void {
   const player = getSelectedValue("player", "blue");
   const board = getSelectedValue("board", "16");
 
-  const themeSummary = document.getElementById("summary-theme");
-  const playerSummary = document.getElementById("summary-player");
-  const boardSummary = document.getElementById("summary-board");
+  const themeSummary = document.getElementById(
+    "summary-theme"
+  );
+
+  const playerSummary = document.getElementById(
+    "summary-player"
+  );
+
+  const boardSummary = document.getElementById(
+    "summary-board"
+  );
 
   if (themeSummary) {
-    themeSummary.textContent = themeLabels[theme];
+    themeSummary.textContent =
+      themeLabels[theme] ?? "Game theme";
   }
 
   if (playerSummary) {
-    playerSummary.textContent = `${capitalize(player)} Player`;
+    playerSummary.textContent =
+      `${capitalize(player)} Player`;
   }
 
   if (boardSummary) {
-    boardSummary.textContent = `Board-${board} Cards`;
+    boardSummary.textContent =
+      `Board-${board} Cards`;
   }
 }
 
 /**
  * Opens or closes the settings summary.
  *
- * @param event  The navigation click event.
+ * @param event The navigation click event.
  */
 function toggleChoiceSummary(event: MouseEvent): void {
   const target = event.target as HTMLElement;
@@ -196,16 +230,17 @@ function addChoiceNavListener(): void {
 /**
  * Adds change listeners to radio inputs.
  *
- * @param name   The radio input name.
- * @param onChange  The function called after a change.
+ * @param name The radio input name.
+ * @param onChange The function called after a change.
  */
 function addInputListeners(
   name: string,
   onChange: (value: string) => void
 ): void {
-  const inputs = document.querySelectorAll<HTMLInputElement>(
-    `input[name="${name}"]`
-  );
+  const inputs =
+    document.querySelectorAll<HTMLInputElement>(
+      `input[name="${name}"]`
+    );
 
   inputs.forEach((input) => {
     input.addEventListener("change", () => {
@@ -237,14 +272,15 @@ function saveSettings(): void {
 /**
  * Adds the click listener to the start button.
  *
- * @param onStart  The function called after starting.
+ * @param onStart The function called after starting.
  */
 function addStartButtonListener(
   onStart: () => void
 ): void {
-  const startButton = document.querySelector<HTMLButtonElement>(
-    ".settings-screen__start"
-  );
+  const startButton =
+    document.querySelector<HTMLButtonElement>(
+      ".settings-screen__start"
+    );
 
   startButton?.addEventListener("click", () => {
     saveSettings();
@@ -255,16 +291,17 @@ function addStartButtonListener(
 /**
  * Restores a saved radio input.
  *
- * @param name   The radio input name.
- * @param value  The saved input value.
+ * @param name The radio input name.
+ * @param value The saved input value.
  */
 function restoreInput(
   name: string,
   value: string
 ): void {
-  const input = document.querySelector<HTMLInputElement>(
-    `input[name="${name}"][value="${value}"]`
-  );
+  const input =
+    document.querySelector<HTMLInputElement>(
+      `input[name="${name}"][value="${value}"]`
+    );
 
   if (input) {
     input.checked = true;
@@ -275,9 +312,14 @@ function restoreInput(
  * Restores the saved settings.
  */
 function restoreSettings(): void {
-  const theme = localStorage.getItem("selectedTheme") ?? "code";
-  const player = localStorage.getItem("selectedPlayer") ?? "blue";
-  const board = localStorage.getItem("selectedBoard") ?? "16";
+  const theme =
+    localStorage.getItem("selectedTheme") ?? "code";
+
+  const player =
+    localStorage.getItem("selectedPlayer") ?? "blue";
+
+  const board =
+    localStorage.getItem("selectedBoard") ?? "16";
 
   restoreInput("theme", theme);
   restoreInput("player", player);
@@ -290,7 +332,7 @@ function restoreSettings(): void {
 /**
  * Initializes the settings screen.
  *
- * @param onStart  The function called after starting the game.
+ * @param onStart The function called after starting the game.
  */
 export function initSettings(
   onStart: () => void
