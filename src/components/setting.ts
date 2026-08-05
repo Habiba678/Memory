@@ -1,6 +1,6 @@
-import codePreview from "../assets/imge/code.png";
-import gamingPreview from "../assets/imge/gaming.png";
-import daPreview from "../assets/imge/DA.png";
+import codePreview from "../assets/imge/code.svg";
+import gamingPreview from "../assets/imge/gaming.svg";
+import daPreview from "../assets/imge/DA.svg";
 
 /**
  * Stores the preview image for each game theme.
@@ -50,25 +50,15 @@ function getChoiceNav(): HTMLElement | null {
 }
 
 /**
- * Returns whether the summary is expanded.
- *
- * @returns Whether the summary is expanded.
- */
-function isSummaryExpanded(): boolean {
-  return (
-    getChoiceNav()?.classList.contains(
-      "settings-screen__choice-nav--expanded"
-    ) ?? false
-  );
-}
-
-/**
  * Updates the preview classes.
  *
  * @param value The selected theme.
  */
 function updatePreviewClass(value: string): void {
-  const preview = document.getElementById("theme-preview");
+  const preview = document.getElementById(
+    "theme-preview"
+  );
+
   const previewBox = document.getElementById(
     "theme-preview-box"
   );
@@ -89,16 +79,16 @@ function updatePreviewClass(value: string): void {
     "preview-da"
   );
 
-  previewBox?.classList.add(`preview-${value}`);
+  previewBox?.classList.add(
+    `preview-${value}`
+  );
 }
 
 /**
- * Updates the summary when it is expanded.
+ * Updates the selected settings summary.
  */
 function updateSummary(): void {
-  if (isSummaryExpanded()) {
-    updateSelectedSummary();
-  }
+  updateSelectedSummary();
 }
 
 /**
@@ -118,28 +108,7 @@ function updateTheme(value: string): void {
   }
 
   updatePreviewClass(value);
-  updateSummary();
-}
-
-/**
- * Resets the summary button texts.
- */
-function resetSummary(): void {
-  const theme = document.getElementById("summary-theme");
-  const player = document.getElementById("summary-player");
-  const board = document.getElementById("summary-board");
-
-  if (theme) {
-    theme.textContent = "Game theme";
-  }
-
-  if (player) {
-    player.textContent = "Player";
-  }
-
-  if (board) {
-    board.textContent = "Board size";
-  }
+  updateSelectedSummary();
 }
 
 /**
@@ -156,9 +125,20 @@ function capitalize(value: string): string {
  * Updates the selected settings summary.
  */
 function updateSelectedSummary(): void {
-  const theme = getSelectedValue("theme", "code");
-  const player = getSelectedValue("player", "blue");
-  const board = getSelectedValue("board", "16");
+  const theme = getSelectedValue(
+    "theme",
+    "code"
+  );
+
+  const player = getSelectedValue(
+    "player",
+    "blue"
+  );
+
+  const board = getSelectedValue(
+    "board",
+    "16"
+  );
 
   const themeSummary = document.getElementById(
     "summary-theme"
@@ -174,7 +154,7 @@ function updateSelectedSummary(): void {
 
   if (themeSummary) {
     themeSummary.textContent =
-      themeLabels[theme] ?? "Game theme";
+      themeLabels[theme] ?? "Code vibes theme";
   }
 
   if (playerSummary) {
@@ -193,7 +173,9 @@ function updateSelectedSummary(): void {
  *
  * @param event The navigation click event.
  */
-function toggleChoiceSummary(event: MouseEvent): void {
+function toggleChoiceSummary(
+  event: MouseEvent
+): void {
   const target = event.target as HTMLElement;
 
   if (target.closest(".settings-screen__start")) {
@@ -206,15 +188,11 @@ function toggleChoiceSummary(event: MouseEvent): void {
     return;
   }
 
-  const isExpanded = choiceNav.classList.toggle(
+  choiceNav.classList.toggle(
     "settings-screen__choice-nav--expanded"
   );
 
-  if (isExpanded) {
-    updateSelectedSummary();
-  } else {
-    resetSummary();
-  }
+  updateSelectedSummary();
 }
 
 /**
@@ -326,7 +304,7 @@ function restoreSettings(): void {
   restoreInput("board", board);
 
   updateTheme(theme);
-  resetSummary();
+  updateSelectedSummary();
 }
 
 /**

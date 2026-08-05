@@ -1,11 +1,11 @@
-import lineThree from "../assets/icon/Line 3.png";
-import paletteIcon from "../assets/icon/palette.png";
-import lineThreeCopy from "../assets/icon/Line 3 Kopie.png";
-import chessPawnIcon from "../assets/icon/chess_pawn.png";
-import styleIcon from "../assets/icon/style.png";
-import codePreview from "../assets/imge/code.png";
+import lineThree from "../assets/icon/Line 3.svg";
+import paletteIcon from "../assets/icon/palette.svg";
+import lineThreeCopy from "../assets/icon/Line 3 (1).svg";
+import chessPawnIcon from "../assets/icon/chess_pawn.svg";
+import styleIcon from "../assets/icon/style.svg";
+import codePreview from "../assets/imge/code.svg";
 import lineFour from "../assets/icon/Line 4.svg";
-import smartDisplayIcon from "../assets/icon/smart_display.png";
+import smartDisplayIcon from "../assets/icon/smart_display.svg";
 
 /**
  * Returns the settings headline.

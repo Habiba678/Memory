@@ -5,6 +5,8 @@
 
 .settings-screen {
   min-height: 100vh;
+  padding: 40px 32px;
+  box-sizing: border-box;
   background-color: $text-light;
   color: $text-dark;
   font-family: $font-subtitle;
@@ -14,7 +16,7 @@
 
   &__panel {
     width: min(100%, 1103px);
-    height: 539px;
+    min-height: 539px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,6 +25,7 @@
 
   &__left {
     width: 420px;
+    flex-shrink: 0;
   }
 
   &__headline {
@@ -31,11 +34,11 @@
   }
 
   &__title {
+    margin: 0;
     font-family: $font-title;
     font-size: 54px;
     font-weight: 700;
     color: $primary-dark;
-    margin: 0;
   }
 
   &__headline-line {
@@ -48,6 +51,7 @@
 
   &__right {
     width: 740px;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -71,45 +75,33 @@
     object-position: center;
   }
 
-  &__preview--code {
-    width: 460px;
-    height: 374px;
-    border-radius: 16px;
-  }
-
-  &__preview--gaming {
-    width: 430px;
-    height: 346.08px;
-    border-radius: 16px;
-    position: relative;
-    top: -20px;
-  }
-
+  &__preview--code,
+  &__preview--gaming,
   &__preview--da {
-    width: 430px;
-    height: 347px;
+    width: 460px;
+    height: 412px;
     border-radius: 16px;
-    position: relative;
-    top: -20px;
+    object-fit: contain;
   }
 
   &__choice-nav {
-    width: 620px;
+    width: 740px;
     min-height: 81px;
-    padding: 14px 24px 14px 16px;
+    padding: 14px 18px;
     box-sizing: border-box;
     background-color: #f6f6f6;
     display: grid;
     grid-template-columns:
-      130px
-      24px
-      95px
-      24px
-      125px
+      minmax(175px, 1.45fr)
+      28px
+      minmax(125px, 1fr)
+      28px
+      minmax(160px, 1.2fr)
       136px;
-    column-gap: 6px;
+    column-gap: 10px;
     align-items: center;
     justify-content: center;
+    align-self: flex-end;
     cursor: pointer;
 
     transition:
@@ -118,29 +110,25 @@
 
     &--expanded {
       width: 740px;
-      padding: 14px 25px;
-      grid-template-columns:
-        175px
-        28px
-        135px
-        28px
-        165px
-        136px;
-      column-gap: 5px;
+      padding: 14px 18px;
     }
   }
 
   &__choice {
     width: 100%;
-    height: 53px;
-    border: none;
-    background: transparent;
+    min-width: 0;
+    height: 48px;
     padding: 0 8px;
     box-sizing: border-box;
+    border: none;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: $font-subtitle;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.2;
     color: $primary-dark;
     cursor: pointer;
     white-space: nowrap;
@@ -151,34 +139,36 @@
       transform 0.2s ease;
 
     &:hover,
-    &:focus {
+    &:focus-visible {
       font-weight: 700;
-      transform: scale(1.03);
       outline: none;
     }
   }
 
   &__line-wrapper {
-    width: 24px;
+    width: 28px;
+    min-width: 28px;
     height: 53px;
     display: flex;
     align-items: center;
     justify-content: center;
+    pointer-events: none;
   }
 
   &__choice-line {
-    width: 24px;
-    height: 65px;
+    width: 22px;
+    height: 58px;
     display: block;
     object-fit: fill;
     pointer-events: none;
   }
 
   &__start {
-    width: 126px;
-    min-width: 126px;
+    width: 136px;
+    min-width: 136px;
     height: 53px;
     padding: 0 14px;
+    box-sizing: border-box;
     border: none;
     border-radius: 0;
     background-color: $secondary-yellow;
@@ -192,17 +182,12 @@
     line-height: 1;
     color: $primary-dark;
     cursor: pointer;
-    box-sizing: border-box;
 
     transition:
-      width 0.2s ease,
-      min-width 0.2s ease,
       transform 0.2s ease,
       background-color 0.2s ease;
 
     &:hover {
-      width: 136px;
-      min-width: 136px;
       transform: scale(1.05);
     }
 
@@ -230,9 +215,6 @@
   }
 }
 
-.preview-code {
-  background-color: $preview-code-bg;
-}
 
 .preview-gaming {
   background: linear-gradient(
@@ -242,9 +224,6 @@
   );
 }
 
-.preview-da {
-  background-color: $preview-da-bg;
-}
 
 .settings-group {
   margin-bottom: 34px;
@@ -263,21 +242,21 @@
   }
 
   &__title {
+    margin: 0;
     font-family: $font-subtitle;
     font-size: 24px;
     font-weight: 700;
     color: $primary-dark;
-    margin: 0;
   }
 
   &__option {
     width: 282px;
     min-height: 24px;
+    margin-left: 40px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-left: 40px;
-    margin-bottom: 12px;
     font-family: $font-subtitle;
     font-size: 20px;
     color: $primary-dark;
@@ -286,11 +265,13 @@
     input {
       width: 20px;
       height: 20px;
+      margin: 0;
       appearance: none;
       border: 2px solid $primary-dark;
       border-radius: 50%;
       cursor: pointer;
       position: relative;
+      flex-shrink: 0;
 
       &::before {
         content: "";
@@ -318,6 +299,11 @@
       &:hover {
         border-width: 3px;
       }
+
+      &:focus-visible {
+        outline: 2px solid $primary-dark;
+        outline-offset: 3px;
+      }
     }
 
     span {
@@ -338,6 +324,7 @@
     height: auto;
     margin-left: 8px;
     opacity: 0;
+    flex-shrink: 0;
     transition: opacity 0.2s ease;
   }
 
@@ -346,6 +333,7 @@
     opacity: 1;
   }
 }
+
 
 @include respond(lg) {
   .settings-screen {
@@ -356,7 +344,7 @@
     &__panel {
       width: 100%;
       max-width: 900px;
-      height: auto;
+      min-height: auto;
       gap: 40px;
     }
 
@@ -400,51 +388,50 @@
       width: 94%;
       max-width: 375px;
       height: auto;
-      top: -15px;
     }
 
     &__choice-nav,
     &__choice-nav--expanded {
-      width: 100%;
-      max-width: 500px;
+      width: min(620px, calc(100vw - 64px));
+      max-width: none;
       min-height: 72px;
       padding: 10px 14px;
       grid-template-columns:
-        minmax(82px, 1fr)
-        18px
-        minmax(66px, 1fr)
-        18px
-        minmax(90px, 1fr)
-        115px;
-      column-gap: 4px;
+        minmax(145px, 1.4fr)
+        22px
+        minmax(105px, 1fr)
+        22px
+        minmax(140px, 1.2fr)
+        120px;
+      column-gap: 6px;
+      align-self: flex-end;
     }
 
     &__choice {
-      width: 100%;
       height: 48px;
-      padding: 0 3px;
+      padding: 0 5px;
       font-size: 16px;
     }
 
     &__line-wrapper {
-      width: 18px;
+      width: 22px;
+      min-width: 22px;
       height: 48px;
     }
 
     &__choice-line {
       width: 18px;
-      height: 54px;
+      height: 52px;
     }
 
     &__start {
-      width: 115px;
-      min-width: 115px;
+      width: 120px;
+      min-width: 120px;
       height: 48px;
       font-size: 17px;
 
       &:hover {
-        width: 120px;
-        min-width: 120px;
+        transform: scale(1.03);
       }
     }
 
@@ -480,6 +467,7 @@
   }
 }
 
+
 @include respond(md) {
   .settings-screen {
     width: 100%;
@@ -490,7 +478,7 @@
     &__panel {
       width: 100%;
       max-width: 520px;
-      height: auto;
+      min-height: auto;
       flex-direction: column;
       align-items: stretch;
       gap: 34px;
@@ -539,40 +527,41 @@
     &__preview--da {
       width: 93%;
       height: auto;
-      top: -10px;
     }
 
     &__choice-nav,
     &__choice-nav--expanded {
       width: 100%;
       max-width: 430px;
-      min-height: 70px;
-      padding: 10px 12px;
+      min-height: 126px;
+      padding: 14px 16px;
       grid-template-columns:
-        minmax(0, 1fr)
-        18px
-        minmax(0, 1fr)
-        18px
-        minmax(0, 1fr);
-      column-gap: 4px;
+        minmax(130px, 1.35fr)
+        22px
+        minmax(105px, 1fr)
+        22px
+        minmax(130px, 1.2fr);
+      grid-template-rows: auto auto;
+      column-gap: 6px;
+      row-gap: 12px;
+      align-self: center;
     }
 
     &__choice {
-      width: 100%;
-      min-width: 0;
-      height: 46px;
-      padding: 0 2px;
-      font-size: 15px;
+      height: 44px;
+      padding: 0 5px;
+      font-size: 14px;
     }
 
     &__line-wrapper {
-      width: 18px;
-      height: 46px;
+      width: 22px;
+      min-width: 22px;
+      height: 44px;
     }
 
     &__choice-line {
       width: 18px;
-      height: 52px;
+      height: 48px;
     }
 
     &__start {
@@ -580,13 +569,12 @@
       width: 126px;
       min-width: 126px;
       height: 48px;
+      margin-top: 0;
       justify-self: center;
-      margin-top: 8px;
       font-size: 17px;
 
       &:hover {
-        width: 132px;
-        min-width: 132px;
+        transform: scale(1.03);
       }
     }
   }
@@ -598,6 +586,7 @@
     }
   }
 }
+
 
 @include respond(sm) {
   .settings-screen {
@@ -635,43 +624,62 @@
     &__choice-nav--expanded {
       width: 100%;
       max-width: 100%;
-      padding: 12px 10px;
+      min-height: 118px;
+      padding: 18px 12px;
+      box-sizing: border-box;
+      display: grid;
       grid-template-columns:
+        minmax(0, 1.35fr)
+        12px
         minmax(0, 1fr)
-        14px
-        minmax(0, 1fr)
-        14px
-        minmax(0, 1fr);
-      column-gap: 2px;
+        12px
+        minmax(0, 1.2fr);
+      grid-template-rows: auto auto;
+      column-gap: 4px;
+      row-gap: 14px;
+      align-items: center;
+      justify-items: center;
+      align-self: center;
     }
 
     &__choice {
       width: 100%;
       min-width: 0;
-      height: 40px;
-      padding: 0;
-      font-size: 12px;
+      height: 36px;
+      padding: 0 2px;
+      box-sizing: border-box;
+      font-size: 11px;
+      line-height: 1.2;
+      white-space: nowrap;
+      text-align: center;
     }
 
     &__line-wrapper {
-      width: 14px;
-      height: 40px;
+      width: 12px;
+      min-width: 12px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: none;
     }
 
     &__choice-line {
-      width: 14px;
-      height: 46px;
+      width: 12px;
+      height: 38px;
     }
 
     &__start {
+      grid-column: 1 / -1;
       width: 120px;
       min-width: 120px;
       height: 46px;
+      margin-top: 0;
+      justify-self: center;
       font-size: 16px;
 
       &:hover {
-        width: 124px;
-        min-width: 124px;
+        transform: scale(1.03);
       }
     }
 
@@ -717,4 +725,3 @@
     }
   }
 }
-
