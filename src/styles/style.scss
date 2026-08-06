@@ -1,12 +1,14 @@
 @use "fonts";
 @use "base";
 @use "tokens" as *;
+@use "abstract/mixins" as *;
+
 
 .memory-home {
-  background-color: $primary-dark;
   min-height: 100vh;
   position: relative;
   overflow: hidden;
+  background-color: $primary-dark;
   color: $text-light;
   display: flex;
   flex-direction: column;
@@ -18,6 +20,7 @@
     position: absolute;
     top: 40px;
     right: 40px;
+    padding: 0;
     background: transparent;
     border: none;
     cursor: pointer;
@@ -27,6 +30,7 @@
   &__settings-icon {
     width: 60px;
     height: 60px;
+    display: block;
     transition: transform 0.3s ease;
   }
 
@@ -35,47 +39,53 @@
   }
 
   &__controller {
+    width: 414.31px;
     min-width: 414.31px;
     height: 301.31px;
     position: absolute;
     left: -80px;
-    top: 400px;
+    top: 53.32vh;
     transform: rotate(5deg);
     opacity: 0.5;
     pointer-events: none;
-    
-   
+    z-index: 1;
   }
-
 
   &__content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    position: relative;
     z-index: 2;
   }
 
   &__small-title {
+    margin: 0;
     font-family: $font-subtitle;
     font-size: $subtitle-size;
     font-weight: 400;
+    line-height: 1.2;
     color: $text-light;
-    margin: 0;
   }
 
   &__main-title {
+    margin: 0;
     font-family: $font-title;
     font-size: $title-size;
     font-weight: 700;
-    line-height: 100%;
+    line-height: 1;
     color: $text-light;
-    margin: 0;
+    white-space: nowrap;
   }
 }
+
 
 .start-button {
   width: $button-width;
   height: $button-height;
+  position: relative;
+  top: 20px;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -83,10 +93,6 @@
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease;
-  z-index: 2;
-
-  position: relative;
-  top: 20px;
 
   &--yellow {
     background-color: $secondary-yellow;
@@ -103,12 +109,15 @@
   &__controller-icon {
     width: 44px;
     height: 32px;
+    display: block;
   }
 
   &__text {
     font-family: $font-title;
     font-size: $button-text-size;
     font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
   }
 
   &__arrow-box {
@@ -121,6 +130,7 @@
   &__arrow-icon {
     width: 35px;
     height: 15px;
+    display: block;
   }
 
   &:hover {
@@ -137,5 +147,199 @@
 
   &:active {
     transform: scale(0.98);
+  }
+}
+
+
+@include respond(lg) {
+  .memory-home {
+    padding: 32px;
+    box-sizing: border-box;
+    gap: 26px;
+
+    &__content {
+      align-items: center;
+      text-align: center;
+    }
+
+    &__small-title {
+      font-size: 30px;
+      text-align: center;
+    }
+
+    &__main-title {
+      font-size: 80px;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    &__controller {
+      width: 350px;
+      min-width: 350px;
+      height: 255px;
+      opacity: 0.4;
+    }
+
+    &__settings-button {
+      top: 28px;
+      right: 28px;
+    }
+
+    &__settings-icon {
+      width: 52px;
+      height: 52px;
+    }
+  }
+
+  .start-button {
+    width: 210px;
+    height: 66px;
+    gap: 16px;
+
+    &__text {
+      font-size: 28px;
+    }
+
+    &__controller-icon {
+      width: 36px;
+      height: 26px;
+    }
+
+    &__arrow-icon {
+      width: 28px;
+      height: 13px;
+    }
+  }
+}
+
+
+@include respond(md) {
+  .memory-home {
+    padding: 28px 24px;
+    box-sizing: border-box;
+    gap: 24px;
+
+    &__content {
+      align-items: center;
+      text-align: center;
+    }
+
+    &__small-title {
+      font-size: 26px;
+      text-align: center;
+    }
+
+    &__main-title {
+      font-size: 48px;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    &__controller {
+      width: 250px;
+      min-width: 250px;
+      height: 182px;
+      opacity: 0.32;
+    }
+
+    &__settings-button {
+      top: 24px;
+      right: 24px;
+    }
+
+    &__settings-icon {
+      width: 46px;
+      height: 46px;
+    }
+  }
+
+  .start-button {
+    width: 195px;
+    height: 62px;
+    gap: 15px;
+
+    &__text {
+      font-size: 25px;
+    }
+
+    &__controller-icon {
+      width: 33px;
+      height: 24px;
+    }
+
+    &__arrow-icon {
+      width: 26px;
+      height: 12px;
+    }
+  }
+}
+
+
+@include respond(sm) {
+  .memory-home {
+    padding: 64px 16px 24px;
+    box-sizing: border-box;
+    gap: 20px;
+
+    &__content {
+      width: 100%;
+      align-items: center;
+      text-align: center;
+    }
+
+    &__small-title {
+      font-size: 16px;
+      text-align: center;
+    }
+
+    &__main-title {
+      font-size: 32px;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    &__controller {
+      width: 190px;
+      min-width: 190px;
+      height: 138px;
+      opacity: 0.25;
+    }
+
+    &__settings-button {
+      top: 18px;
+      right: 18px;
+    }
+
+    &__settings-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  .start-button {
+    width: 165px;
+    height: 52px;
+    gap: 11px;
+
+    &__text {
+      font-size: 21px;
+    }
+
+    &__controller-icon {
+      width: 25px;
+      height: 19px;
+    }
+
+    &__arrow-icon {
+      width: 21px;
+      height: 10px;
+    }
+
+    &:hover {
+      transform: scale(1.03);
+    }
   }
 }

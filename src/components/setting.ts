@@ -24,18 +24,12 @@ const themeLabels: Record<string, string> = {
  * Returns the currently selected input value.
  *
  * @param name The name of the radio input.
- * @param defaultValue The default value.
- * @returns The selected input value.
+ * @returns The selected value or null.
  */
-function getSelectedValue(
-  name: string,
-  defaultValue: string
-): string {
-  return (
-    document.querySelector<HTMLInputElement>(
-      `input[name="${name}"]:checked`
-    )?.value ?? defaultValue
-  );
+function getSelectedValue(name: string): string | null {
+  return document.querySelector<HTMLInputElement>(
+    `input[name="${name}"]:checked`
+  )?.value ?? null;
 }
 
 /**
@@ -46,6 +40,17 @@ function getSelectedValue(
 function getChoiceNav(): HTMLElement | null {
   return document.querySelector<HTMLElement>(
     ".settings-screen__choice-nav"
+  );
+}
+
+/**
+ * Returns the start button.
+ *
+ * @returns The start button element.
+ */
+function getStartButton(): HTMLButtonElement | null {
+  return document.querySelector<HTMLButtonElement>(
+    "#start-game-button"
   );
 }
 
@@ -85,13 +90,6 @@ function updatePreviewClass(value: string): void {
 }
 
 /**
- * Updates the selected settings summary.
- */
-function updateSummary(): void {
-  updateSelectedSummary();
-}
-
-/**
  * Updates the selected theme preview.
  *
  * @param value The selected theme.
@@ -108,7 +106,7 @@ function updateTheme(value: string): void {
   }
 
   updatePreviewClass(value);
-  updateSelectedSummary();
+  updateSettingsState();
 }
 
 /**
@@ -125,20 +123,9 @@ function capitalize(value: string): string {
  * Updates the selected settings summary.
  */
 function updateSelectedSummary(): void {
-  const theme = getSelectedValue(
-    "theme",
-    "code"
-  );
-
-  const player = getSelectedValue(
-    "player",
-    "blue"
-  );
-
-  const board = getSelectedValue(
-    "board",
-    "16"
-  );
+  const theme = getSelectedValue("theme");
+  const player = getSelectedValue("player");
+  const board = getSelectedValue("board");
 
   const themeSummary = document.getElementById(
     "summary-theme"
@@ -153,19 +140,62 @@ function updateSelectedSummary(): void {
   );
 
   if (themeSummary) {
-    themeSummary.textContent =
-      themeLabels[theme] ?? "Code vibes theme";
+    themeSummary.textContent = theme
+      ? themeLabels[theme]
+      : "Choose theme";
   }
 
   if (playerSummary) {
-    playerSummary.textContent =
-      `${capitalize(player)} Player`;
+    playerSummary.textContent = player
+      ? `${capitalize(player)} Player`
+      : "Choose player";
   }
 
   if (boardSummary) {
-    boardSummary.textContent =
-      `Board-${board} Cards`;
+    boardSummary.textContent = board
+      ? `Board-${board} Cards`
+      : "Choose board";
   }
+}
+
+/**
+ * Checks whether all settings have been selected.
+ *
+ * @returns True when all settings are selected.
+ */
+function areSettingsComplete(): boolean {
+  return Boolean(
+    getSelectedValue("theme") &&
+    getSelectedValue("player") &&
+    getSelectedValue("board")
+  );
+}
+
+/**
+ * Enables or disables the start button.
+ */
+function updateStartButtonState(): void {
+  const startButton = getStartButton();
+
+  if (!startButton) {
+    return;
+  }
+
+  const isComplete = areSettingsComplete();
+
+  startButton.disabled = !isComplete;
+  startButton.setAttribute(
+    "aria-disabled",
+    String(!isComplete)
+  );
+}
+
+/**
+ * Updates the complete settings screen state.
+ */
+function updateSettingsState(): void {
+  updateSelectedSummary();
+  updateStartButtonState();
 }
 
 /**
@@ -191,8 +221,6 @@ function toggleChoiceSummary(
   choiceNav.classList.toggle(
     "settings-screen__choice-nav--expanded"
   );
-
-  updateSelectedSummary();
 }
 
 /**
@@ -231,19 +259,27 @@ function addInputListeners(
  * Saves the selected settings.
  */
 function saveSettings(): void {
+  const theme = getSelectedValue("theme");
+  const player = getSelectedValue("player");
+  const board = getSelectedValue("board");
+
+  if (!theme || !player || !board) {
+    return;
+  }
+
   localStorage.setItem(
     "selectedTheme",
-    getSelectedValue("theme", "code")
+    theme
   );
 
   localStorage.setItem(
     "selectedPlayer",
-    getSelectedValue("player", "blue")
+    player
   );
 
   localStorage.setItem(
     "selectedBoard",
-    getSelectedValue("board", "16")
+    board
   );
 }
 
@@ -255,56 +291,38 @@ function saveSettings(): void {
 function addStartButtonListener(
   onStart: () => void
 ): void {
-  const startButton =
-    document.querySelector<HTMLButtonElement>(
-      ".settings-screen__start"
-    );
+  const startButton = getStartButton();
 
   startButton?.addEventListener("click", () => {
+    if (!areSettingsComplete()) {
+      return;
+    }
+
     saveSettings();
     onStart();
   });
 }
 
 /**
- * Restores a saved radio input.
- *
- * @param name The radio input name.
- * @param value The saved input value.
+ * Clears all initial radio selections.
  */
-function restoreInput(
-  name: string,
-  value: string
-): void {
-  const input =
-    document.querySelector<HTMLInputElement>(
-      `input[name="${name}"][value="${value}"]`
+function clearSelections(): void {
+  const inputs =
+    document.querySelectorAll<HTMLInputElement>(
+      'input[type="radio"]'
     );
 
-  if (input) {
-    input.checked = true;
-  }
+  inputs.forEach((input) => {
+    input.checked = false;
+  });
 }
 
 /**
- * Restores the saved settings.
+ * Initializes the initial settings state.
  */
-function restoreSettings(): void {
-  const theme =
-    localStorage.getItem("selectedTheme") ?? "code";
-
-  const player =
-    localStorage.getItem("selectedPlayer") ?? "blue";
-
-  const board =
-    localStorage.getItem("selectedBoard") ?? "16";
-
-  restoreInput("theme", theme);
-  restoreInput("player", player);
-  restoreInput("board", board);
-
-  updateTheme(theme);
-  updateSelectedSummary();
+function initializeSettingsState(): void {
+  clearSelections();
+  updateSettingsState();
 }
 
 /**
@@ -316,9 +334,18 @@ export function initSettings(
   onStart: () => void
 ): void {
   addInputListeners("theme", updateTheme);
-  addInputListeners("player", updateSummary);
-  addInputListeners("board", updateSummary);
+
+  addInputListeners(
+    "player",
+    updateSettingsState
+  );
+
+  addInputListeners(
+    "board",
+    updateSettingsState
+  );
+
   addChoiceNavListener();
   addStartButtonListener(onStart);
-  restoreSettings();
+  initializeSettingsState();
 }

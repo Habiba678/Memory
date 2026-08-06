@@ -7,89 +7,60 @@ import codePreview from "../assets/imge/code.svg";
 import lineFour from "../assets/icon/Line 4.svg";
 import smartDisplayIcon from "../assets/icon/smart_display.svg";
 
-/**
- * Returns the settings headline.
- *
- * @returns The settings headline HTML.
- */
+/** Returns the settings headline. */
 export function getSettingsHeadlineTemplate(): string {
   return `
     <div class="settings-screen__headline">
       <h1 class="settings-screen__title">Settings</h1>
-      <img class="settings-screen__headline-line"
-        src="${lineThree}" alt="">
+      <img class="settings-screen__headline-line" src="${lineThree}" alt="">
     </div>
   `;
 }
 
-/**
- * Returns the game themes title.
- *
- * @returns The game themes title HTML.
- */
+/** Returns the game themes title. */
 export function getThemeTitleTemplate(): string {
   return `
     <div class="settings-group__title-row">
-      <img class="settings-group__icon"
-        src="${paletteIcon}" alt="">
+      <img class="settings-group__icon" src="${paletteIcon}" alt="">
       <h2 class="settings-group__title">Game themes</h2>
     </div>
   `;
 }
 
-/**
- * Returns the code theme option.
- *
- * @returns The code theme option HTML.
- */
+/** Returns the code theme option. */
 export function getCodeThemeOptionTemplate(): string {
   return `
     <label class="settings-group__option">
-      <input type="radio" name="theme" value="code" checked>
+      <input type="radio" name="theme" value="code">
       <span>Code vibes theme</span>
-      <img class="settings-group__arrow"
-        src="${lineThreeCopy}" alt="">
+      <img class="settings-group__arrow" src="${lineThreeCopy}" alt="">
     </label>
   `;
 }
 
-/**
- * Returns the gaming theme option.
- *
- * @returns The gaming theme option HTML.
- */
+/** Returns the gaming theme option. */
 export function getGamingThemeOptionTemplate(): string {
   return `
     <label class="settings-group__option">
       <input type="radio" name="theme" value="gaming">
       <span>Gaming theme</span>
-      <img class="settings-group__arrow"
-        src="${lineThreeCopy}" alt="">
+      <img class="settings-group__arrow" src="${lineThreeCopy}" alt="">
     </label>
   `;
 }
 
-/**
- * Returns the DA Projects theme option.
- *
- * @returns The DA Projects theme option HTML.
- */
+/** Returns the DA Projects theme option. */
 export function getDaThemeOptionTemplate(): string {
   return `
     <label class="settings-group__option">
       <input type="radio" name="theme" value="da">
       <span>DA Projects theme</span>
-      <img class="settings-group__arrow"
-        src="${lineThreeCopy}" alt="">
+      <img class="settings-group__arrow" src="${lineThreeCopy}" alt="">
     </label>
   `;
 }
 
-/**
- * Returns the game theme settings.
- *
- * @returns The game theme settings HTML.
- */
+/** Returns the game theme settings. */
 export function getThemeSettingsTemplate(): string {
   return `
     <section class="settings-group">
@@ -101,40 +72,27 @@ export function getThemeSettingsTemplate(): string {
   `;
 }
 
-/**
- * Returns the player title.
- *
- * @returns The player title HTML.
- */
+/** Returns the player title. */
 export function getPlayerTitleTemplate(): string {
   return `
     <div class="settings-group__title-row">
-      <img class="settings-group__icon"
-        src="${chessPawnIcon}" alt="">
+      <img class="settings-group__icon" src="${chessPawnIcon}" alt="">
       <h2 class="settings-group__title">Choose player</h2>
     </div>
   `;
 }
 
-/**
- * Returns the blue player option.
- *
- * @returns The blue player option HTML.
- */
+/** Returns the blue player option. */
 export function getBluePlayerOptionTemplate(): string {
   return `
     <label class="settings-group__option">
-      <input type="radio" name="player" value="blue" checked>
+      <input type="radio" name="player" value="blue">
       <span>Blue</span>
     </label>
   `;
 }
 
-/**
- * Returns the orange player option.
- *
- * @returns The orange player option HTML.
- */
+/** Returns the orange player option. */
 export function getOrangePlayerOptionTemplate(): string {
   return `
     <label class="settings-group__option">
@@ -144,11 +102,7 @@ export function getOrangePlayerOptionTemplate(): string {
   `;
 }
 
-/**
- * Returns the player settings.
- *
- * @returns The player settings HTML.
- */
+/** Returns the player settings. */
 export function getPlayerSettingsTemplate(): string {
   return `
     <section class="settings-group">
@@ -159,40 +113,27 @@ export function getPlayerSettingsTemplate(): string {
   `;
 }
 
-/**
- * Returns the board size title.
- *
- * @returns The board size title HTML.
- */
+/** Returns the board size title. */
 export function getBoardTitleTemplate(): string {
   return `
     <div class="settings-group__title-row">
-      <img class="settings-group__icon"
-        src="${styleIcon}" alt="">
+      <img class="settings-group__icon" src="${styleIcon}" alt="">
       <h2 class="settings-group__title">Board size</h2>
     </div>
   `;
 }
 
-/**
- * Returns the 16 cards option.
- *
- * @returns The 16 cards option HTML.
- */
+/** Returns the 16 cards option. */
 export function get16CardsOptionTemplate(): string {
   return `
     <label class="settings-group__option">
-      <input type="radio" name="board" value="16" checked>
+      <input type="radio" name="board" value="16">
       <span>16 cards</span>
     </label>
   `;
 }
 
-/**
- * Returns the 24 cards option.
- *
- * @returns The 24 cards option HTML.
- */
+/** Returns the 24 cards option. */
 export function get24CardsOptionTemplate(): string {
   return `
     <label class="settings-group__option">
@@ -202,11 +143,7 @@ export function get24CardsOptionTemplate(): string {
   `;
 }
 
-/**
- * Returns the 36 cards option.
- *
- * @returns The 36 cards option HTML.
- */
+/** Returns the 36 cards option. */
 export function get36CardsOptionTemplate(): string {
   return `
     <label class="settings-group__option">
@@ -216,11 +153,7 @@ export function get36CardsOptionTemplate(): string {
   `;
 }
 
-/**
- * Returns the board size settings.
- *
- * @returns The board size settings HTML.
- */
+/** Returns the board size settings. */
 export function getBoardSettingsTemplate(): string {
   return `
     <section class="settings-group">
@@ -232,11 +165,7 @@ export function getBoardSettingsTemplate(): string {
   `;
 }
 
-/**
- * Returns the left settings area.
- *
- * @returns The left settings area HTML.
- */
+/** Returns the left settings area. */
 export function getSettingsLeftTemplate(): string {
   return `
     <div class="settings-screen__left">
@@ -248,100 +177,74 @@ export function getSettingsLeftTemplate(): string {
   `;
 }
 
-/**
- * Returns the theme preview.
- *
- * @returns The theme preview HTML.
- */
+/** Returns the theme preview. */
 export function getThemePreviewTemplate(): string {
   return `
-    <div id="theme-preview-box"
-      class="settings-screen__preview-box preview-code">
-      <img id="theme-preview"
+    <div id="theme-preview-box" class="settings-screen__preview-box preview-code">
+      <img
+        id="theme-preview"
         class="settings-screen__preview settings-screen__preview--code"
         src="${codePreview}"
-        alt="Theme Preview">
+        alt="Theme preview">
     </div>
   `;
 }
 
-/**
- * Returns the theme summary button.
- *
- * @returns The theme summary button HTML.
- */
+/** Returns the theme summary button. */
 export function getThemeSummaryTemplate(): string {
   return `
-    <button id="summary-theme"
-      class="settings-screen__choice" type="button">
-      Code vibes theme
+    <button id="summary-theme" class="settings-screen__choice" type="button">
+      Choose theme
     </button>
   `;
 }
 
-/**
- * Returns a choice line.
- *
- * @returns The choice line HTML.
- */
+/** Returns a choice line. */
 export function getChoiceLineTemplate(): string {
   return `
     <span class="settings-screen__line-wrapper">
-      <img class="settings-screen__choice-line
-        settings-screen__choice-line--default"
-        src="${lineFour}" alt="">
+      <img
+        class="settings-screen__choice-line settings-screen__choice-line--default"
+        src="${lineFour}"
+        alt="">
     </span>
   `;
 }
 
-/**
- * Returns the player summary button.
- *
- * @returns The player summary button HTML.
- */
+/** Returns the player summary button. */
 export function getPlayerSummaryTemplate(): string {
   return `
-    <button id="summary-player"
-      class="settings-screen__choice" type="button">
-      Blue Player
+    <button id="summary-player" class="settings-screen__choice" type="button">
+      Choose player
     </button>
   `;
 }
 
-/**
- * Returns the board summary button.
- *
- * @returns The board summary button HTML.
- */
+/** Returns the board summary button. */
 export function getBoardSummaryTemplate(): string {
   return `
-    <button id="summary-board"
-      class="settings-screen__choice" type="button">
-      Board-16 Cards
+    <button id="summary-board" class="settings-screen__choice" type="button">
+      Choose board
     </button>
   `;
 }
 
-/**
- * Returns the start button.
- *
- * @returns The start button HTML.
- */
+/** Returns the disabled start button. */
 export function getStartButtonTemplate(): string {
   return `
-    <button class="settings-screen__start" type="button">
-      <img class="settings-screen__start-icon"
-        src="${smartDisplayIcon}" alt="">
+    <button
+      id="start-game-button"
+      class="settings-screen__start"
+      type="button"
+      disabled
+      aria-disabled="true">
+      <img class="settings-screen__start-icon" src="${smartDisplayIcon}" alt="">
       <span>Start</span>
     </button>
   `;
 }
 
-/**
- * Returns the settings navigation.
- *
- * @returns The settings navigation HTML.
- */
+/** Returns the settings navigation. */
 export function getSettingsNavigationTemplate(): string {
   return `
     <nav class="settings-screen__choice-nav">
@@ -355,11 +258,7 @@ export function getSettingsNavigationTemplate(): string {
   `;
 }
 
-/**
- * Returns the right settings area.
- *
- * @returns The right settings area HTML.
- */
+/** Returns the right settings area. */
 export function getSettingsRightTemplate(): string {
   return `
     <div class="settings-screen__right">
@@ -369,11 +268,7 @@ export function getSettingsRightTemplate(): string {
   `;
 }
 
-/**
- * Returns the settings panel.
- *
- * @returns The settings panel HTML.
- */
+/** Returns the settings panel. */
 export function getSettingsPanelTemplate(): string {
   return `
     <section class="settings-screen__panel">
@@ -383,11 +278,7 @@ export function getSettingsPanelTemplate(): string {
   `;
 }
 
-/**
- * Returns the complete settings template.
- *
- * @returns The complete settings HTML.
- */
+/** Returns the complete settings template. */
 export function settingsTemplate(): string {
   return `
     <main class="settings-screen">
