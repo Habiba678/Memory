@@ -2,6 +2,7 @@
 @use "tokens" as *;
 @use "abstract/mixins" as *;
 
+
 .memory-game--code {
   font-family: $font-title;
 
@@ -70,12 +71,11 @@
   }
 }
 
-.memory-game--gaming {
-  font-family: $font-gaming;
 
+.memory-game--gaming,
+.memory-game--da {
   .memory-game__container {
     width: min(1219px, 100%);
-    padding-top: 41px;
   }
 
   .game-header {
@@ -85,34 +85,23 @@
     padding: 16px;
     box-sizing: border-box;
     border-radius: 10px;
-    background-color: rgba(253, 150, 201, 0.2);
-    color: #ffffff;
     gap: 24px;
   }
 
   .game-header__scores {
-    width: 182px;
     height: 54px;
     padding: 8px 16px;
-    gap: 8px;
     border-radius: 10px;
     background-color: #ffffff;
   }
 
   .game-score {
-    gap: 8px;
-    font-family: $font-gaming;
-    font-size: 30px;
     font-weight: 700;
     line-height: 1;
   }
 
-  .game-score__icon {
-    width: 22px;
-    height: 28px;
-  }
-
-  .game-score__name {
+  .game-score__name,
+  .game-header__current-name {
     display: none;
   }
 
@@ -129,14 +118,7 @@
     height: 40px;
     justify-content: center;
     gap: 10px;
-    font-family: $font-gaming;
-    font-size: 30px;
     font-weight: 700;
-    color: #ffffff;
-  }
-
-  .game-header__current-name {
-    display: none;
   }
 
   .game-header__current-icon {
@@ -144,30 +126,136 @@
     height: 40px;
     padding: 4px 8px;
     box-sizing: border-box;
-    background: #1faafc;
-    border-radius: 3px;
     object-fit: contain;
     display: block;
   }
 
   .game-header__exit {
-    width: 195px;
     height: 54px;
     padding: 12px 20px;
-    border: 2px solid #e71c4f;
     border-radius: 10px;
-    background: rgba(237, 27, 118, 0.08);
-    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    font-family: $font-gaming;
     font-size: 20px;
     font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .game-header__exit-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .memory-game__grid {
+    margin: 54px auto;
+  }
+
+  .memory-card,
+  .memory-card__inner,
+  .memory-card__front,
+  .memory-card__back,
+  .memory-card__front-image,
+  .memory-card__back-image {
+    border-radius: 10px;
+  }
+
+  .exit-dialog {
+    width: min(481px, 92vw);
+    padding: 0;
+    border: none;
+    border-radius: 20px;
+    background: transparent;
+
+    &__content {
+      width: 100%;
+      min-height: 254px;
+      padding: 40px;
+      box-sizing: border-box;
+      border-radius: 20px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    &__title {
+      width: 401px;
+      max-width: 100%;
+      margin: 0;
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 135%;
+      text-align: center;
+      color: #294f60;
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &__button {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+    }
+  }
+}
+
+
+.memory-game--gaming {
+  font-family: $font-gaming;
+
+  .memory-game__container {
+    padding-top: 41px;
+  }
+
+  .game-header {
+    background-color: rgba(253, 150, 201, 0.2);
+    color: #ffffff;
+  }
+
+  .game-header__scores {
+    width: 182px;
+    gap: 8px;
+  }
+
+  .game-score {
+    gap: 8px;
+    font-family: $font-gaming;
+    font-size: 30px;
+  }
+
+  .game-score__icon {
+    width: 22px;
+    height: 28px;
+  }
+
+  .game-header__current-player {
+    font-family: $font-gaming;
+    font-size: 30px;
+    color: #ffffff;
+  }
+
+  .game-header__current-icon {
+    background: #1faafc;
+    border-radius: 3px;
+  }
+
+  .game-header__exit {
+    width: 195px;
+    border: 2px solid #e71c4f;
+    background: rgba(237, 27, 118, 0.08);
+    color: #ffffff;
+    font-family: $font-gaming;
     line-height: 1;
     letter-spacing: 0.04em;
-    white-space: nowrap;
 
     transition:
       background-color 180ms ease,
@@ -206,15 +294,6 @@
     }
   }
 
-  .game-header__exit-icon {
-    width: 30px;
-    height: 30px;
-  }
-
-  .memory-game__grid {
-    margin: 54px auto;
-  }
-
   .memory-game__grid--16 {
     width: 468px;
     height: 528px;
@@ -247,61 +326,23 @@
     height: 120px;
   }
 
-  .memory-card,
-  .memory-card__inner,
-  .memory-card__front,
-  .memory-card__back,
-  .memory-card__front-image,
-  .memory-card__back-image {
-    border-radius: 10px;
-  }
-
   .memory-card:focus-visible {
     outline-color: #e71c4f;
   }
 
   .exit-dialog {
-    width: min(481px, 92vw);
-    padding: 0;
-    border: none;
-    border-radius: 20px;
-    background: transparent;
     font-family: $font-gaming;
 
     &::backdrop {
       background: rgba(10, 38, 55, 0.25);
     }
 
-    &__content {
-      width: 100%;
-      min-height: 254px;
-      padding: 40px;
-      box-sizing: border-box;
-      border-radius: 20px;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-    }
-
-    &__title {
-      width: 401px;
-      max-width: 100%;
-      margin: 0;
+    &__title,
+    &__button {
       font-family: $font-gaming;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 135%;
-      text-align: center;
-      color: #294f60;
     }
 
     &__actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       gap: 20px;
     }
 
@@ -309,11 +350,6 @@
       height: 44px;
       padding: 0 20px;
       border-radius: 8px;
-      font-family: $font-gaming;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1;
-      cursor: pointer;
 
       transition:
         background-color 180ms ease,
@@ -365,41 +401,28 @@
   }
 }
 
+
 .memory-game--da {
   font-family: $font-da;
 
   .memory-game__container {
-    width: min(1219px, 100%);
     padding-top: 38px;
   }
 
   .game-header {
-    width: 100%;
-    height: 102px;
-    min-height: 102px;
-    padding: 16px;
-    box-sizing: border-box;
-    border-radius: 10px;
     background: #f0f3f4;
     color: #1e7594;
-    gap: 24px;
   }
 
   .game-header__scores {
     width: auto;
-    height: 54px;
-    padding: 8px 16px;
     gap: 24px;
-    border-radius: 10px;
-    background: #ffffff;
   }
 
   .game-score {
     gap: 6px;
     font-family: $font-da;
     font-size: 32px;
-    font-weight: 700;
-    line-height: 1;
   }
 
   .game-score__icon {
@@ -407,31 +430,14 @@
     height: 32px;
   }
 
-  .game-score__name {
-    display: none;
-  }
-
   .game-score__points {
     font-size: 32px;
     line-height: 1;
   }
 
-  .game-score--blue {
-    color: #097fc5;
-  }
-
-  .game-score--orange {
-    color: #ea6900;
-  }
-
   .game-header__current-player {
-    width: auto;
-    height: 40px;
-    justify-content: center;
-    gap: 10px;
     font-family: $font-da;
     font-size: 32px;
-    font-weight: 700;
     color: #1e7594;
   }
 
@@ -439,37 +445,17 @@
     white-space: nowrap;
   }
 
-  .game-header__current-name {
-    display: none;
-  }
-
   .game-header__current-icon {
-    width: 41px;
-    height: 40px;
-    padding: 4px 8px;
-    box-sizing: border-box;
     background: #097fc5;
     border-radius: 8px;
-    object-fit: contain;
-    display: block;
   }
 
   .game-header__exit {
     width: 172px;
-    height: 54px;
-    padding: 12px 20px;
     border: none;
-    border-radius: 10px;
     background: #bfe5f2;
     color: #1e7594;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
     font-family: $font-da;
-    font-size: 20px;
-    font-weight: 700;
-    white-space: nowrap;
 
     transition:
       background-color 180ms ease,
@@ -487,14 +473,8 @@
     }
   }
 
-  .game-header__exit-icon {
-    width: 30px;
-    height: 30px;
-  }
-
   .memory-game__grid {
     gap: 16px;
-    margin: 54px auto;
   }
 
   .memory-game__grid--16 {
@@ -517,62 +497,24 @@
     height: 100px;
   }
 
-  .memory-card,
-  .memory-card__inner,
-  .memory-card__front,
-  .memory-card__back,
-  .memory-card__front-image,
-  .memory-card__back-image {
-    border-radius: 10px;
-  }
-
   .memory-card:focus-visible {
     outline: 3px solid #097fc5;
     outline-offset: 3px;
   }
 
   .exit-dialog {
-    width: min(481px, 92vw);
-    padding: 0;
-    border: none;
-    border-radius: 20px;
-    background: transparent;
     font-family: $font-da;
 
     &::backdrop {
       background: rgba(20, 63, 78, 0.22);
     }
 
-    &__content {
-      width: 100%;
-      min-height: 254px;
-      padding: 40px;
-      box-sizing: border-box;
-      border-radius: 20px;
-      background: #ffffff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 40px;
-    }
-
-    &__title {
-      width: 401px;
-      max-width: 100%;
-      margin: 0;
+    &__title,
+    &__button {
       font-family: $font-da;
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 135%;
-      text-align: center;
-      color: #294f60;
     }
 
     &__actions {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       gap: 10px;
     }
 
@@ -585,11 +527,6 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      font-family: $font-da;
-      font-size: 16px;
-      font-weight: 700;
-      line-height: 1;
-      cursor: pointer;
 
       transition:
         background-color 180ms ease,
@@ -620,6 +557,7 @@
     }
   }
 }
+
 
 @include respond(tablet) {
   .memory-game--gaming,
@@ -719,6 +657,7 @@
   }
 }
 
+
 @include respond(mobile) {
   .memory-game--code,
   .memory-game--gaming,
@@ -735,13 +674,11 @@
       height: auto;
       min-height: 0;
       padding: 10px;
-
       display: grid;
       grid-template-columns: minmax(0, 1fr) auto;
       grid-template-areas:
         "scores exit"
         "current current";
-
       align-items: center;
       gap: 10px;
     }
@@ -876,11 +813,14 @@
     }
   }
 
-  .memory-game--gaming {
+  .memory-game--gaming,
+  .memory-game--da {
     .game-header__scores {
       background-color: #ffffff;
     }
+  }
 
+  .memory-game--gaming {
     .game-header__exit {
       border-width: 2px;
     }
@@ -891,15 +831,12 @@
   }
 
   .memory-game--da {
-    .game-header__scores {
-      background-color: #ffffff;
-    }
-
     .game-header__current-player {
       color: #1e7594;
     }
   }
 }
+
 
 @include respond(sm) {
   .memory-game--code,
