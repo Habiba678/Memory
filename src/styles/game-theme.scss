@@ -2,7 +2,6 @@
 @use "tokens" as *;
 @use "abstract/mixins" as *;
 
-
 .memory-game--code {
   font-family: $font-title;
 
@@ -70,7 +69,6 @@
     }
   }
 }
-
 
 .memory-game--gaming,
 .memory-game--da {
@@ -208,7 +206,6 @@
   }
 }
 
-
 .memory-game--gaming {
   font-family: $font-gaming;
 
@@ -267,7 +264,8 @@
       background: rgba(237, 27, 118, 0.12);
     }
 
-    &:hover img {
+    &:hover img,
+    &.active .game-header__exit-icon {
       filter:
         brightness(0)
         saturate(100%)
@@ -282,16 +280,6 @@
       border-color: #e71c4f;
       color: #ffffff;
     }
-
-    &.active .game-header__exit-icon {
-      filter:
-        brightness(0)
-        saturate(100%)
-        invert(24%)
-        sepia(95%)
-        saturate(2800%)
-        hue-rotate(320deg);
-    }
   }
 
   .memory-game__grid--16 {
@@ -299,8 +287,7 @@
     height: 528px;
     grid-template-columns: repeat(4, 105px);
     grid-template-rows: repeat(4, 120px);
-    column-gap: 6px;
-    row-gap: 6px;
+    gap: 6px;
   }
 
   .memory-game__grid--24 {
@@ -308,8 +295,7 @@
     height: 498px;
     grid-template-columns: repeat(6, 105px);
     grid-template-rows: repeat(4, 120px);
-    column-gap: 6px;
-    row-gap: 6px;
+    gap: 6px;
   }
 
   .memory-game__grid--36 {
@@ -317,8 +303,7 @@
     height: 750px;
     grid-template-columns: repeat(6, 105px);
     grid-template-rows: repeat(6, 120px);
-    column-gap: 6px;
-    row-gap: 6px;
+    gap: 6px;
   }
 
   .memory-card {
@@ -400,7 +385,6 @@
     }
   }
 }
-
 
 .memory-game--da {
   font-family: $font-da;
@@ -541,7 +525,6 @@
       &:hover {
         background: #1e7594;
         color: #ffffff;
-        border: none;
       }
     }
 
@@ -552,12 +535,10 @@
 
       &:hover {
         background: #db564d;
-        border: none;
       }
     }
   }
 }
-
 
 @include respond(tablet) {
   .memory-game--gaming,
@@ -657,65 +638,20 @@
   }
 }
 
-
 @include respond(mobile) {
   .memory-game--code,
   .memory-game--gaming,
   .memory-game--da {
-    .memory-game__container {
-      width: 100%;
-      min-width: 0;
-      padding: 16px 10px 0;
-      box-sizing: border-box;
-    }
-
     .game-header {
-      width: 100%;
-      height: auto;
-      min-height: 0;
       padding: 10px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      grid-template-areas:
-        "scores exit"
-        "current current";
-      align-items: center;
-      gap: 10px;
     }
 
     .game-header__scores {
-      grid-area: scores;
-      width: max-content;
-      max-width: 100%;
-      min-width: 0;
-      height: 46px;
-      padding: 8px 10px;
       gap: 6px;
-    }
-
-    .game-header__exit {
-      grid-area: exit;
-      width: auto;
-      min-width: 0;
-      height: 46px;
-      padding: 8px 10px;
-      gap: 6px;
-      font-size: 15px;
-    }
-
-    .game-header__exit-icon {
-      width: 22px;
-      height: 22px;
     }
 
     .game-header__current-player {
-      grid-area: current;
-      width: 100%;
-      min-width: 0;
-      height: 38px;
       justify-content: center;
-      gap: 8px;
-      font-size: 18px;
     }
 
     .game-header__current-icon {
@@ -724,60 +660,14 @@
       padding: 3px 5px;
     }
 
-    .game-score {
-      height: 22px;
-      gap: 3px;
-      font-size: 15px;
-    }
-
-    .game-score__icon {
-      width: 20px;
-      height: 20px;
-    }
-
     .game-score__points {
       font-size: 15px;
-    }
-
-    .memory-game__grid {
-      width: max-content;
-      max-width: 100%;
-      height: auto;
-      margin: 28px auto;
-      gap: 8px;
-    }
-
-    .memory-game__grid--16 {
-      width: auto;
-      height: auto;
-      grid-template-columns: repeat(4, 68px);
-      grid-template-rows: repeat(4, 76px);
-    }
-
-    .memory-game__grid--24 {
-      width: auto;
-      height: auto;
-      grid-template-columns: repeat(4, 68px);
-      grid-template-rows: repeat(6, 76px);
-    }
-
-    .memory-game__grid--36 {
-      width: auto;
-      height: auto;
-      grid-template-columns: repeat(4, 68px);
-      grid-auto-rows: 76px;
-    }
-
-    .memory-card {
-      width: 68px;
-      height: 76px;
     }
 
     .exit-dialog {
       width: min(92vw, 481px);
 
       &__content {
-        width: 100%;
         min-height: auto;
         padding: 32px 18px;
         gap: 28px;
@@ -790,8 +680,6 @@
       }
 
       &__actions {
-        width: 100%;
-        flex-direction: column;
         gap: 12px;
       }
 
@@ -836,7 +724,6 @@
     }
   }
 }
-
 
 @include respond(sm) {
   .memory-game--code,
