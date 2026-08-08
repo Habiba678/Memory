@@ -2,7 +2,6 @@
 @use "tokens" as *;
 @use "abstract/mixins" as *;
 
-
 .settings-screen {
   min-height: 100vh;
   padding: 40px 32px;
@@ -104,10 +103,6 @@
     align-self: flex-end;
     cursor: pointer;
 
-    transition:
-      width 0.2s ease,
-      padding 0.2s ease;
-
     &--expanded {
       width: 740px;
       padding: 14px 18px;
@@ -133,14 +128,13 @@
     cursor: pointer;
     white-space: nowrap;
     text-align: center;
-
     transition:
-      font-weight 0.2s ease,
-      transform 0.2s ease;
+      text-shadow 0.2s ease,
+      color 0.2s ease;
 
     &:hover,
     &:focus-visible {
-      font-weight: 700;
+      text-shadow: 0 0 0.5px currentColor;
       outline: none;
     }
   }
@@ -215,7 +209,6 @@
   }
 }
 
-
 .preview-gaming {
   background: linear-gradient(
     180deg,
@@ -223,7 +216,6 @@
     #2086b4 100%
   );
 }
-
 
 .settings-group {
   margin-bottom: 34px;
@@ -266,6 +258,7 @@
       width: 20px;
       height: 20px;
       margin: 0;
+      box-sizing: border-box;
       appearance: none;
       border: 2px solid $primary-dark;
       border-radius: 50%;
@@ -297,7 +290,7 @@
       }
 
       &:hover {
-        border-width: 3px;
+        box-shadow: 0 0 0 1px $primary-dark;
       }
 
       &:focus-visible {
@@ -308,6 +301,7 @@
 
     span {
       position: relative;
+      transition: text-shadow 0.2s ease;
     }
 
     input:checked + span {
@@ -315,7 +309,7 @@
     }
 
     &:hover span {
-      font-weight: 700;
+      text-shadow: 0 0 0.5px currentColor;
     }
   }
 
@@ -333,7 +327,6 @@
     opacity: 1;
   }
 }
-
 
 @include respond(lg) {
   .settings-screen {
@@ -467,7 +460,6 @@
   }
 }
 
-
 @include respond(md) {
   .settings-screen {
     width: 100%;
@@ -586,7 +578,6 @@
     }
   }
 }
-
 
 @include respond(sm) {
   .settings-screen {
