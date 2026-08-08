@@ -1,54 +1,56 @@
 # Memory Game
 
-Memory Game is a browser-based game developed with TypeScript and SCSS.
+Memory Game is a browser-based game developed with TypeScript, SCSS and Vite.
 
-The goal of the game is to find all matching card pairs. Players take turns opening two cards. If the cards match, the player receives a point. The player with the highest score at the end wins the game.
+Two players play against each other and try to find matching card pairs. Before starting the game, the players can choose a theme, a starting player and a board size.
 
 ## Features
 
+The game includes three different themes: Code Vibes, Gaming and DA Projects.
+
+Players can choose between:
+
+- Blue or Orange as the starting player
+- 16, 24 or 36 cards
 - Three different game themes
-- Player selection
-- Different board sizes: 16, 24 and 36 cards
-- Score tracking for both players
-- Automatic player switching
-- Winner and draw screens
-- Exit game dialog
-- Responsive design for different screen sizes
-- Interactive hover and focus states
 
-## Game Themes
+The game keeps track of the score and shows the winner or a draw at the end.
 
-The game includes three different visual themes:
+The layout is also responsive and adapts to different screen sizes.
 
-- Code Vibes
-- Gaming
-- DA Projects
+## Installation
 
-Each theme has its own design, cards, player icons and game result screens.
+Install the required dependencies:
 
-## How to Play
+```bash
+npm install
+```
 
-1. Choose a game theme.
-2. Choose the starting player.
-3. Select the board size.
-4. Start the game.
-5. Open two cards and try to find matching pairs.
-6. Matching pairs give the current player a point.
-7. The player with the highest score wins.
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Vite will provide a local address where the game can be opened in the browser.
+
+## Build
+
+Create the production version:
+
+```bash
+npm run build
+```
+
+To preview the production version locally:
+
+```bash
+npm run preview
+```
 
 ## Technologies
-
-The project was developed using:
 
 - TypeScript
 - SCSS
 - HTML
 - Vite
-
-## Installation
-
-Install the dependencies:
-
-```bash
-npm install
-
